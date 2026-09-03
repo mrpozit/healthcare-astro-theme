@@ -1,12 +1,12 @@
 {
   "brand": {
-    "name": "Viva Medical",
-    "logo": "Viva Medical"
+    "name": "МЦВА",
+    "logo": "МЦВА"
   },
   "contact": {
-    "addressLine1": "123 Healthcare Drive, Suite 200",
-    "addressLine2": "Springfield, IL 62701",
-    "phone": "+1 (555) 123-4567",
+    "addressLine1": "Україна",
+    "addressLine2": "Київ",
+    "phone": "+38********",
     "email": "hello@example.com"
   },
   "links": [

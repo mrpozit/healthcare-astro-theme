@@ -11,27 +11,27 @@
   },
   "links": [
     {
-      "label": "Home",
+      "label": "Головна",
       "href": "/",
       "icon": "home"
     },
     {
-      "label": "About Us",
+      "label": "Про нас",
       "href": "/about",
       "icon": "info"
     },
     {
-      "label": "Services",
+      "label": "Послуги",
       "href": "/services",
       "icon": "clipboard"
     },
     {
-      "label": "Careers",
+      "label": "Матеріали",
       "href": "/careers",
       "icon": "users"
     },
     {
-      "label": "Info",
+      "label": "Суспільна діяльність",
       "href": "/info",
       "icon": "book"
     }

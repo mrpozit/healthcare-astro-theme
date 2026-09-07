@@ -24,6 +24,11 @@
 	--font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 	/* Kept for backward-compat with existing classes (points to primary) */
 	--font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+	@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
 
 	/* Breakpoints */
 	--breakpoint-xs: 475px;

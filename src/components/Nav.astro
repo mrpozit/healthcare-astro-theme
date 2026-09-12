@@ -3,6 +3,7 @@
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 import Icon from "./Icon.astro";
 import nav from "../data/navigation.json";
+import logo from "../assets/logo.png";
 
 const normalizePath = (path: string) =>
   path === "/" ? "/" : path.replace(/\/$/, "");
@@ -19,14 +20,16 @@ const isCurrentPage = (href: string) => {
 >
   <div class="container">
     <Astronav>
-      <div class="flex items-center justify-between w-full py-4 lg:py-5">
+      <div class="flex items-center justify-between w-full py-3 lg:py-4">
         <!-- Logo -->
-        <a href="/" class="shrink-0 flex items-center group relative z-10">
-          <div
-            class="text-2xl lg:text-3xl font-display font-bold text-theme-primary transition-transform duration-300 group-hover:scale-[1.02] whitespace-nowrap"
-          >
-            {nav.brand.name}
-          </div>
+        <a href="/" class="shrink-0 flex items-center group relative z-10" aria-label={nav.brand.name}>
+          <img
+            src={logo.src}
+            width={logo.width}
+            height={logo.height}
+            alt={nav.brand.name}
+            class="block h-12 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+          />
         </a>
 
         <!-- Desktop Navigation -->

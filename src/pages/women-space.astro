@@ -1,24 +1,37 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
 import Cta from '../components/CallToActionSection.astro';
 ---
 
-<Layout 
-  title="Простір жіночих трансформацій" 
-  description="Програми та зустрічі для жінок: арт-терапія, ресурси, психологічна підтримка та відновлення."
+<Layout
+  title="Жіночий простір"
+  description="Безпечний простір для жінок: арт-терапія, відновлення ресурсу, спілкування та підтримка."
 >
   <main class="container mx-auto px-4 py-12">
-    <!-- Заголовок страницы -->
     <div class="text-center max-w-3xl mx-auto mb-12">
-      <h1 class="text-4xl font-bold mb-4">Простір жіночих трансформацій</h1>
+      <h1 class="text-4xl font-bold mb-4">Жіночий простір</h1>
       <p class="text-lg text-theme-text-secondary">
-        Безпечний простір для відновлення внутрішнього ресурсу, гармонізації та розвитку.
+        Безпечний простір для відновлення, самодослідження та спілкування без тиску й оцінювання.
       </p>
     </div>
 
-    <!-- Здесь позже разместим описание программ и арт-терапии -->
+    <section class="grid gap-6 md:grid-cols-3">
+      <article class="rounded-2xl border border-theme-border p-6">
+        <h2 class="text-xl font-semibold mb-3">Арт-терапія</h2>
+        <p class="text-theme-text-secondary">Творчі практики для самодослідження, проживання досвіду та пошуку нових опор.</p>
+      </article>
+
+      <article class="rounded-2xl border border-theme-border p-6">
+        <h2 class="text-xl font-semibold mb-3">Відновлення ресурсу</h2>
+        <p class="text-theme-text-secondary">Практики та зустрічі, які допомагають повернути увагу до себе й власних потреб.</p>
+      </article>
+
+      <article class="rounded-2xl border border-theme-border p-6">
+        <h2 class="text-xl font-semibold mb-3">Безпечне спілкування</h2>
+        <p class="text-theme-text-secondary">Простір, де можна говорити про важливе без необхідності відповідати чиїмось очікуванням.</p>
+      </article>
+    </section>
   </main>
-  
+
   <Cta />
 </Layout>

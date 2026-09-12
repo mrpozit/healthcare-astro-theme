@@ -33,17 +33,17 @@
     {
       "label": "Жіночий простір",
       "href": "/women-space",
-      "icon": "sparkles"
+      "icon": "heart"
     },
     {
       "label": "Блог",
       "href": "/blog",
-      "icon": "book-open"
+      "icon": "book"
     },
     {
       "label": "Суспільна діяльність",
       "href": "/info",
-      "icon": "book"
+      "icon": "document"
     }
   ],
   "cta": {

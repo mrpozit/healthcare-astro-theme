@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import nav from "../data/navigation.json";
+import { nav, footerLinks } from "../lib/navigation";
 ---
 
 <footer class="bg-theme-primary-darker text-white py-8">
@@ -13,15 +13,12 @@ import nav from "../data/navigation.json";
         class="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2"
       >
         {
-          nav.links.map((link) => (
+          footerLinks.map((link) => (
             <a href={link.href} class="text-sm text-white hover:text-gray-300">
               {link.label}
             </a>
           ))
         }
-        <a href={nav.cta.href} class="text-sm text-white hover:text-gray-300"
-          >{nav.cta.label}</a
-        >
       </nav>
     </div>
 

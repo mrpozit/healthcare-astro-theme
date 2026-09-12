@@ -1,24 +1,61 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Cta from '../components/CallToActionSection.astro';
+import Layout from "../layouts/Layout.astro";
+import CallToActionSection from "../components/CallToActionSection.astro";
+
+const directions = [
+  {
+    title: "Арт-терапія",
+    description: "Творчі практики, які допомагають краще почути себе та побачити власні переживання з іншого боку.",
+  },
+  {
+    title: "Відновлення ресурсу",
+    description: "Зустрічі та практики для відновлення внутрішньої опори, уваги до себе та власних потреб.",
+  },
+  {
+    title: "Безпечне спілкування",
+    description: "Простір без оцінювання та тиску, де можна говорити, досліджувати себе й бути почутою.",
+  },
+];
 ---
 
-<Layout 
-  title="Простір жіночих трансформацій" 
-  description="Програми та зустрічі для жінок: арт-терапія, ресурси, психологічна підтримка та відновлення."
+<Layout
+  title="Жіночий простір | МЦ відновлення та адаптації"
+  description="Безпечний простір для жінок: арт-терапія, відновлення ресурсу, психологічна підтримка та зустрічі."
 >
-  <main class="container mx-auto px-4 py-12">
-    <!-- Заголовок страницы -->
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <h1 class="text-4xl font-bold mb-4">Простір жіночих трансформацій</h1>
-      <p class="text-lg text-theme-text-secondary">
-        Безпечний простір для відновлення внутрішнього ресурсу, гармонізації та розвитку.
-      </p>
-    </div>
+  <main>
+    <section class="section bg-gradient-to-b from-theme-surface-muted to-theme-surface">
+      <div class="container">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-3">
+            Жіночий простір
+          </p>
+          <h1 class="text-4xl lg:text-5xl font-bold text-theme-text-primary mb-5">
+            Простір, де можна бути собою
+          </h1>
+          <p class="text-lg leading-relaxed text-theme-text-secondary">
+            Місце для відновлення, творчості, спілкування та уважного ставлення
+            до себе. Без поспіху, оцінювання та необхідності відповідати чиїмось очікуванням.
+          </p>
+        </div>
 
-    <!-- Здесь позже разместим описание программ и арт-терапии -->
+        <div class="grid gap-6 md:grid-cols-3">
+          {directions.map((direction) => (
+            <article class="bg-theme-surface rounded-2xl p-7 border border-theme-border shadow-sm">
+              <div class="w-12 h-12 rounded-xl bg-theme-primary-lighter/20 flex items-center justify-center text-theme-primary text-xl mb-6">
+                ✦
+              </div>
+              <h2 class="text-xl font-bold text-theme-text-primary mb-3">
+                {direction.title}
+              </h2>
+              <p class="text-base leading-relaxed text-theme-text-secondary">
+                {direction.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   </main>
-  
-  <Cta />
+
+  <CallToActionSection />
 </Layout>

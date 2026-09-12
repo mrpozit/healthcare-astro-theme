@@ -31,6 +31,16 @@
       "icon": "users"
     },
     {
+      "label": "Простір трансформацій",
+      "href": "/women-space",
+      "icon": "sparkles"
+    },
+    {
+      "label": "Блог",
+      "href": "/blog",
+      "icon": "book-open"
+    },
+    {
       "label": "Суспільна діяльність",
       "href": "/info",
       "icon": "book"

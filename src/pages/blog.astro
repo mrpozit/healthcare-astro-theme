@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CallToActionSection from "../components/CallToActionSection.astro";
+
+const articles = [
+  {
+    title: "Психологічне відновлення: з чого почати",
+    description: "Матеріали про відновлення, адаптацію та повернення до повсякденного життя без зайвого тиску на себе.",
+  },
+  {
+    title: "Коли тривога стає сигналом",
+    description: "Як помічати власний стан, розуміти його причини та знаходити спосіб діяти далі.",
+  },
+  {
+    title: "Ресурс, межі та турбота про себе",
+    description: "Практичні матеріали про внутрішні ресурси, особисті межі та підтримку у складні періоди.",
+  },
+];
+---
+
+<Layout
+  title="Блог | МЦ відновлення та адаптації"
+  description="Статті та матеріали про психологічне відновлення, адаптацію, ресурси та підтримку."
+>
+  <main>
+    <section class="section bg-gradient-to-b from-theme-surface-muted to-theme-surface">
+      <div class="container">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-3">
+            Блог
+          </p>
+          <h1 class="text-4xl lg:text-5xl font-bold text-theme-text-primary mb-5">
+            Думки, досвід та матеріали
+          </h1>
+          <p class="text-lg leading-relaxed text-theme-text-secondary">
+            Тут ми будемо публікувати матеріали про відновлення, адаптацію,
+            психологічне здоров'я та життя після складних періодів.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {articles.map((article) => (
+            <article class="bg-theme-surface rounded-2xl p-7 border border-theme-border shadow-sm hover:shadow-lg transition-shadow">
+              <div class="w-12 h-12 rounded-xl bg-theme-primary-lighter/20 flex items-center justify-center text-theme-primary font-bold mb-6">
+                →
+              </div>
+              <h2 class="text-xl font-bold text-theme-text-primary mb-3">
+                {article.title}
+              </h2>
+              <p class="text-base leading-relaxed text-theme-text-secondary">
+                {article.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <CallToActionSection />
+</Layout>

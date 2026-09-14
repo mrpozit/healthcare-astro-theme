@@ -4,7 +4,9 @@ import Layout from "../layouts/Layout.astro";
 import Heading from "../components/Heading.astro";
 import ExpandableText from "../components/content/ExpandableText.astro";
 import ProcessFlow from "../components/content/ProcessFlow.astro";
-import aboutHeroImage from "../assets/about-main.jpg";
+import aboutHeroImage from "../assets/about-icra.jpg";
+import patriciaImage from "../assets/patricia-bozhko.jpg";
+import serhiiImage from "../assets/serhii-nakonechnyi.jpg";
 
 const practiceCycle = [
   "Практика",
@@ -26,8 +28,8 @@ const sharedCycle = [
 ---
 
 <Layout
-  title="Про нас | ICRA — Міжнародний центр відновлення і адаптації"
-  description="ICRA — простір практики, дослідження, текстів, арт-терапії, соціальних проєктів і методів, що народжуються з реальної роботи з людьми."
+  title="Про нас | ICRA | Міжнародний центр відновлення і адаптації"
+  description="ICRA: простір практики, дослідження, текстів, арт-терапії, соціальних проєктів і методів, що народжуються з реальної роботи з людьми."
 >
   <main>
     <section class="w-full bg-theme-surface-muted section" aria-labelledby="about-hero-title">
@@ -55,8 +57,8 @@ const sharedCycle = [
             <ExpandableText summary="Читати більше" class="mt-6">
               <p>
                 Ми довго не намагалися зібрати все, що робимо, під одну вивіску.
-                Практика розвивалася окремо, тексти — окремо, дослідження й методичні
-                матеріали виникали з власних запитань, а соціальні проєкти — з конкретних
+                Практика розвивалася окремо, тексти окремо, дослідження й методичні
+                матеріали виникали з власних запитань, а соціальні проєкти з конкретних
                 потреб людей і спільнот.
               </p>
               <p>
@@ -66,7 +68,7 @@ const sharedCycle = [
                 і реальних життєвих ситуаціях.
               </p>
               <p>
-                Так з'явився ICRA — не як ще один формат послуг, а як місце, де ця робота
+                Так з'явився ICRA: не як ще один формат послуг, а як місце, де ця робота
                 може існувати разом і розвиватися без необхідності штучно розділяти її на
                 «практику», «дослідження», «освіту» чи «творчість».
               </p>
@@ -94,8 +96,8 @@ const sharedCycle = [
           Відновлення та адаптація
         </p>
         <Heading level="h2" size="section" class="mb-6" id="recovery-title">
-          Відновлення — не повернення до колишньої версії себе.<br class="hidden md:block" />
-          Адаптація — не вміння терпіти те, що не підходить.
+          Відновлення: не повернення до колишньої версії себе.<br class="hidden md:block" />
+          Адаптація: не вміння терпіти те, що не підходить.
         </Heading>
 
         <div class="rounded-2xl border-l-4 border-theme-primary bg-theme-primary-lighter/10 p-6 lg:p-8 mb-6">
@@ -111,14 +113,14 @@ const sharedCycle = [
             що відбувається навколо неї зараз.
           </p>
           <p>
-            Для нас відновлення — це не спроба повернути людину в минулу конфігурацію.
+            Для нас відновлення не означає спробу повернути людину в минулу конфігурацію.
             Це повернення контакту з фактичним собою: зі своїм станом, можливостями,
             потребами й тим, що справді доступне сьогодні.
           </p>
           <p>
-            Адаптація — це побудова нової конфігурації між сьогоднішньою людиною і
-            сьогоднішньою реальністю. Іноді вона включає відновлення втраченого. Іноді —
-            відмову від того, що більше не працює. А іноді — створення способу жити,
+            Адаптація означає побудову нової конфігурації між сьогоднішньою людиною і
+            сьогоднішньою реальністю. Іноді вона включає відновлення втраченого. Іноді
+            відмову від того, що більше не працює. А іноді створення способу жити,
             якого раніше взагалі не було.
           </p>
         </ExpandableText>
@@ -135,7 +137,7 @@ const sharedCycle = [
             Кілька принципів, які допомагають нам не спрощувати людину
           </Heading>
           <p class="text-lg leading-relaxed text-theme-text-secondary">
-            Це не набір універсальних правил. Швидше — орієнтири, до яких ми повертаємося,
+            Це не набір універсальних правил. Швидше, орієнтири, до яких ми повертаємося,
             коли намагаємося зрозуміти, що саме відбувається і яка робота тут справді потрібна.
           </p>
         </div>
@@ -154,7 +156,7 @@ const sharedCycle = [
             </p>
           </ExpandableText>
 
-          <ExpandableText summary="Відповідальність — не провина">
+          <ExpandableText summary="Відповідальність: не провина">
             <p>
               Людина могла ухвалювати минулі рішення з тим досвідом, силами, знаннями й
               можливостями, які були доступні їй тоді. Заднім числом легко бачити більше,
@@ -167,14 +169,14 @@ const sharedCycle = [
             </p>
           </ExpandableText>
 
-          <ExpandableText summary="Метод — інструмент, а не релігія">
+          <ExpandableText summary="Метод: інструмент, а не релігія">
             <p>
               Ми не намагаємося підігнати людину під улюблений підхід. Один і той самий метод
               може бути доречним для однієї задачі й абсолютно зайвим для іншої.
             </p>
             <p>
               Спосіб роботи має підбиратися під конкретну людину, її стан і реальну задачу.
-              Якщо метод перестає бути корисним, його не потрібно захищати — його потрібно
+              Якщо метод перестає бути корисним, його не потрібно захищати. Його потрібно
               змінити або відкласти.
             </p>
           </ExpandableText>
@@ -252,20 +254,22 @@ const sharedCycle = [
             Два способи бути присутніми в ICRA
           </p>
           <Heading level="h2" size="section" class="mb-4" id="people-title">
-            Ролі різні — простір спільний
+            Ролі різні. Простір спільний.
           </Heading>
           <p class="text-lg leading-relaxed text-theme-text-secondary">
             Ми не намагаємося робити наші ролі однаковими. Вони різні за формою, ритмом і
-            способом роботи — і саме тому добре доповнюють одна одну.
+            способом роботи. Саме тому добре доповнюють одна одну.
           </p>
         </div>
 
-        <article class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch mb-10">
-          <div class="min-h-[360px] rounded-2xl border border-dashed border-theme-border bg-theme-primary-lighter/10 flex items-center justify-center p-8 text-center">
-            <div>
-              <p class="font-semibold text-theme-text-primary">Фото Патриції Божко</p>
-              <p class="mt-2 text-sm text-theme-text-muted">TODO: додати реальну фотографію</p>
-            </div>
+        <article class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch mb-14">
+          <div class="relative min-h-[380px] overflow-hidden rounded-2xl">
+            <Image
+              src={patriciaImage}
+              alt="Патриція Божко"
+              class="w-full h-full min-h-[380px] object-cover"
+              loading="lazy"
+            />
           </div>
 
           <div class="rounded-2xl bg-theme-surface p-7 lg:p-9 border border-theme-border">
@@ -298,8 +302,38 @@ const sharedCycle = [
           </div>
         </article>
 
-        <article class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div class="rounded-2xl bg-theme-primary-darker text-white p-7 lg:p-9 lg:order-2">
+        <article class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div class="lg:order-1 flex flex-col gap-5">
+            <div class="relative overflow-hidden rounded-2xl min-h-[340px] lg:min-h-[420px]">
+              <Image
+                src={serhiiImage}
+                alt="Сергій Наконечний"
+                class="w-full h-full min-h-[340px] lg:min-h-[420px] object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <ExpandableText summary="Як виглядає ця робота" open={true}>
+              <p>
+                Частина роботи Сергія відбувається до зустрічі з людиною або групою: у текстах,
+                моделях, запитаннях, способах структурувати досвід і знаходити для нього мову.
+              </p>
+              <p>
+                Інша частина починається після практики, коли спостереження потрібно зібрати,
+                порівняти, перевірити на внутрішню логіку й перетворити на новий матеріал,
+                який знову може повернутися в роботу.
+              </p>
+              <p>
+                Тут же формується значна частина довгих текстів, книг, методичних матеріалів
+                і загальної архітектури ICRA як простору.
+              </p>
+            </ExpandableText>
+            <a href="/careers" class="inline-flex font-semibold text-theme-primary hover:underline underline-offset-4">
+              Тексти та книги Сергія → Бібліотека
+            </a>
+          </div>
+
+          <div class="rounded-2xl bg-theme-primary-darker text-white p-7 lg:p-9 lg:order-2 flex flex-col justify-center">
             <p class="text-sm font-semibold uppercase tracking-wider text-white/70 mb-3">
               Сергій Наконечний
             </p>
@@ -313,27 +347,6 @@ const sharedCycle = [
             <p class="mt-5 font-semibold text-white">
               Зараз не веде індивідуальну практику.
             </p>
-          </div>
-
-          <div class="lg:order-1">
-            <ExpandableText summary="Як виглядає ця робота" open={true}>
-              <p>
-                Частина роботи Сергія відбувається до зустрічі з людиною або групою: у текстах,
-                моделях, запитаннях, способах структурувати досвід і знаходити для нього мову.
-              </p>
-              <p>
-                Інша частина починається після практики — коли спостереження потрібно зібрати,
-                порівняти, перевірити на внутрішню логіку й перетворити на новий матеріал,
-                який знову може повернутися в роботу.
-              </p>
-              <p>
-                Тут же формується значна частина довгих текстів, книг, методичних матеріалів
-                і загальної архітектури ICRA як простору.
-              </p>
-            </ExpandableText>
-            <a href="/careers" class="inline-flex mt-5 font-semibold text-theme-primary hover:underline underline-offset-4">
-              Тексти та книги Сергія → Бібліотека
-            </a>
           </div>
         </article>
       </div>
@@ -395,7 +408,7 @@ const sharedCycle = [
             яку ми вважаємо для себе живою й осмисленою.
           </p>
           <p>
-            ICRA — місце, де ця робота збирається разом. Не як завершена система, а як простір,
+            ICRA: місце, де ця робота збирається разом. Не як завершена система, а як простір,
             який продовжує змінюватися разом із практикою, текстами, людьми й новими запитаннями.
           </p>
         </div>

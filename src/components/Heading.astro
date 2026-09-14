@@ -6,6 +6,7 @@ interface Props {
   class?: string;
   size?: "default" | "section" | "page";
   align?: "left" | "center" | "right";
+  id?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   class: className = "",
   size = "default",
   align = "left",
+  id,
 } = Astro.props;
 
 // Map size variants to consistent Tailwind classes
@@ -63,6 +65,6 @@ const allClasses = [baseClasses, sizeClass, alignClass, className].filter(Boolea
 const Element = level;
 ---
 
-<Element class={allClasses}>
+<Element id={id} class={allClasses}>
   <slot />
 </Element>

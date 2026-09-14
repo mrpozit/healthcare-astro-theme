@@ -1,0 +1,41 @@
+---
+interface Props {
+  summary?: string;
+  open?: boolean;
+  class?: string;
+}
+
+const {
+  summary = "Читати більше",
+  open = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<details
+  class:list={[
+    "group rounded-2xl border border-theme-border bg-theme-surface/80",
+    "transition-colors duration-200 open:bg-theme-surface",
+    className,
+  ]}
+  open={open}
+>
+  <summary
+    class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-theme-primary outline-none transition-colors hover:text-theme-primary-dark focus-visible:ring-2 focus-visible:ring-theme-primary focus-visible:ring-offset-2 rounded-2xl"
+  >
+    <span>{summary}</span>
+    <svg
+      class="h-5 w-5 shrink-0 transition-transform duration-200 group-open:rotate-180"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </summary>
+
+  <div class="px-5 pb-5 text-theme-text-secondary leading-relaxed [&_p+p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_li+li]:mt-2 [&_a]:font-semibold [&_a]:text-theme-primary [&_a]:underline-offset-4 hover:[&_a]:underline">
+    <slot />
+  </div>
+</details>

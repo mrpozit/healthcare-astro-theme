@@ -1,4 +1,5 @@
 import bearStory from "./library-items/vedmid-yakyi-zahubyv-sebe-v-lisi";
+import akatsiiaStory from "./library-items/akatsiia";
 
 export type LibraryType = "book" | "article" | "practical" | "story" | "research" | "video";
 export type LibraryStatus = "published" | "in-progress" | "evolving";
@@ -66,6 +67,6 @@ const mistoNavshpynkah: LibraryItem = {
   ],
 };
 
-export const libraryItems: LibraryItem[] = [mistoNavshpynkah, bearStory];
+export const libraryItems: LibraryItem[] = [mistoNavshpynkah, bearStory, akatsiiaStory];
 
 export const getLibraryItem = (slug: string) => libraryItems.find((item) => item.slug === slug);

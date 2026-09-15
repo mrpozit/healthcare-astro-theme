@@ -1,4 +1,5 @@
 import type { LibraryItem } from "../library";
+import coverImage from "../../assets/library/vedmid-yakyi-zahubyv-sebe-v-lisi/cover.jpg";
 
 const item: LibraryItem = {
   title: "Ведмідь, який загубив себе в лісі",
@@ -9,6 +10,8 @@ const item: LibraryItem = {
   language: "uk",
   status: "published",
   access: "free",
+  cover: coverImage.src,
+  coverAlt: "Ведмідь на круговій стежці у зимовому лісі",
   description: "Невелике оповідання про ведмедя, який повернувся до лісу, але продовжував жити так, ніби стіни старої клітки все ще були навколо нього.",
   editorialOrder: 2,
   intro: [

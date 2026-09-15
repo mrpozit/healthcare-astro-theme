@@ -1,457 +1,202 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import teamProfessionalsImage from "../assets/team-professionals.jpg";
-import PageHero from "../components/PageHero.astro";
-import CallToActionSection from "../components/CallToActionSection.astro";
-import Icon from "../components/Icon.astro";
-import CheckListItem from "../components/CheckListItem.astro";
-import professionalStaffImage from "../assets/professional-staff.jpg";
-import { Image } from "astro:assets";
+import LibraryCover from "../components/library/LibraryCover.astro";
+import LibraryItemCard from "../components/library/LibraryItemCard.astro";
+import { libraryItems, libraryTypeLabels } from "../data/library";
 
+const featured = [...libraryItems].filter((item) => item.featured).sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99))[0];
+const recent = [...libraryItems].sort((a, b) => (a.editorialOrder ?? 99) - (b.editorialOrder ?? 99)).slice(0, 4);
+const categories = [
+  ["all", "Усі"],
+  ...Object.entries(libraryTypeLabels),
+];
 ---
 
 <Layout
-  title="Career Opportunities - Join Our Team | Viva Medical"
-  description="Join the Viva Medical healthcare team. We offer rewarding careers for qualified healthcare professionals with competitive salary, flexible schedules, and professional development."
+  title="Бібліотека ICRA | Книги, тексти, дослідження та матеріали"
+  description="Бібліотека ICRA: книги, статті, практичні матеріали, дослідження, оповідання, притчі, відео та інші результати нашої роботи."
 >
-  <PageHero
-    title="CAREER OPPORTUNITIES"
-    description="Viva Medical is a dynamic and rapidly growing healthcare services agency looking to grow our family of qualified healthcare professionals across multiple regions. We offer rewarding career opportunities for dedicated individuals who are passionate about providing exceptional patient care."
-    image={teamProfessionalsImage}
-  />
-
-  <section
-    class="section bg-gradient-to-b from-theme-surface-muted to-theme-surface"
-  >
-    <div class="container">
-      <!-- Education & Experience Section -->
-      <div class="flex flex-wrap items-center gap-12 lg:gap-16 justify-center">
-        <!-- Text Content -->
-        <div class="w-full lg:w-5/12 mx-auto">
-          <!-- Section Heading -->
-          <div class="flex items-center mb-6">
-            <div
-              class="p-4 text-center inline-flex items-center justify-center w-14 h-14 bg-theme-primary-lighter/20 rounded-xl mr-4"
-            >
-              <Icon name="users" size="lg" class="text-theme-primary w-7 h-7" />
-            </div>
-            <h2
-              class="text-2xl lg:text-3xl font-bold text-theme-text-primary leading-tight"
-            >
-              Education & Experience
-            </h2>
+  <main>
+    <section class="section-sm bg-theme-surface-muted" aria-labelledby="library-title">
+      <div class="container">
+        <div class="max-w-4xl">
+          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-4">ICRA</p>
+          <h1 id="library-title" class="text-4xl lg:text-5xl font-bold leading-tight text-theme-text-primary">Бібліотека ICRA</h1>
+          <div class="mt-6 max-w-3xl space-y-4 text-base lg:text-lg leading-relaxed text-theme-text-secondary">
+            <p>Тут ми збираємо те, що народжується з нашої роботи, досліджень, спостережень і звичайного життя.</p>
+            <p>Книги й статті. Практичні матеріали та методики. Дослідження. Оповідання, терапевтичні історії й притчі. Відео. Іноді речі, яким ми ще не знайшли кращої назви.</p>
+            <p>Частина матеріалів завершена. Частина продовжує змінюватися разом із нашими уявленнями. Щось можна прочитати або завантажити безкоштовно. Щось існує як окрема книга.</p>
+            <p>Ми не збирали цю бібліотеку як шлях до консультації.</p>
           </div>
-          <!-- Section Description -->
-          <p
-            class="text-base lg:text-lg font-light leading-relaxed mb-6 text-theme-text-secondary"
-          >
-            All potential candidates for hire as healthcare professionals must
-            meet standards established by the specific state licensing
-            requirements and Department of Health (DOH) minimum requirements to
-            service any patient within the domain of Viva Medical
-            healthcare services licensure.
-          </p>
-          <p
-            class="text-base lg:text-lg font-light leading-relaxed text-theme-text-secondary"
-          >
-            This agency strictly adheres to the state codes, rules, and
-            regulations governing the healthcare model requirements and
-            experience essential for healthcare services. A complete job
-            description is located in the agency Manual on Policy and
-            Procedures. A description may be obtained from the agency Human
-            Resources (HR) department.
+          <p class="mt-7 max-w-3xl rounded-xl border-l-4 border-theme-primary bg-theme-surface px-5 py-4 text-lg lg:text-xl font-semibold leading-relaxed text-theme-text-primary">
+            Наша справа залишити тут те, що в нас є. Ваша взяти те, що виявиться вам потрібним.
           </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Image Block -->
-        <div class="w-full lg:w-5/12 mx-auto">
-          <div
-            class="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300"
-          >
-            <Image
-              alt="Healthcare team collaboration"
-              src={professionalStaffImage}
-              class="w-full h-full object-cover"
-            />
-          </div>
+    <section class="bg-theme-surface border-y border-theme-border" aria-label="Навігація бібліотеки">
+      <div class="container py-5">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <nav class="flex gap-2 overflow-x-auto pb-1" aria-label="Типи матеріалів" data-library-filters>
+            {categories.map(([value, label], index) => (
+              <button type="button" data-filter={value} aria-pressed={index === 0 ? "true" : "false"} class="shrink-0 rounded-full border border-theme-border bg-theme-surface px-4 py-2 text-sm font-semibold text-theme-text-secondary hover:border-theme-primary hover:text-theme-primary aria-pressed:border-theme-primary aria-pressed:bg-theme-primary aria-pressed:text-white transition-colors">{label}</button>
+            ))}
+          </nav>
+          <label class="relative block w-full lg:w-72">
+            <span class="sr-only">Пошук у бібліотеці</span>
+            <input id="library-search" type="search" placeholder="Пошук у бібліотеці" class="w-full rounded-full border border-theme-border bg-theme-surface px-4 py-2.5 text-sm text-theme-text-primary focus:border-theme-primary focus:outline-none focus:ring-2 focus:ring-theme-primary-lighter/30" />
+          </label>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section
-    class="section-sm bg-gradient-to-b from-theme-primary-lighter/10 via-theme-primary-lighter/5 to-theme-surface"
-  >
-    <div class="container">
-      <!-- Position Requirements & Why Work With Us Section -->
-      <div class="flex flex-wrap items-start gap-12 lg:gap-16">
-        <!-- Position Requirements -->
-        <div class="w-full lg:w-5/12 mx-auto">
-          <div class="flex items-center mb-8">
-            <div class="p-4 bg-theme-primary-lighter/20 rounded-xl mr-4">
-              <Icon
-                name="clipboard"
-                size="lg"
-                class="text-theme-primary w-7 h-7"
-              />
-            </div>
-            <h2
-              class="text-2xl lg:text-3xl font-bold text-theme-text-primary leading-tight"
-            >
-              Position Requirements
-            </h2>
+    <section class="section bg-theme-surface-muted" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="flex items-end justify-between gap-6 mb-8">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-2">Вибір редакції</p>
+            <h2 id="featured-title" class="text-2xl lg:text-3xl font-bold text-theme-text-primary">З чого можна почати</h2>
           </div>
-          <!-- Requirements List -->
-          <ul class="space-y-4">
-            <CheckListItem
-              >Professional license for at least 1-2 years, with current
-              registration</CheckListItem
-            >
-            <CheckListItem
-              >Knowledge of healthcare therapies and patient care procedures</CheckListItem
-            >
-            <CheckListItem>Proficient clinical skills</CheckListItem>
-            <CheckListItem>Good physical assessment skills</CheckListItem>
-            <CheckListItem>Excellent communication skills</CheckListItem>
-            <CheckListItem>Reliability, with a flexible schedule</CheckListItem>
-            <CheckListItem
-              >Valid driver's license if not using public transportation</CheckListItem
-            >
-            <CheckListItem
-              >Graduate of an Accredited Healthcare Program, College or
-              University</CheckListItem
-            >
-            <CheckListItem
-              >Minimum 1-2 years healthcare experience</CheckListItem
-            >
-            <CheckListItem>Current CPR/BLS certification</CheckListItem>
-            <CheckListItem
-              >Current professional liability insurance required</CheckListItem
-            >
-            <CheckListItem
-              >Knowledge of the Microsoft Outlook and MS Word</CheckListItem
-            >
-          </ul>
         </div>
 
-        <!-- Why Work With Us & Application Process -->
-        <div class="w-full lg:w-5/12 mx-auto">
-          <!-- Why Work With Us -->
-          <div
-            class="relative bg-gradient-to-br from-theme-primary to-theme-primary-dark rounded-2xl p-8 lg:p-10 shadow-xl mb-8 overflow-hidden"
-          >
-            <!-- Decorative elements -->
-            <div
-              class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"
-            >
+        <div class="grid gap-6 lg:grid-cols-[0.75fr_1.5fr_0.75fr] lg:items-stretch">
+          <aside class="order-2 lg:order-1 rounded-2xl border border-theme-border bg-theme-surface p-6 flex flex-col justify-between min-h-52">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">Місце для наступного матеріалу</p>
+              <h3 class="mt-3 text-xl font-bold text-theme-text-primary">Бібліотека тільки починає наповнюватися</h3>
+              <p class="mt-3 text-sm leading-relaxed text-theme-text-secondary">Тут з'явиться окремий матеріал з власною обкладинкою, коли ми його додамо.</p>
             </div>
-            <div
-              class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"
-            >
-            </div>
+          </aside>
 
-            <div class="relative z-10">
-              <div class="flex items-center mb-8">
-                <div class="p-3 bg-white/20 rounded-xl mr-4">
-                  <Icon name="star" size="lg" class="text-white w-8 h-8" />
+          {featured && (
+            <article class="order-1 lg:order-2 rounded-2xl border border-theme-border bg-theme-surface p-6 lg:p-8 shadow-sm">
+              <a href={`/library/${featured.slug}`} class="grid gap-7 sm:grid-cols-[minmax(180px,0.8fr)_1.2fr] items-center group">
+                <div class="max-w-[300px] w-full mx-auto">
+                  <LibraryCover src={featured.cover} alt={featured.coverAlt} title={featured.title} author={featured.author} loading="eager" />
                 </div>
-                <h3 class="text-2xl lg:text-3xl font-bold text-white">
-                  Why Work With Us
-                </h3>
-              </div>
-              <ul class="space-y-5">
-                <li class="flex items-start group">
-                  <div
-                    class="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-4 mt-0.5 group-hover:bg-white/30 transition-colors duration-300"
-                  >
-                    <Icon name="check" size="md" class="text-white" />
-                  </div>
-                  <span class="text-lg text-white font-medium"
-                    >Equal Opportunity Employer</span
-                  >
-                </li>
-                <li class="flex items-start group">
-                  <div
-                    class="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-4 mt-0.5 group-hover:bg-white/30 transition-colors duration-300"
-                  >
-                    <Icon name="check" size="md" class="text-white" />
-                  </div>
-                  <span class="text-lg text-white font-medium"
-                    >Competitive Salary</span
-                  >
-                </li>
-                <li class="flex items-start group">
-                  <div
-                    class="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-4 mt-0.5 group-hover:bg-white/30 transition-colors duration-300"
-                  >
-                    <Icon name="check" size="md" class="text-white" />
-                  </div>
-                  <span class="text-lg text-white font-medium"
-                    >Full, Part-Time and Per Diem Positions Available</span
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">{libraryTypeLabels[featured.type]} · {featured.author}</p>
+                  <h3 class="mt-3 text-3xl lg:text-4xl font-bold leading-tight text-theme-text-primary group-hover:text-theme-primary transition-colors">{featured.title}</h3>
+                  <p class="mt-4 text-base lg:text-lg leading-relaxed text-theme-text-secondary">{featured.description}</p>
+                  <span class="inline-flex mt-6 font-semibold text-theme-primary">Відкрити матеріал →</span>
+                </div>
+              </a>
+            </article>
+          )}
 
-          <!-- Application Process -->
-          <div
-            class="bg-theme-surface rounded-2xl p-6 lg:p-8 shadow-xl border border-theme-border hover:shadow-2xl transition-shadow duration-300"
-          >
-            <div class="flex items-center mb-4">
-              <div class="p-2.5 bg-theme-primary-lighter/20 rounded-lg mr-3">
-                <Icon name="document" size="lg" class="text-theme-primary" />
-              </div>
-              <h3 class="text-xl lg:text-2xl font-bold text-theme-text-primary">
-                Application Process
-              </h3>
+          <aside class="order-3 rounded-2xl bg-theme-primary-darker p-6 text-white flex flex-col justify-between min-h-52">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-white/65">Ще один напрям</p>
+              <h3 class="mt-3 text-xl font-bold">Тут буде несподіване</h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/75">Стаття, дослідження, відео, оповідання або річ, для якої ще немає зручної категорії.</p>
             </div>
-            <p
-              class="mb-5 text-base font-light leading-relaxed text-theme-text-secondary"
-            >
-              Viva Medical requires all healthcare professional applicants
-              to complete the Personal Experience Screening Questionnaires.
-            </p>
-            <!-- Application Links -->
-            <div class="space-y-3">
-              <a
-                href="/contact"
-                class="flex items-center justify-between p-3 bg-theme-surface-hover hover:bg-theme-primary-lighter/10 rounded-lg text-theme-primary hover:text-theme-primary-dark font-semibold transition-all duration-300 group border border-theme-border hover:border-theme-primary-lighter"
-              >
-                <div class="flex items-center">
-                  <Icon name="document" size="md" class="mr-3 flex-shrink-0" />
-                  <span class="text-base lg:text-lg"
-                    >Request a Screening Questionnaire</span
-                  >
-                </div>
-                <Icon
-                  name="chevron-right"
-                  size="md"
-                  class="group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
-                />
-              </a>
-              <a
-                href="/contact"
-                class="flex items-center justify-between p-3 bg-theme-surface-hover hover:bg-theme-primary-lighter/10 rounded-lg text-theme-primary hover:text-theme-primary-dark font-semibold transition-all duration-300 group border border-theme-border hover:border-theme-primary-lighter"
-              >
-                <div class="flex items-center">
-                  <Icon name="document" size="md" class="mr-3 flex-shrink-0" />
-                  <span class="text-base lg:text-lg"
-                    >Request an Employment Application</span
-                  >
-                </div>
-                <Icon
-                  name="chevron-right"
-                  size="md"
-                  class="group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
-                />
-              </a>
-              <a
-                href="/contact"
-                class="flex items-center justify-between p-3 bg-theme-surface-hover hover:bg-theme-primary-lighter/10 rounded-lg text-theme-primary hover:text-theme-primary-dark font-semibold transition-all duration-300 group border border-theme-border hover:border-theme-primary-lighter"
-              >
-                <div class="flex items-center">
-                  <Icon name="document" size="md" class="mr-3 flex-shrink-0" />
-                <span class="text-base lg:text-lg">Request a Reference Form</span>
-                </div>
-                <Icon
-                  name="chevron-right"
-                  size="md"
-                  class="group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
-                />
-              </a>
-            </div>
-          </div>
+          </aside>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Training Section -->
-  <section class="section-sm bg-theme-surface">
-    <div class="container">
-      <!-- Training Header -->
-      <div class="mb-12">
-        <div class="flex items-center mb-6">
-          <div class="p-4 bg-theme-primary-lighter/20 rounded-xl mr-4">
-            <Icon name="book" size="lg" class="text-theme-primary w-7 h-7" />
-          </div>
-          <h2
-            class="text-2xl lg:text-3xl font-bold text-theme-text-primary leading-tight"
-          >
-            Training
-          </h2>
-        </div>
-
-        <p
-          class="text-base font-light leading-relaxed text-theme-text-secondary mb-4"
-        >
-          Once a candidate has met the pre-hiring requirements, the agency
-          schedules the healthcare professional for essential training prior to
-          servicing any patient.
-        </p>
-        <p
-          class="text-base font-light leading-relaxed text-theme-text-secondary"
-        >
-          The agency training program incorporates both a clinical and didactic
-          component.
-        </p>
-      </div>
-
-      <!-- Training Cards -->
-      <div class="flex flex-wrap items-stretch gap-8 lg:gap-12">
-        <!-- Training Resources Card -->
-        <div class="w-full lg:w-[48%]">
-          <div
-            class="bg-gradient-to-br from-theme-surface-muted to-theme-surface-hover rounded-2xl p-8 border border-theme-border h-full"
-          >
-            <h3 class="text-xl font-bold text-theme-text-primary mb-4">
-              Training Resources
-            </h3>
-            <p
-              class="text-base font-light leading-relaxed text-theme-text-secondary mb-6"
-            >
-              Specific equipment operation training and procedures may be viewed
-              through our comprehensive training resources.
-              <a
-                href="/contact"
-                class="text-theme-primary hover:text-theme-primary-dark font-semibold transition-colors"
-                >Request training access</a
-              >
-              Click on equipment training for detailed video resources.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-start">
-                <Icon
-                  name="video"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Infusion pump training</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="video"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Ambulatory infusion system training</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="video"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Medical device training</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="video"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Infusion therapy training</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="document"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Patient care protocols</span
-                >
-              </li>
-              <li class="flex items-start">
-                <Icon
-                  name="document"
-                  size="md"
-                  class="text-theme-primary mr-3 mt-1 flex-shrink-0"
-                />
-                <span class="text-base text-theme-text-secondary"
-                  >Clinical guidelines</span
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Sexual Harassment Training Card -->
-        <div class="w-full lg:w-[48%]">
-          <div
-            class="bg-gradient-to-br from-theme-accent-sky/10 to-theme-accent-sky/5 rounded-2xl p-8 border border-theme-accent-sky/20 h-full"
-          >
-            <h3 class="text-xl font-bold text-theme-text-primary mb-4">
-              Sexual Harassment Prevention Training
-            </h3>
-            <p
-              class="text-base font-light leading-relaxed text-theme-text-secondary mb-6"
-            >
-              The Sexual Harassment Training video was prepared by the Secretary
-              of Labor for the State. Both the Governing Authority and all
-              employees of Viva Medical are required to review the Sexual
-              Harassment Prevention Policy and Training. A copy of the agency
-              policy and procedure document is available at your request. An
-              acknowledgement form must be signed and returned to the agency.
-            </p>
-            <div class="space-y-3 mb-6">
-              <a
-                href="/contact"
-                class="flex items-center text-theme-primary hover:text-theme-primary-dark font-semibold text-base transition-colors group"
-              >
-                <Icon
-                  name="video"
-                  size="md"
-                  class="mr-2 group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
-                />
-                <span>Request Prevention Training Part 1</span>
-              </a>
-              <a
-                href="/contact"
-                class="flex items-center text-theme-primary hover:text-theme-primary-dark font-semibold text-base transition-colors group"
-              >
-                <Icon
-                  name="video"
-                  size="md"
-                  class="mr-2 group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0"
-                />
-                <span
-                  >Request Prevention Training Part 2: Case Studies</span
-                >
-              </a>
+    <section class="section-sm bg-theme-surface" aria-labelledby="recent-title">
+      <div class="container">
+        <h2 id="recent-title" class="text-2xl font-bold text-theme-text-primary mb-6">Нещодавно додали</h2>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {recent.map((item) => <LibraryItemCard item={item} compact={true} />)}
+          {Array.from({ length: Math.max(0, 4 - recent.length) }).map(() => (
+            <div class="grid grid-cols-[72px_1fr] gap-4 items-start opacity-60" aria-hidden="true">
+              <div class="aspect-[1/1.414] rounded-lg bg-theme-surface-muted border border-theme-border"></div>
+              <div class="pt-2"><div class="h-3 w-16 rounded bg-theme-border"></div><div class="mt-3 h-4 w-full rounded bg-theme-border"></div><div class="mt-2 h-4 w-2/3 rounded bg-theme-border"></div></div>
             </div>
-            <div class="bg-white rounded-xl p-6 border border-blue-200">
-              <p class="text-gray-700 mb-2 text-sm">
-                <strong class="text-gray-900">Submit forms:</strong>
-                <a href="/contact" class="text-theme-primary hover:text-theme-primary-dark font-semibold transition-colors ml-2">Contact Human Resources</a>
-              </p>
-              <p class="text-gray-700 text-sm">
-                <strong class="text-gray-900">Questions?</strong>
-                <a href="/contact" class="ml-2 text-theme-primary hover:text-theme-primary-dark font-semibold transition-colors">Contact the administrator</a>
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Final CTA Section -->
-  <CallToActionSection
-    heading="Begin Your Rewarding Healthcare Career"
-    subheading="Join a team of dedicated professionals making a real difference in patients' lives. We offer competitive benefits, ongoing training, and the opportunity to grow with a regional leader in healthcare services."
-    primaryButtonText="Apply Today"
-    primaryButtonLink="/contact"
-    secondaryButtonText="Have Questions?"
-    secondaryButtonLink="/contact"
-  />
+    <section class="section bg-theme-surface-muted" aria-labelledby="editorial-title">
+      <div class="container grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
+        <div>
+          <h2 id="editorial-title" class="text-2xl lg:text-3xl font-bold text-theme-text-primary mb-8">Матеріали</h2>
+          <div class="space-y-7" data-editorial-list>
+            {libraryItems.map((item) => <LibraryItemCard item={item} />)}
+          </div>
+        </div>
+
+        <aside class="space-y-6" aria-label="Редакційні добірки">
+          {featured && (
+            <section class="rounded-2xl border border-theme-border bg-theme-surface p-6">
+              <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary">Можливо, ви прийшли саме за цим</p>
+              <a href={`/library/${featured.slug}`} class="block mt-4 group">
+                <h3 class="text-xl font-bold text-theme-text-primary group-hover:text-theme-primary transition-colors">{featured.title}</h3>
+                <p class="mt-2 text-sm text-theme-text-muted">{featured.author} · {libraryTypeLabels[featured.type]}</p>
+              </a>
+            </section>
+          )}
+          <section class="rounded-2xl bg-theme-primary-darker p-6 text-white">
+            <p class="text-sm font-semibold uppercase tracking-wider text-white/65">Досліджуємо зараз</p>
+            <p class="mt-4 text-sm leading-relaxed text-white/80">Цей блок готовий до наповнення. Додамо сюди 2–3 реальні поточні напрями, коли сформулюємо їх для публікації.</p>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section bg-theme-surface" aria-labelledby="all-title">
+      <div class="container">
+        <div class="max-w-3xl mb-8">
+          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-2">Архів</p>
+          <h2 id="all-title" class="text-3xl lg:text-4xl font-bold text-theme-text-primary">Усі матеріали</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-all-materials>
+          {libraryItems.map((item) => (
+            <article class="rounded-2xl border border-theme-border bg-theme-surface-muted p-5" data-library-item data-type={item.type} data-search={`${item.title} ${item.author} ${item.description} ${item.topics.join(" ")}`.toLowerCase()}>
+              <a href={`/library/${item.slug}`} class="grid grid-cols-[100px_1fr] gap-5 group">
+                <LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author} />
+                <div class="pt-1">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">{libraryTypeLabels[item.type]}</p>
+                  <h3 class="mt-2 text-lg font-bold leading-tight text-theme-text-primary group-hover:text-theme-primary transition-colors">{item.title}</h3>
+                  <p class="mt-2 text-sm text-theme-text-muted">{item.author}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+        <p id="library-empty" class="hidden mt-8 rounded-xl border border-theme-border bg-theme-surface-muted p-6 text-theme-text-secondary">За цим запитом матеріалів поки немає.</p>
+        <div class="mt-8 text-center">
+          <button type="button" disabled class="rounded-full border border-theme-border px-5 py-2.5 text-sm font-semibold text-theme-text-muted opacity-60 cursor-not-allowed">Показати ще</button>
+          <p class="mt-2 text-xs text-theme-text-muted">Кнопка стане активною, коли бібліотека виросте.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const initLibrary = () => {
+      const search = document.querySelector<HTMLInputElement>("#library-search");
+      const filters = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-filter]"));
+      const items = Array.from(document.querySelectorAll<HTMLElement>("[data-library-item]"));
+      const empty = document.querySelector<HTMLElement>("#library-empty");
+      let activeType = "all";
+
+      const apply = () => {
+        const query = search?.value.trim().toLowerCase() ?? "";
+        let visible = 0;
+        items.forEach((item) => {
+          const typeMatch = activeType === "all" || item.dataset.type === activeType;
+          const searchMatch = !query || (item.dataset.search ?? "").includes(query);
+          const show = typeMatch && searchMatch;
+          item.classList.toggle("hidden", !show);
+          if (show) visible += 1;
+        });
+        empty?.classList.toggle("hidden", visible > 0);
+      };
+
+      filters.forEach((button) => button.addEventListener("click", () => {
+        activeType = button.dataset.filter ?? "all";
+        filters.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
+        apply();
+      }));
+      search?.addEventListener("input", apply);
+    };
+
+    document.addEventListener("astro:page-load", initLibrary);
+    initLibrary();
+  </script>
 </Layout>

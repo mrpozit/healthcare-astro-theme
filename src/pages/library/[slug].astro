@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LibraryCover from "../../components/library/LibraryCover.astro";
+import { libraryItems, libraryTypeLabels, libraryStatusLabels } from "../../data/library";
+
+export function getStaticPaths() {
+  return libraryItems.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const related = (item.relatedItems ?? [])
+  .map((slug: string) => libraryItems.find((candidate) => candidate.slug === slug))
+  .filter(Boolean);
+---
+
+<Layout title={`${item.title} | Бібліотека ICRA`} description={item.description}>
+  <article class="section bg-theme-surface-muted">
+    <div class="container">
+      <a href="/careers" class="inline-flex mb-8 font-semibold text-theme-primary hover:underline underline-offset-4">← Бібліотека</a>
+
+      <div class="grid gap-10 lg:grid-cols-[minmax(260px,0.38fr)_minmax(0,0.62fr)] lg:gap-16 items-start">
+        <div class="max-w-[380px] w-full mx-auto lg:mx-0">
+          <LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author} loading="eager" />
+        </div>
+
+        <div class="max-w-3xl">
+          <div class="flex flex-wrap gap-2 text-sm font-semibold uppercase tracking-wider text-theme-primary mb-4">
+            <span>{libraryTypeLabels[item.type]}</span>
+            <span aria-hidden="true">·</span>
+            <span>{item.author}</span>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold leading-tight text-theme-text-primary">{item.title}</h1>
+          <p class="mt-5 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">{item.description}</p>
+
+          {item.status && <p class="mt-4 text-sm text-theme-text-muted">Статус: {libraryStatusLabels[item.status]}</p>}
+
+          {item.externalLinks?.length > 0 && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {item.externalLinks.map((link: { label: string; href: string }) => (
+                <a href={link.href} class="button button-primary" target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label}</a>
+              ))}
+            </div>
+          )}
+
+          <section class="mt-10 border-t border-theme-border pt-8" aria-labelledby="annotation-title">
+            <h2 id="annotation-title" class="text-2xl font-bold text-theme-text-primary mb-4">Про матеріал</h2>
+            <p class="text-lg leading-relaxed text-theme-text-secondary">{item.description}</p>
+          </section>
+
+          {item.whyInIcra?.length > 0 && (
+            <section class="mt-10 rounded-2xl bg-theme-primary-lighter/10 border border-theme-border p-6 lg:p-8" aria-labelledby="why-icra-title">
+              <h2 id="why-icra-title" class="text-2xl font-bold text-theme-text-primary mb-4">Чому цей матеріал є в ICRA</h2>
+              <div class="space-y-4 text-base lg:text-lg leading-relaxed text-theme-text-secondary">
+                {item.whyInIcra.map((paragraph: string) => <p>{paragraph}</p>)}
+              </div>
+            </section>
+          )}
+        </div>
+      </div>
+
+      {related.length > 0 && (
+        <section class="mt-16 border-t border-theme-border pt-10" aria-labelledby="related-title">
+          <h2 id="related-title" class="text-2xl font-bold text-theme-text-primary mb-6">Може бути поруч</h2>
+          <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {related.map((relatedItem: any) => (
+              <a href={`/library/${relatedItem.slug}`} class="rounded-xl border border-theme-border bg-theme-surface p-5 hover:border-theme-primary transition-colors">
+                <p class="text-xs uppercase tracking-wider font-semibold text-theme-primary">{libraryTypeLabels[relatedItem.type]}</p>
+                <h3 class="mt-2 font-bold text-theme-text-primary">{relatedItem.title}</h3>
+                <p class="mt-1 text-sm text-theme-text-muted">{relatedItem.author}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</Layout>

@@ -1,4 +1,5 @@
 import type { LibraryItem } from "../library";
+import coverImage from "../../assets/library/akatsiia/cover.jpg";
 
 const item: LibraryItem = {
   title: "Акація",
@@ -9,6 +10,8 @@ const item: LibraryItem = {
   language: "uk",
   status: "published",
   access: "free",
+  cover: coverImage.src,
+  coverAlt: "Обкладинка оповідання «Акація»",
   description: "Невелике оповідання про міцність, внутрішню напругу та право навіть найсильнішого не тримати все в собі.",
   editorialOrder: 3,
   body: [

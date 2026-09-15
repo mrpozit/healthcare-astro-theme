@@ -11,6 +11,7 @@ const { item } = Astro.props;
 const related = (item.relatedItems ?? [])
   .map((slug: string) => libraryItems.find((candidate) => candidate.slug === slug))
   .filter(Boolean);
+const hasReadableContent = (item.intro?.length ?? 0) > 0 || (item.body?.length ?? 0) > 0;
 ---
 
 <Layout title={`${item.title} | Бібліотека ICRA`} description={item.description}>
@@ -25,13 +26,10 @@ const related = (item.relatedItems ?? [])
 
         <div class="max-w-3xl">
           <div class="flex flex-wrap gap-2 text-sm font-semibold uppercase tracking-wider text-theme-primary mb-4">
-            <span>{libraryTypeLabels[item.type]}</span>
-            <span aria-hidden="true">·</span>
-            <span>{item.author}</span>
+            <span>{libraryTypeLabels[item.type]}</span><span aria-hidden="true">·</span><span>{item.author}</span>
           </div>
           <h1 class="text-4xl lg:text-5xl font-bold leading-tight text-theme-text-primary">{item.title}</h1>
           <p class="mt-5 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">{item.description}</p>
-
           {item.status && <p class="mt-4 text-sm text-theme-text-muted">Статус: {libraryStatusLabels[item.status]}</p>}
 
           {item.externalLinks?.length > 0 && (
@@ -42,10 +40,12 @@ const related = (item.relatedItems ?? [])
             </div>
           )}
 
-          <section class="mt-10 border-t border-theme-border pt-8" aria-labelledby="annotation-title">
-            <h2 id="annotation-title" class="text-2xl font-bold text-theme-text-primary mb-4">Про матеріал</h2>
-            <p class="text-lg leading-relaxed text-theme-text-secondary">{item.description}</p>
-          </section>
+          {!hasReadableContent && (
+            <section class="mt-10 border-t border-theme-border pt-8" aria-labelledby="annotation-title">
+              <h2 id="annotation-title" class="text-2xl font-bold text-theme-text-primary mb-4">Про матеріал</h2>
+              <p class="text-lg leading-relaxed text-theme-text-secondary">{item.description}</p>
+            </section>
+          )}
 
           {item.whyInIcra?.length > 0 && (
             <section class="mt-10 rounded-2xl bg-theme-primary-lighter/10 border border-theme-border p-6 lg:p-8" aria-labelledby="why-icra-title">
@@ -57,6 +57,19 @@ const related = (item.relatedItems ?? [])
           )}
         </div>
       </div>
+
+      {hasReadableContent && (
+        <section class="mt-14 lg:mt-20 max-w-[760px] mx-auto" aria-label="Текст матеріалу">
+          {item.intro?.length > 0 && (
+            <div class="mb-10 rounded-2xl border border-theme-border bg-theme-surface p-6 lg:p-8 text-base lg:text-lg leading-relaxed text-theme-text-secondary space-y-4">
+              {item.intro.map((paragraph: string) => <p>{paragraph}</p>)}
+            </div>
+          )}
+          <div class="space-y-6 text-[1.06rem] lg:text-lg leading-[1.85] text-theme-text-primary">
+            {item.body?.map((paragraph: string) => <p>{paragraph}</p>)}
+          </div>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section class="mt-16 border-t border-theme-border pt-10" aria-labelledby="related-title">

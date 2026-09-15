@@ -1,3 +1,5 @@
+import bearStory from "./library-items/vedmid-yakyi-zahubyv-sebe-v-lisi";
+
 export type LibraryType = "book" | "article" | "practical" | "story" | "research" | "video";
 export type LibraryStatus = "published" | "in-progress" | "evolving";
 export type LibraryAccess = "free" | "paid";
@@ -28,6 +30,8 @@ export interface LibraryItem {
   featuredOrder?: number;
   editorialOrder?: number;
   whyInIcra?: string[];
+  intro?: string[];
+  body?: string[];
 }
 
 export const libraryTypeLabels: Record<LibraryType, string> = {
@@ -45,24 +49,23 @@ export const libraryStatusLabels: Record<LibraryStatus, string> = {
   evolving: "Продовжує змінюватися",
 };
 
-export const libraryItems: LibraryItem[] = [
-  {
-    title: "Місто навшпиньках",
-    slug: "misto-navshpynkah",
-    author: "Brann Solen",
-    type: "book",
-    topics: ["терапевтичні тексти", "арт-терапія"],
-    language: "uk",
-    description:
-      "Книга, окремі глави якої Патриція використовує для налаштування груп перед арт-терапевтичною роботою.",
-    featured: true,
-    featuredOrder: 1,
-    editorialOrder: 1,
-    whyInIcra: [
-      "Окремі глави цієї книги Патриція використовує для налаштування груп перед арт-терапевтичною роботою.",
-      "Після таких зустрічей учасники неодноразово самі запитували, де можна прочитати або завантажити книгу цілком. Саме тому їй природно бути в Бібліотеці ICRA.",
-    ],
-  },
-];
+const mistoNavshpynkah: LibraryItem = {
+  title: "Місто навшпиньках",
+  slug: "misto-navshpynkah",
+  author: "Brann Solen",
+  type: "book",
+  topics: ["терапевтичні тексти", "арт-терапія"],
+  language: "uk",
+  description: "Книга, окремі глави якої Патриція використовує для налаштування груп перед арт-терапевтичною роботою.",
+  featured: true,
+  featuredOrder: 1,
+  editorialOrder: 1,
+  whyInIcra: [
+    "Окремі глави цієї книги Патриція використовує для налаштування груп перед арт-терапевтичною роботою.",
+    "Після таких зустрічей учасники неодноразово самі запитували, де можна прочитати або завантажити книгу цілком. Саме тому їй природно бути в Бібліотеці ICRA.",
+  ],
+};
+
+export const libraryItems: LibraryItem[] = [mistoNavshpynkah, bearStory];
 
 export const getLibraryItem = (slug: string) => libraryItems.find((item) => item.slug === slug);

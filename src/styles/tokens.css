@@ -1,0 +1,40 @@
+:root {
+  /* ICRA core palette */
+  --icra-color-brand: #0d9488;
+  --icra-color-brand-dark: #0f766e;
+  --icra-color-brand-deep: #115e59;
+
+  --icra-color-text: #111827;
+  --icra-color-text-soft: #374151;
+  --icra-color-text-muted: #6b7280;
+  --icra-color-inverse: #ffffff;
+
+  --icra-color-surface: #ffffff;
+  --icra-color-surface-warm: #f5f1e8;
+  --icra-color-surface-cool: #edf4f5;
+  --icra-color-surface-cool-strong: #e3eef0;
+  --icra-color-border: #e5e7eb;
+
+  /* Layout */
+  --icra-container: 85.375rem;
+  --icra-gutter: 1rem;
+  --icra-gutter-lg: 2rem;
+  --icra-section-y: 3rem;
+  --icra-section-y-lg: 4rem;
+  --icra-section-y-compact: 2rem;
+  --icra-section-y-compact-lg: 2.5rem;
+
+  /* Shape */
+  --icra-radius-sm: 0.75rem;
+  --icra-radius-md: 1rem;
+  --icra-radius-lg: 1.5rem;
+
+  /* Typography */
+  --icra-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --icra-leading-body: 1.65;
+  --icra-leading-heading: 1.12;
+
+  /* Elevation */
+  --icra-shadow-card: 0 2px 8px -2px rgb(17 24 39 / 0.08);
+  --icra-shadow-card-hover: 0 10px 28px -10px rgb(17 24 39 / 0.16);
+}

@@ -1,0 +1,19 @@
+---
+type Tone = "white" | "warm" | "cool" | "dark";
+
+interface Props {
+  tone?: Tone;
+  class?: string;
+}
+
+const { tone = "white", class: className = "" } = Astro.props;
+const classes = [
+  "icra-card",
+  tone !== "white" && `icra-card--${tone}`,
+  className,
+].filter(Boolean).join(" ");
+---
+
+<div class={classes}>
+  <slot />
+</div>

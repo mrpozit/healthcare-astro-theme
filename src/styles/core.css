@@ -1,4 +1,7 @@
-/* ICRA core visual language. New core pages should use these primitives. */
+/*
+ * ICRA core design contract.
+ * Pages choose structure and meaning. Core components own visual decisions.
+ */
 
 .icra-container {
   width: 100%;
@@ -9,40 +12,25 @@
 
 .icra-section {
   padding-block: var(--icra-section-y);
+  background: var(--icra-color-surface);
   color: var(--icra-color-text);
 }
 
-.icra-section--white { background: var(--icra-color-surface); }
-.icra-section--warm { background: var(--icra-color-surface-warm); }
-.icra-section--cool { background: var(--icra-color-surface-cool); }
-.icra-section--cool-strong { background: var(--icra-color-surface-cool-strong); }
-.icra-section--dark {
-  background: var(--icra-color-brand-deep);
-  color: var(--icra-color-inverse);
-}
-
-.icra-section--compact {
-  padding-block: var(--icra-section-y-compact);
-}
+.icra-section--base { background: var(--icra-color-surface); }
+.icra-section--alternate { background: var(--icra-color-surface-cool); }
+.icra-section--compact { padding-block: var(--icra-section-y-compact); }
 
 .icra-heading {
   margin: 0;
   color: inherit;
   font-weight: 700;
   line-height: var(--icra-leading-heading);
+  letter-spacing: -0.025em;
 }
 
-.icra-heading--page {
-  font-size: clamp(2.25rem, 4vw, 3.5rem);
-}
-
-.icra-heading--section {
-  font-size: clamp(1.875rem, 3vw, 2.5rem);
-}
-
-.icra-heading--subsection {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-}
+.icra-heading--page { font-size: clamp(2.25rem, 4vw, 3.5rem); }
+.icra-heading--section { font-size: clamp(1.875rem, 3vw, 2.5rem); }
+.icra-heading--subsection { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 
 .icra-card {
   border: 1px solid var(--icra-color-border);
@@ -52,25 +40,18 @@
   box-shadow: var(--icra-shadow-card);
 }
 
-.icra-card--warm { background: var(--icra-color-surface-warm); }
-.icra-card--cool { background: var(--icra-color-surface-cool); }
-.icra-card--dark {
-  border-color: transparent;
-  background: var(--icra-color-brand-deep);
-  color: var(--icra-color-inverse);
+.icra-card--accent {
+  border-color: color-mix(in srgb, var(--icra-color-brand) 25%, var(--icra-color-border));
+  background: var(--icra-color-surface-warm);
 }
 
 .icra-eyebrow {
   margin: 0 0 1rem;
-  color: var(--icra-color-brand);
+  color: var(--icra-color-brand-dark);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-}
-
-.icra-card--dark .icra-eyebrow {
-  color: rgb(255 255 255 / 0.7);
 }
 
 .icra-copy {
@@ -79,9 +60,24 @@
   line-height: var(--icra-leading-body);
 }
 
-.icra-copy--inverse,
-.icra-card--dark .icra-copy {
-  color: rgb(255 255 255 / 0.88);
+.icra-callout {
+  border-left: 4px solid var(--icra-color-brand);
+  padding-left: 1.25rem;
+  color: var(--icra-color-brand-deep);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.icra-link {
+  color: var(--icra-color-brand-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.icra-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 @media (min-width: 1024px) {

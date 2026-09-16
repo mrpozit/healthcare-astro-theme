@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatJournalDate, journalSlug, journalTypeLabels } from "../../lib/journal";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("journal", ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: journalSlug(entry.id) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const type = journalTypeLabels[entry.data.type ?? "update"];
+const description = entry.data.excerpt ?? entry.data.title;
+---
+<Layout title={`${entry.data.title} | Життя ICRA`} description={description}>
+  <article class="section bg-theme-surface-muted">
+    <div class="container max-w-4xl">
+      <p class="text-sm text-theme-text-muted"><span>{type}</span> <span aria-hidden="true">·</span> <time datetime={entry.data.date.toISOString()}>{formatJournalDate(entry.data.date)}</time></p>
+      <h1 class="mt-4 text-4xl lg:text-6xl font-bold leading-tight text-theme-text-primary">{entry.data.title}</h1>
+      {entry.data.excerpt && <p class="mt-6 text-xl lg:text-2xl leading-relaxed text-theme-text-secondary">{entry.data.excerpt}</p>}
+      {entry.data.author && <p class="mt-4 text-sm font-semibold text-theme-text-muted">{entry.data.author}</p>}
+      {entry.data.cover && <Image src={entry.data.cover} alt={entry.data.title} class="mt-10 block h-auto w-full rounded-2xl" widths={[640, 960, 1280]} sizes="(min-width:1024px) 896px, 100vw" loading="eager" />}
+      <div class="journal-prose mt-10 text-lg leading-relaxed text-theme-text-secondary"><Content /></div>
+      <footer class="mt-12 border-t border-theme-border pt-8 flex flex-wrap gap-x-8 gap-y-4">
+        <a href="/blog" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
+        {entry.data.relatedLibraryItem && <a href={entry.data.relatedLibraryItem} class="font-semibold text-theme-primary hover:underline underline-offset-4">Матеріал у Бібліотеці →</a>}
+        {entry.data.externalUrl && <a href={entry.data.externalUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-theme-primary hover:underline underline-offset-4">Перейти →</a>}
+      </footer>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  .journal-prose p { margin-top: 1.15em; }
+  .journal-prose h2 { margin-top: 1.8em; font-size: 1.65em; line-height: 1.2; font-weight: 700; color: var(--color-theme-text-primary); }
+  .journal-prose h3 { margin-top: 1.6em; font-size: 1.3em; line-height: 1.25; font-weight: 700; color: var(--color-theme-text-primary); }
+  .journal-prose blockquote { margin: 1.5em 0; border-left: 3px solid var(--color-theme-primary); padding-left: 1.25em; font-style: italic; }
+  .journal-prose ul, .journal-prose ol { margin: 1.2em 0; padding-left: 1.5em; }
+  .journal-prose ul { list-style: disc; }
+  .journal-prose ol { list-style: decimal; }
+  .journal-prose a { color: var(--color-theme-primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .journal-prose img { margin: 2rem auto; max-width: 100%; height: auto; border-radius: 1rem; }
+</style>

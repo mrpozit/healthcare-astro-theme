@@ -1,53 +1,22 @@
 {
   "brand": {
-    "name": "Міжнародний центр відновлення і адаптації",
-    "logo": "ICRA"
+    "name": "МЦ відновлення та адаптації",
+    "logo": "МЦ відновлення та адаптації"
   },
   "contact": {
     "addressLine1": "Україна",
     "addressLine2": "Київ",
     "phone": "+38********",
-    "email": "icra.centre@gmail.com"
+    "email": "***"
   },
   "links": [
-    {
-      "label": "Головна",
-      "href": "/",
-      "icon": "home"
-    },
-    {
-      "label": "Про нас",
-      "href": "/about",
-      "icon": "info"
-    },
-    {
-      "label": "Послуги",
-      "href": "/services",
-      "icon": "clipboard"
-    },
-    {
-      "label": "Бібліотека",
-      "href": "/careers",
-      "icon": "users"
-    },
-    {
-      "label": "Жіночий простір",
-      "href": "/women-space",
-      "icon": "heart"
-    },
-    {
-      "label": "Блог",
-      "href": "/blog",
-      "icon": "book"
-    },
-    {
-      "label": "Суспільна діяльність",
-      "href": "/info",
-      "icon": "document"
-    }
+    {"label":"Головна","href":"/","icon":"home"},
+    {"label":"Про нас","href":"/about","icon":"info"},
+    {"label":"Послуги","href":"/services","icon":"clipboard"},
+    {"label":"Бібліотека","href":"/careers","icon":"users"},
+    {"label":"Жіночий простір","href":"/women-space","icon":"heart"},
+    {"label":"Життя ICRA","href":"/blog","icon":"book"},
+    {"label":"Суспільна діяльність","href":"/info","icon":"document"}
   ],
-  "cta": {
-    "label": "Контакти",
-    "href": "/contact"
-  }
+  "cta": {"label":"Контакти","href":"/contact"}
 }

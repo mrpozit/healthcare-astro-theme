@@ -16,15 +16,21 @@
    automatically. Dark cards inside articles/divs are intentionally untouched. */
 main section.bg-theme-primary-darker {
   background-color: var(--icra-wide-accent-surface) !important;
-  color: var(--color-theme-text-primary) !important;
+  color: #0f172a !important;
 }
 
-main section.bg-theme-primary-darker :is(h1, h2, h3, h4, h5, h6) {
-  color: var(--color-theme-text-primary) !important;
+main section.bg-theme-primary-darker h1,
+main section.bg-theme-primary-darker h2,
+main section.bg-theme-primary-darker h3,
+main section.bg-theme-primary-darker h4,
+main section.bg-theme-primary-darker h5,
+main section.bg-theme-primary-darker h6,
+#research-cycle-title {
+  color: #0f172a !important;
 }
 
 main section.bg-theme-primary-darker :is(.text-white, .\!text-white) {
-  color: var(--color-theme-text-primary) !important;
+  color: #0f172a !important;
 }
 
 main section.bg-theme-primary-darker :is(.text-white\/90, .text-white\/85, .text-white\/80) {

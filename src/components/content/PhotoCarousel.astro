@@ -28,7 +28,7 @@ const {
       </div>
       <div data-carousel-track class="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" tabindex="0" aria-label={ariaLabel}>
         {images.map((image) => (
-          <figure data-carousel-slide class="w-[84%] sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)] shrink-0 snap-start overflow-hidden rounded-2xl bg-theme-surface shadow-lg">
+          <figure data-carousel-slide class="w-[84%] sm:w-[48%] lg:w-[32%] shrink-0 snap-start overflow-hidden rounded-2xl bg-theme-surface shadow-lg">
             <Image src={image.src} alt={image.alt} class="block w-full aspect-[4/5] object-cover" widths={[480, 720, 960]} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 84vw" loading="lazy" />
           </figure>
         ))}

@@ -19,6 +19,10 @@ main section.bg-theme-primary-darker {
   color: var(--color-theme-text-primary) !important;
 }
 
+main section.bg-theme-primary-darker :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-theme-text-primary) !important;
+}
+
 main section.bg-theme-primary-darker :is(.text-white, .\!text-white) {
   color: var(--color-theme-text-primary) !important;
 }

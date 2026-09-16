@@ -1,0 +1,60 @@
+/*
+ * ICRA visual grammar
+ *
+ * The footer's darkest brand surface is reserved for the real footer and
+ * bounded components such as cards, profile panels and compact callouts.
+ * Full-width content bands use a light tinted surface so they never read as
+ * the end of the page.
+ */
+
+:root {
+  --icra-wide-accent-surface: #edf4f5;
+  --icra-wide-accent-surface-strong: #e3eef0;
+}
+
+/* Existing full-width sections that use the footer surface are normalized
+   automatically. Dark cards inside articles/divs are intentionally untouched. */
+main section.bg-theme-primary-darker {
+  background-color: var(--icra-wide-accent-surface) !important;
+  color: var(--color-theme-text-primary) !important;
+}
+
+main section.bg-theme-primary-darker :is(.text-white, .\!text-white) {
+  color: var(--color-theme-text-primary) !important;
+}
+
+main section.bg-theme-primary-darker :is(.text-white\/90, .text-white\/85, .text-white\/80) {
+  color: var(--color-theme-text-secondary) !important;
+}
+
+main section.bg-theme-primary-darker :is(.text-white\/75, .text-white\/70, .text-white\/65, .text-white\/60) {
+  color: var(--color-theme-text-muted) !important;
+}
+
+main section.bg-theme-primary-darker :is(.bg-white\/10, .\!bg-white\/10) {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+main section.bg-theme-primary-darker :is(.border-white\/60, .border-white\/20, .\!border-white\/20) {
+  border-color: var(--color-theme-primary) !important;
+}
+
+main section.bg-theme-primary-darker a:not(.button) {
+  color: var(--color-theme-primary-darker) !important;
+}
+
+/* Semantic classes for all new work. */
+.icra-wide-band {
+  background-color: var(--icra-wide-accent-surface);
+  color: var(--color-theme-text-primary);
+}
+
+.icra-wide-band-strong {
+  background-color: var(--icra-wide-accent-surface-strong);
+  color: var(--color-theme-text-primary);
+}
+
+.icra-dark-card {
+  background-color: var(--color-theme-primary-darker);
+  color: var(--color-theme-text-on-dark);
+}

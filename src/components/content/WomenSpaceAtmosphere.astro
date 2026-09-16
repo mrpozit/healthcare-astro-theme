@@ -1,8 +1,22 @@
 ---
 import { Image } from "astro:assets";
 import meetingOne from "../../assets/womens-space-meeting-01.jpg";
-import meetingTwo from "../../assets/womens-space-meeting-02.jpg";
+import atmosphereTwo from "../../assets/womens-space-atmosphere-02.jpg";
+import atmosphereThree from "../../assets/womens-space-atmosphere-03.jpg";
+import atmosphereFour from "../../assets/womens-space-atmosphere-04.jpg";
+import atmosphereFive from "../../assets/womens-space-atmosphere-05.jpg";
+import atmosphereSix from "../../assets/womens-space-atmosphere-06.jpg";
 import patriciaWomen from "../../assets/patricia-womens-space.jpg";
+import patriciaAuthor from "../../assets/patricia-womens-space-author.jpg";
+
+const atmosphereImages = [
+  meetingOne,
+  atmosphereTwo,
+  atmosphereThree,
+  atmosphereFour,
+  atmosphereFive,
+  atmosphereSix,
+];
 ---
 
 <section
@@ -10,37 +24,57 @@ import patriciaWomen from "../../assets/patricia-womens-space.jpg";
   class="section bg-[#f8eee8]"
   aria-labelledby="women-atmosphere-title"
   data-patricia-src={patriciaWomen.src}
+  data-patricia-author-src={patriciaAuthor.src}
   data-meeting-one-src={meetingOne.src}
 >
   <div class="container">
-    <div class="max-w-4xl mb-10">
-      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#a67c32] mb-4">Живі моменти</p>
-      <h2 id="women-atmosphere-title" class="text-3xl lg:text-5xl font-bold leading-tight text-[#54172d]">Атмосфера наших зустрічей</h2>
-      <p class="mt-5 text-lg lg:text-xl leading-relaxed text-[#604e53]">Кілька кадрів, які передають настрій Жіночого простору. Тут важливі присутність, розмова, творчість і можливість бути собою.</p>
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-10">
+      <div class="max-w-4xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#a67c32] mb-4">Живі моменти</p>
+        <h2 id="women-atmosphere-title" class="text-3xl lg:text-5xl font-bold leading-tight text-[#54172d]">Атмосфера наших зустрічей</h2>
+        <p class="mt-5 text-lg lg:text-xl leading-relaxed text-[#604e53]">Кілька кадрів, які передають настрій Жіночого простору. Тут важливі присутність, розмова, творчість і можливість бути собою.</p>
+      </div>
+      <div class="flex gap-3 shrink-0" aria-label="Керування галереєю">
+        <button type="button" class="women-carousel-prev grid h-12 w-12 place-items-center rounded-full border border-[#c49a4a] text-2xl text-[#54172d] transition hover:bg-[#54172d] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#54172d]" aria-label="Попередні фото">‹</button>
+        <button type="button" class="women-carousel-next grid h-12 w-12 place-items-center rounded-full border border-[#c49a4a] text-2xl text-[#54172d] transition hover:bg-[#54172d] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#54172d]" aria-label="Наступні фото">›</button>
+      </div>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2">
-      <figure class="overflow-hidden rounded-2xl bg-[#fffaf3] shadow-lg shadow-[#54172d]/10">
-        <Image src={meetingOne} alt="Атмосфера жіночої зустрічі ICRA" class="w-full aspect-[4/3] object-cover" loading="lazy" />
-      </figure>
-      <figure class="overflow-hidden rounded-2xl bg-[#fffaf3] shadow-lg shadow-[#54172d]/10">
-        <Image src={meetingTwo} alt="Жіноча зустріч у просторі ICRA" class="w-full aspect-[4/3] object-cover" loading="lazy" />
-      </figure>
+    <div class="women-carousel overflow-hidden" tabindex="0" aria-label="Фотографії з жіночих зустрічей">
+      <div class="women-carousel-track flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {atmosphereImages.map((image, index) => (
+          <figure class="women-carousel-slide shrink-0 snap-start overflow-hidden rounded-2xl bg-[#fffaf3] shadow-lg shadow-[#54172d]/10">
+            <Image
+              src={image}
+              alt={`Атмосфера жіночих зустрічей ICRA, фото ${index + 1}`}
+              class="block w-full aspect-[4/5] object-cover"
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
     </div>
+    <p class="mt-5 text-sm text-[#8b747a]">Гортайте фото стрілками або свайпом.</p>
   </div>
 </section>
 
+<style>
+  .women-carousel-slide { width: 84%; }
+  @media (min-width: 640px) { .women-carousel-slide { width: calc((100% - 1.25rem) / 2); } }
+  @media (min-width: 1024px) { .women-carousel-slide { width: calc((100% - 2.5rem) / 3); } }
+</style>
+
 <script is:inline>
   (() => {
-    const patchWomenSpace = () => {
+    const initWomenSpace = () => {
       const page = document.querySelector('.women-space');
       const atmosphere = document.getElementById('women-atmosphere');
       if (!page || !atmosphere) return;
 
       const patriciaSrc = atmosphere.dataset.patriciaSrc;
+      const patriciaAuthorSrc = atmosphere.dataset.patriciaAuthorSrc;
       const meetingOneSrc = atmosphere.dataset.meetingOneSrc;
 
-      // Use the dedicated portrait in the hero and remove the temporary technical caption.
       const heroFigure = page.querySelector('section[aria-labelledby="women-hero-title"] figure');
       const heroImage = heroFigure?.querySelector('img');
       if (heroImage && patriciaSrc) {
@@ -49,7 +83,6 @@ import patriciaWomen from "../../assets/patricia-womens-space.jpg";
       }
       heroFigure?.querySelector('figcaption')?.remove();
 
-      // Remove the old photo placeholder from the aesthetics section.
       const aesthetics = page.querySelector('section[aria-labelledby="aesthetics-title"]');
       if (aesthetics) {
         const grid = aesthetics.querySelector('.container');
@@ -59,7 +92,6 @@ import patriciaWomen from "../../assets/patricia-womens-space.jpg";
         grid?.classList.add('max-w-5xl');
       }
 
-      // Put a real meeting photo directly into the Closed circle block.
       const join = page.querySelector('section[aria-labelledby="join-title"]');
       const articles = join ? Array.from(join.querySelectorAll('article')) : [];
       const closedCircle = articles.find((article) => article.textContent?.includes('Закрите коло'));
@@ -70,7 +102,6 @@ import patriciaWomen from "../../assets/patricia-womens-space.jpg";
         closedCircle.appendChild(imageWrap);
       }
 
-      // The story no longer needs a photo placeholder.
       const story = page.querySelector('section[aria-labelledby="story-title"]');
       if (story) {
         const storyGrid = story.querySelector('.container');
@@ -80,16 +111,38 @@ import patriciaWomen from "../../assets/patricia-womens-space.jpg";
         storyGrid?.classList.add('max-w-5xl');
       }
 
-      // Move the atmosphere gallery inside the page, before the Patricia block.
       const patriciaSection = page.querySelector('section[aria-labelledby="patricia-title"]');
+      if (patriciaSection && patriciaAuthorSrc) {
+        const authorImage = patriciaSection.querySelector('img');
+        if (authorImage) {
+          authorImage.src = patriciaAuthorSrc;
+          authorImage.removeAttribute('srcset');
+        }
+      }
+
       if (patriciaSection && atmosphere.parentElement !== page) {
         page.insertBefore(atmosphere, patriciaSection);
       } else if (patriciaSection && atmosphere.nextElementSibling !== patriciaSection) {
         page.insertBefore(atmosphere, patriciaSection);
       }
+
+      const track = atmosphere.querySelector('.women-carousel-track');
+      const prev = atmosphere.querySelector('.women-carousel-prev');
+      const next = atmosphere.querySelector('.women-carousel-next');
+      if (track && prev && next && !atmosphere.dataset.carouselReady) {
+        atmosphere.dataset.carouselReady = 'true';
+        const step = () => {
+          const slide = track.querySelector('.women-carousel-slide');
+          if (!slide) return track.clientWidth;
+          const gap = parseFloat(getComputedStyle(track).gap || '0');
+          return slide.getBoundingClientRect().width + gap;
+        };
+        prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+        next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      }
     };
 
-    patchWomenSpace();
-    document.addEventListener('astro:page-load', patchWomenSpace);
+    initWomenSpace();
+    document.addEventListener('astro:page-load', initWomenSpace);
   })();
 </script>

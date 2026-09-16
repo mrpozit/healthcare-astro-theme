@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import WomenSpaceAtmosphere from "../components/content/WomenSpaceAtmosphere.astro";
 import "../styles/tailwind.css";
+import "../styles/site-concept.css";
 import nav from "../data/navigation.json";
 
 interface Props {
@@ -69,7 +70,6 @@ const defaultDescription =
 				if (swapEvent.newDocument) {
 					swapEvent.newDocument.documentElement.style.scrollBehavior = "auto";
 				}
-			}
 		});
 
 		document.addEventListener("astro:page-load", () => {

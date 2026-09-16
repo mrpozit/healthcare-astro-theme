@@ -12,56 +12,64 @@
   --icra-wide-accent-surface-strong: #e3eef0;
 }
 
-/* Existing full-width sections that use the footer surface are normalized
-   automatically. Dark cards inside articles/divs are intentionally untouched. */
+/* Existing full-width sections that still use the old dark footer class are
+   converted to the light wide-band treatment. Dark cards inside articles/divs
+   are intentionally untouched. */
 main section.bg-theme-primary-darker {
   background-color: var(--icra-wide-accent-surface) !important;
   color: #0f172a !important;
 }
 
-main section.bg-theme-primary-darker h1,
-main section.bg-theme-primary-darker h2,
-main section.bg-theme-primary-darker h3,
-main section.bg-theme-primary-darker h4,
-main section.bg-theme-primary-darker h5,
-main section.bg-theme-primary-darker h6,
-#research-cycle-title {
+/*
+ * Wide bands are always light surfaces. Therefore headings and legacy
+ * text-white utilities inside them must be converted back to dark text.
+ * This rule applies both to converted legacy sections and to the semantic
+ * classes used by new sections.
+ */
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(h1, h2, h3, h4, h5, h6) {
   color: #0f172a !important;
 }
 
-main section.bg-theme-primary-darker :is(.text-white, .\!text-white) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(.text-white, .\!text-white) {
   color: #0f172a !important;
 }
 
-main section.bg-theme-primary-darker :is(.text-white\/90, .text-white\/85, .text-white\/80) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(.text-white\/90, .text-white\/85, .text-white\/80) {
   color: var(--color-theme-text-secondary) !important;
 }
 
-main section.bg-theme-primary-darker :is(.text-white\/75, .text-white\/70, .text-white\/65, .text-white\/60) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(.text-white\/75, .text-white\/70, .text-white\/65, .text-white\/60) {
   color: var(--color-theme-text-muted) !important;
 }
 
-main section.bg-theme-primary-darker :is(.bg-white\/10, .\!bg-white\/10) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(.bg-white\/10, .\!bg-white\/10) {
   background-color: rgba(255, 255, 255, 0.72) !important;
 }
 
-main section.bg-theme-primary-darker :is(.border-white\/60, .border-white\/20, .\!border-white\/20) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  :is(.border-white\/60, .border-white\/20, .\!border-white\/20) {
   border-color: var(--color-theme-primary) !important;
 }
 
-main section.bg-theme-primary-darker a:not(.button) {
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+  a:not(.button) {
   color: var(--color-theme-primary-darker) !important;
 }
 
 /* Semantic classes for all new work. */
 .icra-wide-band {
   background-color: var(--icra-wide-accent-surface);
-  color: var(--color-theme-text-primary);
+  color: #0f172a;
 }
 
 .icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface-strong);
-  color: var(--color-theme-text-primary);
+  color: #0f172a;
 }
 
 .icra-dark-card {

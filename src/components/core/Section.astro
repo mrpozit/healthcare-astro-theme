@@ -1,0 +1,32 @@
+---
+type Tone = "white" | "warm" | "cool" | "cool-strong" | "dark";
+
+interface Props {
+  tone?: Tone;
+  compact?: boolean;
+  id?: string;
+  labelledby?: string;
+  class?: string;
+}
+
+const {
+  tone = "white",
+  compact = false,
+  id,
+  labelledby,
+  class: className = "",
+} = Astro.props;
+
+const classes = [
+  "icra-section",
+  `icra-section--${tone}`,
+  compact && "icra-section--compact",
+  className,
+].filter(Boolean).join(" ");
+---
+
+<section id={id} aria-labelledby={labelledby} class={classes}>
+  <div class="icra-container">
+    <slot />
+  </div>
+</section>

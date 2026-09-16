@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import meetingOne from "../../assets/womens-space-meeting-01.jpg";
+import meetingTwo from "../../assets/womens-space-meeting-02.jpg";
+---
+
+<section class="section bg-[#f8eee8]" aria-labelledby="women-atmosphere-title">
+  <div class="container">
+    <div class="max-w-4xl mb-10">
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#a67c32] mb-4">Живі моменти</p>
+      <h2 id="women-atmosphere-title" class="text-3xl lg:text-5xl font-bold leading-tight text-[#54172d]">Атмосфера наших зустрічей</h2>
+      <p class="mt-5 text-lg lg:text-xl leading-relaxed text-[#604e53]">Кілька кадрів, які передають настрій Жіночого простору. Тут важливі присутність, розмова, творчість і можливість бути собою.</p>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <figure>
+        <Image src={meetingOne} alt="Атмосфера жіночої зустрічі ICRA" class="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg shadow-[#54172d]/10" loading="lazy" />
+        <figcaption class="mt-3 text-sm font-medium text-[#6f3047]">Простір, де можна бути собою</figcaption>
+      </figure>
+      <figure>
+        <Image src={meetingTwo} alt="Жіноча зустріч у просторі ICRA" class="w-full aspect-[4/5] object-cover rounded-2xl shadow-lg shadow-[#54172d]/10" loading="lazy" />
+        <figcaption class="mt-3 text-sm font-medium text-[#6f3047]">Розмови, які мають значення</figcaption>
+      </figure>
+      <figure class="rounded-2xl border border-dashed border-[#c49a4a] bg-[#fffaf3] aspect-[4/5] flex items-center justify-center p-6 text-center">
+        <figcaption><span class="block font-semibold text-[#54172d]">Творчість як спосіб дослідження</span><span class="block mt-2 text-xs text-[#8b747a]">womens-space-atmosphere-03.jpg</span></figcaption>
+      </figure>
+      <figure class="rounded-2xl border border-dashed border-[#c49a4a] bg-[#fffaf3] aspect-[4/5] flex items-center justify-center p-6 text-center">
+        <figcaption><span class="block font-semibold text-[#54172d]">Тепла атмосфера і підтримка</span><span class="block mt-2 text-xs text-[#8b747a]">womens-space-atmosphere-04.jpg</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,5 @@
 ---
-type Tone = "white" | "warm" | "cool" | "cool-strong" | "dark";
+type Tone = "base" | "alternate";
 
 interface Props {
   tone?: Tone;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  tone = "white",
+  tone = "base",
   compact = false,
   id,
   labelledby,

@@ -20,19 +20,37 @@ main section.bg-theme-primary-darker {
   color: #0f172a !important;
 }
 
-/*
- * Wide bands are always light surfaces. Therefore headings and legacy
- * text-white utilities inside them must be converted back to dark text.
- * This rule applies both to converted legacy sections and to the semantic
- * classes used by new sections.
- */
-main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
-  :is(h1, h2, h3, h4, h5, h6) {
+/* Wide bands are light surfaces, so their headings are always dark. */
+main section.bg-theme-primary-darker h1,
+main section.bg-theme-primary-darker h2,
+main section.bg-theme-primary-darker h3,
+main section.bg-theme-primary-darker h4,
+main section.bg-theme-primary-darker h5,
+main section.bg-theme-primary-darker h6,
+main .icra-wide-band h1,
+main .icra-wide-band h2,
+main .icra-wide-band h3,
+main .icra-wide-band h4,
+main .icra-wide-band h5,
+main .icra-wide-band h6,
+main .icra-wide-band-strong h1,
+main .icra-wide-band-strong h2,
+main .icra-wide-band-strong h3,
+main .icra-wide-band-strong h4,
+main .icra-wide-band-strong h5,
+main .icra-wide-band-strong h6 {
   color: #0f172a !important;
 }
 
-main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
-  :is(.text-white, .\!text-white) {
+/* Some legacy sections explicitly carry Tailwind's !text-white utility.
+   Match the literal class attribute instead of relying on an escaped CSS
+   class selector, so those legacy important utilities cannot keep text white. */
+main section.bg-theme-primary-darker [class~="!text-white"],
+main .icra-wide-band [class~="!text-white"],
+main .icra-wide-band-strong [class~="!text-white"],
+main section.bg-theme-primary-darker .text-white,
+main .icra-wide-band .text-white,
+main .icra-wide-band-strong .text-white {
   color: #0f172a !important;
 }
 

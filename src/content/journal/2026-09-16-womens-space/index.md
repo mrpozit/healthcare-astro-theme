@@ -3,9 +3,9 @@ title: "Жіночий простір. Ще одна зустріч"
 date: 2026-09-16
 type: womens-space
 excerpt: "Розмова, атмосфера, кілька важливих питань і той особливий момент, коли група перестає бути просто групою людей в одній кімнаті."
+cover: "../../../assets/womens-space-meeting-01.jpg"
 draft: false
 featured: true
-externalUrl: "https://icra.example/women-space"
 ---
 
 Є зустрічі, після яких не хочеться одразу підбивати підсумки.

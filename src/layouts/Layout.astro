@@ -17,8 +17,10 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const isWomenSpace = Astro.url.pathname === "/women-space" || Astro.url.pathname === "/women-space/";
-const canonicalUrl = new URL(Astro.url.pathname, Astro.url.origin).href;
+const pathname = Astro.url.pathname;
+const isWomenSpace = pathname === "/women-space" || pathname === "/women-space/";
+const isRebuiltCorePage = pathname === "/info" || pathname === "/info/";
+const canonicalUrl = new URL(pathname, Astro.url.origin).href;
 
 const defaultTitle = nav.brand.name;
 const defaultDescription =
@@ -45,7 +47,7 @@ const defaultDescription =
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-theme-surface-muted font-sans text-theme-text-primary antialiased selection:bg-theme-primary-lighter/50 selection:text-theme-primary-darker">
+	<body class:list={["bg-theme-surface-muted font-sans text-theme-text-primary antialiased selection:bg-theme-primary-lighter/50 selection:text-theme-primary-darker", !isRebuiltCorePage && "icra-legacy"]}>
 		<Nav />
 		<main>
 			<slot />

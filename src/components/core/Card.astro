@@ -1,15 +1,15 @@
 ---
-type Tone = "white" | "warm" | "cool" | "dark";
+type Variant = "default" | "accent";
 
 interface Props {
-  tone?: Tone;
+  variant?: Variant;
   class?: string;
 }
 
-const { tone = "white", class: className = "" } = Astro.props;
+const { variant = "default", class: className = "" } = Astro.props;
 const classes = [
   "icra-card",
-  tone !== "white" && `icra-card--${tone}`,
+  variant === "accent" && "icra-card--accent",
   className,
 ].filter(Boolean).join(" ");
 ---

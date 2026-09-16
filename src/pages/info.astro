@@ -1,56 +1,267 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
-import CallToActionSection from "../components/CallToActionSection.astro";
-import faqHeroImage from "../assets/service-detail.jpg";
 import Heading from "../components/Heading.astro";
-import FaqAccordion from "../components/FaqAccordion.astro";
-import faqs from "../data/faqs.json";
+import Button from "../components/Button.astro";
+import ExpandableText from "../components/content/ExpandableText.astro";
+import ProcessFlow from "../components/content/ProcessFlow.astro";
+import PhotoCarousel from "../components/content/PhotoCarousel.astro";
+import JournalEntry from "../components/journal/JournalEntry.astro";
+import { getPublishedJournal } from "../lib/journal";
 
-const faqLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer.replace(/<[^>]*>/g, ""),
-    },
-  })),
+const assetModules = import.meta.glob("../assets/social/*.{jpg,jpeg,png,webp}", { eager: true });
+const getAsset = (name: string) => {
+  const module = assetModules[`../assets/social/${name}`] as { default: ImageMetadata } | undefined;
+  return module?.default;
 };
+
+const heroImage = getAsset("social-activity-hero.jpg");
+const probationImage = getAsset("social-probation.jpg");
+const valkyriesImage = getAsset("social-valkyries.jpg");
+const teenagersImage = getAsset("social-teenagers.jpg");
+const galleryImages = Array.from({ length: 10 }, (_, index) => {
+  const number = String(index + 1).padStart(2, "0");
+  const src = getAsset(`social-gallery-${number}.jpg`);
+  return src ? { src, alt: `Суспільна діяльність ICRA, фото ${index + 1}` } : null;
+}).filter((item): item is { src: ImageMetadata; alt: string } => Boolean(item));
+
+const journal = await getPublishedJournal();
+const socialEntries = journal.filter((entry) => entry.data.type === "social").slice(0, 3);
+const practiceCycle = ["Реальна робота", "Спостереження", "Фіксація", "Осмислення", "Новий матеріал", "Наступна практика"];
 ---
 
 <Layout
-  title="FAQ - Frequently Asked Questions | Viva Medical"
-  description="Find clear answers about our services, eligibility, appointments, and what to expect from professional care at home."
+  title="Суспільна діяльність | ICRA"
+  description="Суспільна діяльність ICRA: робота з ветеранами, фахівцями допомагаючих професій, громадськими організаціями, підлітками та іншими групами."
 >
-  <PageHero
-    title="FREQUENTLY ASKED QUESTIONS"
-    description="Clear answers about our services, coverage, and care—so you can make confident decisions for yourself or a loved one."
-    image={faqHeroImage}
-  />
-
-  <section class="section bg-gradient-to-b from-theme-surface-muted to-theme-surface">
-    <div class="container">
-      <div class="narrow mx-auto text-center mb-8">
-        <Heading level="h2" align="center"> Frequently Asked Questions </Heading>
+  <div class="social-activity">
+    <section class="section bg-[#f5f1e8]" aria-labelledby="social-hero-title">
+      <div class:list={["container grid gap-10 lg:items-center", heroImage ? "lg:grid-cols-[1.05fr_0.95fr]" : ""]}>
+        <div class="max-w-4xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-theme-primary mb-4">Суспільна діяльність</p>
+          <Heading level="h1" size="page" id="social-hero-title" class="mb-7">Частину важливої роботи ми просто робимо</Heading>
+          <div class="space-y-4 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">
+            <p class="font-medium text-theme-text-primary">Не вся робота ICRA починається з питання, хто за неї заплатить.</p>
+            <p>Ми співпрацюємо з українськими організаціями, працюємо з ветеранами, звільненими з полону, фахівцями допомагаючих професій, жінками ВПО, підлітками та іншими групами.</p>
+            <p>Іноді це партнерський проєкт. Іноді волонтерська робота. Іноді кілька зустрічей. Іноді робота, яка триває місяцями.</p>
+            <p>Це не окреме «соціальне обличчя» ICRA. Це просто частина того, що ми робимо.</p>
+          </div>
+          <a href="#projects" class="inline-flex mt-8 font-semibold text-theme-primary hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-theme-primary focus-visible:ring-offset-4 rounded">Подивитися проєкти ↓</a>
+        </div>
+        {heroImage && (
+          <figure class="overflow-hidden rounded-2xl shadow-xl bg-theme-surface">
+            <Image src={heroImage} alt="Патриція Божко під час групової роботи ICRA" class="block w-full aspect-[4/5] object-cover" widths={[640, 960, 1280]} sizes="(min-width:1024px) 46vw, 100vw" loading="eager" fetchpriority="high" />
+          </figure>
+        )}
       </div>
-      <div class="max-w-5xl mx-auto">
-        <FaqAccordion items={faqs} />
+    </section>
+
+    <section id="projects" class="section bg-theme-primary-darker text-white scroll-mt-24" aria-labelledby="kyrylivska-title">
+      <div class="container grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-white/70 mb-4">Постійна практика</p>
+          <h2 id="kyrylivska-title" class="text-4xl lg:text-6xl font-bold leading-tight">Кирилівська, 103</h2>
+          <p class="mt-5 text-xl lg:text-2xl leading-relaxed text-white/90">Робота з ветеранами та людьми, звільненими з полону</p>
+        </div>
+        <div class="max-w-3xl">
+          <div class="space-y-4 text-lg leading-relaxed text-white/90">
+            <p>У психіатричному відділенні Патриція регулярно працює з невеликими групами ветеранів і людей, які пережили полон.</p>
+            <p>Ця робота стала одним із місць, де особливо виразно проявилася взаємодія тексту, арт-терапевтичної практики та подальшої роботи з психологом і психіатром.</p>
+          </div>
+          <ExpandableText summary="Читати більше" class="mt-7 !border-white/20 !bg-white/10 open:!bg-white/10 [&_summary]:!text-white [&>div]:!text-white/90">
+            <p>Це непроста аудиторія.</p>
+            <p>Людина може пережити бойовий досвід, втрату, поранення, полон і при цьому зовсім не хотіти розповідати незнайомій людині про страх, біль, приниження або те, що продовжує відбуватися всередині.</p>
+            <p>«Я сам впораюся».</p>
+            <p>«Що ви можете зрозуміти?»</p>
+            <p>Іноді пряме запитання лише сильніше зачиняє двері.</p>
+            <p>У нашій роботі поступово склалася інша послідовність.</p>
+            <p>Перед практичною частиною Патриція може прочитати короткий текст, оповідання, притчу або фрагмент книги Brann Solen, підібраний до теми зустрічі.</p>
+            <p>Текст не запитує людину: «Що сталося саме з вами?» Він розповідає історію про когось іншого.</p>
+            <p>Іноді цього достатньо, щоб людина впізнала в ній частину себе, не пояснюючи цього всій кімнаті.</p>
+            <p>Після цього група переходить до роботи з АКТ.</p>
+            <p>АКТ дозволяє працювати через лінію, колір, образ і композицію без необхідності публічно розповідати, з якою саме особистою проблемою людина зараз працює. Для цієї аудиторії така м'якість виявилася особливо важливою.</p>
+            <p>Далі ми почали помічати ще одну річ.</p>
+            <p>Після таких зустрічей частина ветеранів самостійно починала звертатися до психолога, хоча раніше уникала такої роботи.</p>
+            <p>Це спостерігаємо не лише ми. Такі зміни в поведінці пацієнтів відзначають психолог і медичний персонал відділення.</p>
+            <p>Для нас це стало важливим практичним спостереженням: іноді першим завданням є не змусити людину говорити. Потрібно створити спосіб, у якому вона сама зможе трохи відчинити двері.</p>
+          </ExpandableText>
+          <p class="mt-8 border-l-4 border-white/60 pl-5 text-xl lg:text-2xl font-semibold leading-relaxed">Текст допомагає впізнати себе. Практика дозволяє торкнутися теми без примусу до сповіді. А далі стає можливою глибша робота.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <script
-    is:inline
-    type="application/ld+json"
-    set:html={JSON.stringify(faqLd)}></script>
+    <section class="section bg-theme-surface" aria-labelledby="contexts-title">
+      <div class="container">
+        <div class="max-w-4xl mb-12">
+          <Heading level="h2" size="page" id="contexts-title" class="mb-5">Різні люди. Різні контексти.</Heading>
+          <p class="text-lg lg:text-xl leading-relaxed text-theme-text-secondary">Метод або формат, який працює з однією групою, не можна механічно переносити на всіх. Саме тому суспільна робота ICRA відбувається в дуже різних середовищах.</p>
+        </div>
 
-  <CallToActionSection
-    heading="Still Have Questions?"
-    subheading="Our healthcare team is here to help answer any additional questions you may have about our services. Contact us today to learn more about how we can support your healthcare needs."
-    primaryButtonText="Contact Us"
-    primaryButtonLink="/contact"
-  />
+        <div class="space-y-8 lg:space-y-12">
+          <article class="grid overflow-hidden rounded-2xl border border-theme-border bg-[#f5f1e8] lg:grid-cols-2">
+            <div class="p-7 lg:p-10">
+              <h3 class="text-3xl font-bold text-theme-text-primary">Фахівці пробації</h3>
+              <p class="mt-5 text-lg leading-relaxed text-theme-text-secondary">У співпраці з українською пробацією Патриція проводить безкоштовні заняття для фахівців. Це можуть бути навчальні формати або сесії психологічного розвантаження для людей, чия робота сама по собі пов'язана з постійним емоційним навантаженням.</p>
+            </div>
+            {probationImage ? <Image src={probationImage} alt="Робота ICRA з фахівцями пробації" class="h-full min-h-[300px] w-full object-cover" widths={[640, 960]} sizes="(min-width:1024px) 50vw, 100vw" loading="lazy" /> : <div class="min-h-[220px] lg:min-h-[300px] grid place-items-center border-t lg:border-t-0 lg:border-l border-theme-border p-8 text-center text-theme-text-muted">Фото буде додано після підготовки до публікації</div>}
+          </article>
+
+          <article class="grid overflow-hidden rounded-2xl bg-[#54172d] text-white lg:grid-cols-[0.9fr_1.1fr]">
+            {valkyriesImage ? <Image src={valkyriesImage} alt="Проєкт Українські Валькірії" class="h-full min-h-[320px] w-full object-cover" widths={[640, 960]} sizes="(min-width:1024px) 45vw, 100vw" loading="lazy" /> : <div class="min-h-[220px] lg:min-h-[320px] grid place-items-center border-b lg:border-b-0 lg:border-r border-white/15 p-8 text-center text-white/65">Фото буде додано після підготовки до публікації</div>}
+            <div class="p-7 lg:p-12">
+              <h3 class="text-3xl lg:text-4xl font-bold">«Українські Валькірії»</h3>
+              <p class="mt-5 text-lg leading-relaxed text-white/85">У межах проєкту Патриція проводить лекції, вебінари, практикуми та майстер-класи для учасниць організації, жінок ВПО та фахівців допомагаючих професій.</p>
+              <p class="mt-4 text-lg leading-relaxed text-white/85">Теми і формат залежать від конкретної групи: від роботи зі стресом та емоційною саморегуляцією до арт-терапевтичних практик і психологічного відновлення.</p>
+            </div>
+          </article>
+
+          <article class="grid gap-0 overflow-hidden rounded-2xl border border-theme-border bg-theme-surface-muted lg:grid-cols-[1.2fr_0.8fr]">
+            <div class="p-7 lg:p-10">
+              <h3 class="text-3xl font-bold text-theme-text-primary">Recovery Ukraine</h3>
+              <div class="mt-5 space-y-4 text-lg leading-relaxed text-theme-text-secondary">
+                <p>У межах проєктів Recovery Ukraine Патриція проводила заходи з психологічного розвантаження та відновлення для фахівців допомагаючих професій, які працюють із військовослужбовцями та ветеранами.</p>
+                <p>У допомагаючих професіях легко зосередитися лише на тому, кому допомагає спеціаліст. Але ресурс самого спеціаліста теж не безмежний.</p>
+                <p>Іноді допомога тим, хто допомагає іншим, є окремим важливим завданням.</p>
+              </div>
+              <a href="https://recoveryua.org/" target="_blank" rel="noopener noreferrer" class="inline-flex mt-6 font-semibold text-theme-primary hover:underline underline-offset-4">Recovery Ukraine ↗</a>
+            </div>
+            <div class="bg-theme-primary-darker p-8 lg:p-10 text-white flex items-end">
+              <p class="text-2xl lg:text-3xl font-semibold leading-relaxed">Допомога тим, хто щодня допомагає іншим.</p>
+            </div>
+          </article>
+
+          <article class="grid overflow-hidden rounded-2xl border border-theme-border bg-[#f5f1e8] lg:grid-cols-2">
+            <div class="p-7 lg:p-10 lg:order-2">
+              <h3 class="text-3xl font-bold text-theme-text-primary">Підлітки</h3>
+              <div class="mt-5 space-y-4 text-lg leading-relaxed text-theme-text-secondary">
+                <p>Окремий напрям практики Патриції - робота з підлітками у школі.</p>
+                <p>Зустрічі присвячені стресу, емоціям, способам помічати власний стан і простим інструментам саморегуляції.</p>
+                <p>Тут особливо важливо говорити з людиною зрозумілою мовою, не перетворюючи психологію на лекцію про те, як вона «повинна правильно почуватися».</p>
+              </div>
+            </div>
+            {teenagersImage ? <Image src={teenagersImage} alt="Заняття ICRA з підлітками" class="h-full min-h-[300px] w-full object-cover lg:order-1" widths={[640, 960]} sizes="(min-width:1024px) 50vw, 100vw" loading="lazy" /> : <div class="min-h-[220px] lg:min-h-[300px] grid place-items-center border-b lg:border-b-0 lg:border-r border-theme-border p-8 text-center text-theme-text-muted lg:order-1">Фото буде додано після підготовки до публікації</div>}
+          </article>
+
+          <article class="max-w-5xl rounded-2xl border border-theme-border bg-theme-surface p-7 lg:p-10">
+            <h3 class="text-3xl font-bold text-theme-text-primary">Невеликі спільноти</h3>
+            <div class="mt-5 space-y-3 text-lg leading-relaxed text-theme-text-secondary">
+              <p>Не кожна суспільна ініціатива повинна бути великим проєктом.</p>
+              <p>Іноді це безкоштовний майстер-клас із нейрографіки. Іноді подарункові сертифікати для учасників спільноти. Іноді невелика зустріч, яка просто може бути корисною людям саме зараз.</p>
+              <p class="font-semibold text-theme-text-primary">Ми не вимірюємо сенс роботи лише масштабом аудиторії.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-[#f5f1e8]" aria-labelledby="helpers-title">
+      <div class="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <Heading level="h2" size="page" id="helpers-title">Допомога тим, хто допомагає</Heading>
+        <div class="max-w-3xl">
+          <p class="text-xl lg:text-2xl font-semibold leading-relaxed text-theme-text-primary">Психологи. Соціальні працівники. Фахівці, які працюють із ветеранами. Працівники громадських організацій. Люди, які щодня мають справу з чужою кризою, болем або складними життєвими обставинами.</p>
+          <div class="mt-6 space-y-4 text-lg leading-relaxed text-theme-text-secondary">
+            <p>Допомагаюча професія не робить людину невразливою.</p>
+            <p>Вона лише створює ситуацію, в якій власне виснаження дуже легко відкласти на потім.</p>
+            <p>Тому частина групової роботи Патриції спрямована саме на психологічне розвантаження, відновлення, контакт із власним станом і повернення уваги до себе.</p>
+          </div>
+          <p class="mt-8 border-l-4 border-theme-primary pl-5 text-2xl font-semibold leading-relaxed text-theme-primary-darker">Той, хто підтримує інших, теж потребує місця, де не потрібно нікого підтримувати.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-theme-surface" aria-labelledby="brann-title">
+      <div class="container grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-theme-primary mb-4">Матеріали</p>
+          <Heading level="h2" size="page" id="brann-title">Не вся робота відбувається в кімнаті з групою</Heading>
+        </div>
+        <div class="max-w-3xl space-y-4 text-lg leading-relaxed text-theme-text-secondary">
+          <p>Безпосередньо з людьми працює Патриція. Але навколо кожної такої роботи існує ще один шар.</p>
+          <p class="text-xl font-semibold text-theme-text-primary">Тексти. Оповідання і притчі. Методичні матеріали. Робочі зошити. Інструкції. Питання для практичної роботи. Систематизація спостережень.</p>
+          <p>Частину цих матеріалів створює Brann Solen.</p>
+          <p>Деякі тексти спочатку були написані як література і лише згодом виявилося, що вони прекрасно працюють перед груповою практикою. Інші створюються вже спеціально для конкретних тем та аудиторій.</p>
+          <p>Так поступово виник симбіоз: текст може допомогти людині впізнати себе; практика Патриції дозволяє почати роботу; а досвід групи залишає новий матеріал для спостереження, осмислення і наступних текстів.</p>
+          <a href="/careers" class="inline-flex pt-3 font-semibold text-theme-primary hover:underline underline-offset-4">Матеріали Brann Solen у Бібліотеці →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-theme-primary-darker text-white" aria-labelledby="practice-title">
+      <div class="container">
+        <div class="max-w-4xl">
+          <Heading level="h2" size="page" id="practice-title" class="!text-white mb-6">Після зустрічі робота не закінчується</Heading>
+          <p class="text-lg lg:text-xl leading-relaxed text-white/85">Ми не хочемо, щоб після групи залишалися лише фотографії і спогад про те, що «все пройшло добре». Практична робота фіксується.</p>
+        </div>
+        <div class="mt-9 grid gap-8 lg:grid-cols-2">
+          <div class="rounded-2xl bg-white/10 p-7 lg:p-9">
+            <p class="font-semibold text-xl mb-4">Після зустрічей записується:</p>
+            <ul class="space-y-3 text-white/85 list-disc pl-5">
+              <li>скільки людей брало участь;</li><li>з якою темою працювали;</li><li>які інструменти використовували;</li><li>як проходила робота;</li><li>який зворотний зв'язок отримали;</li><li>які особливості групи стали помітними;</li><li>що варто змінити або перевірити наступного разу.</li>
+            </ul>
+          </div>
+          <div class="space-y-4 text-lg leading-relaxed text-white/85">
+            <p>За різні формати практичної роботи Патриції вже пройшло понад тисячу людей.</p>
+            <p>Це дає матеріал не лише для наступної зустрічі. Спостереження накопичуються, порівнюються і систематизуються.</p>
+            <p>З них можуть виростати нові методичні матеріали, робочі моделі, статті та дослідницькі роботи.</p>
+            <p class="text-2xl font-semibold text-white">Практика дає матеріал. Матеріал змінює наступну практику.</p>
+            <a href="/careers" class="inline-flex font-semibold text-white underline underline-offset-4">Дослідження та матеріали → Бібліотека</a>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl bg-white p-6 lg:p-8 text-theme-text-primary"><ProcessFlow items={practiceCycle} ariaLabel="Цикл практики та осмислення ICRA" /></div>
+      </div>
+    </section>
+
+    <section class="section bg-[#f5f1e8]" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="max-w-4xl mb-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-theme-primary mb-4">Живі моменти</p>
+          <Heading level="h2" size="page" id="gallery-title" class="mb-5">Не лише розповідати. Показувати.</Heading>
+          <p class="text-lg lg:text-xl leading-relaxed text-theme-text-secondary">За словами легко втратити просту річ: усе це відбувається з реальними людьми, у реальних кімнатах, школах, організаціях і групах.</p>
+        </div>
+        <PhotoCarousel images={galleryImages} ariaLabel="Фотохроніка суспільної діяльності ICRA" emptyText="Тут буде фотохроніка реальних проєктів ICRA. Ми не підставляємо випадкові або стокові фотографії замість реальних." />
+      </div>
+    </section>
+
+    <section class="section bg-theme-surface" aria-labelledby="journal-social-title">
+      <div class="container">
+        <div class="max-w-4xl mb-10">
+          <Heading level="h2" size="page" id="journal-social-title" class="mb-5">А що відбувається зараз?</Heading>
+          <p class="text-lg lg:text-xl leading-relaxed text-theme-text-secondary">Ця сторінка описує напрями нашої суспільної роботи. А конкретні зустрічі, нові проєкти, спостереження та невеликі події поступово залишаються в «Житті ICRA».</p>
+          <a href="/blog" class="inline-flex mt-6 font-semibold text-theme-primary hover:underline underline-offset-4">Дивитися Життя ICRA →</a>
+        </div>
+        {socialEntries.length > 0 && <div class="space-y-12 border-t border-theme-border pt-10">{socialEntries.map((entry) => <JournalEntry entry={entry} />)}</div>}
+      </div>
+    </section>
+
+    <section class="section bg-[#54172d] text-white" aria-labelledby="cooperation-title">
+      <div class="container grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+        <Heading level="h2" size="page" id="cooperation-title" class="!text-white">Якщо ви представляєте організацію</Heading>
+        <div class="max-w-3xl">
+          <div class="space-y-4 text-lg leading-relaxed text-white/85">
+            <p>Ми відкриті до співпраці з організаціями, спільнотами та проєктами, якщо бачимо, що наш досвід і формати роботи можуть бути корисними їхнім людям.</p>
+            <p>Це може бути окрема зустріч, серія заходів, робота з групою, навчання фахівців, психологічне розвантаження або спільний проєкт.</p>
+            <p>Не кожна така співпраця має бути безкоштовною. Не кожна має бути комерційною.</p>
+            <p>Формат залежить від завдання, аудиторії, наших можливостей і сенсу конкретної роботи.</p>
+          </div>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <Button href="/contact" variant="white">Обговорити співпрацю</Button>
+            <a href="/services" class="inline-flex items-center font-semibold text-white underline underline-offset-4 px-2">Переглянути послуги для організацій →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-theme-surface-muted" aria-labelledby="future-title">
+      <div class="container max-w-5xl">
+        <Heading level="h2" size="page" id="future-title" class="mb-7">Ця робота може стати більшою</Heading>
+        <div class="max-w-4xl space-y-4 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">
+          <p>Більшість того, що описано на цій сторінці, виросло за останні роки з нашої власної практики, часу і ресурсів.</p>
+          <p>Ми не чекали появи великої структури, щоб почати. Але структура може допомогти робити більше.</p>
+          <p>У майбутньому ICRA може розширювати суспільні проєкти через партнерства, громадську організацію, донорські програми, підготовку матеріалів і навчання спеціалістів.</p>
+          <p>Для нас важлива послідовність: спочатку реальна робота; потім досвід; потім систематизація; і лише після цього масштабування того, що має сенс масштабувати.</p>
+        </div>
+        <p class="mt-9 border-l-4 border-theme-primary pl-5 text-2xl lg:text-3xl font-semibold leading-relaxed text-theme-primary-darker">Ми не будуємо діяльність під можливість отримати підтримку. Підтримка може допомогти розширити діяльність, яка вже існує.</p>
+      </div>
+    </section>
+  </div>
 </Layout>

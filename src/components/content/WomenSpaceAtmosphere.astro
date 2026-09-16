@@ -25,7 +25,6 @@ const atmosphereImages = [
   aria-labelledby="women-atmosphere-title"
   data-patricia-src={patriciaWomen.src}
   data-patricia-author-src={patriciaAuthor.src}
-  data-meeting-one-src={meetingOne.src}
 >
   <div class="container">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-10">
@@ -73,7 +72,6 @@ const atmosphereImages = [
 
       const patriciaSrc = atmosphere.dataset.patriciaSrc;
       const patriciaAuthorSrc = atmosphere.dataset.patriciaAuthorSrc;
-      const meetingOneSrc = atmosphere.dataset.meetingOneSrc;
 
       const heroFigure = page.querySelector('section[aria-labelledby="women-hero-title"] figure');
       const heroImage = heroFigure?.querySelector('img');
@@ -90,16 +88,6 @@ const atmosphereImages = [
         if (placeholder && placeholder.querySelector('p')) placeholder.remove();
         grid?.classList.remove('lg:grid-cols-[0.95fr_1.05fr]');
         grid?.classList.add('max-w-5xl');
-      }
-
-      const join = page.querySelector('section[aria-labelledby="join-title"]');
-      const articles = join ? Array.from(join.querySelectorAll('article')) : [];
-      const closedCircle = articles.find((article) => article.textContent?.includes('Закрите коло'));
-      if (closedCircle && meetingOneSrc && !closedCircle.querySelector('.closed-circle-photo')) {
-        const imageWrap = document.createElement('figure');
-        imageWrap.className = 'closed-circle-photo lg:col-span-2 mt-3 overflow-hidden rounded-2xl shadow-lg shadow-[#54172d]/10';
-        imageWrap.innerHTML = `<img src="${meetingOneSrc}" alt="Жіноча зустріч у просторі ICRA" class="w-full h-[320px] lg:h-[480px] object-cover" loading="lazy">`;
-        closedCircle.appendChild(imageWrap);
       }
 
       const story = page.querySelector('section[aria-labelledby="story-title"]');

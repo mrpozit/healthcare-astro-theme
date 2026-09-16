@@ -1,0 +1,64 @@
+/* ICRA core visual language. New core pages should use these primitives. */
+
+.icra-container {
+  width: 100%;
+  max-width: var(--icra-container);
+  margin-inline: auto;
+  padding-inline: var(--icra-gutter);
+}
+
+.icra-section {
+  padding-block: var(--icra-section-y);
+  color: var(--icra-color-text);
+}
+
+.icra-section--white { background: var(--icra-color-surface); }
+.icra-section--warm { background: var(--icra-color-surface-warm); }
+.icra-section--cool { background: var(--icra-color-surface-cool); }
+.icra-section--cool-strong { background: var(--icra-color-surface-cool-strong); }
+.icra-section--dark {
+  background: var(--icra-color-brand-deep);
+  color: var(--icra-color-inverse);
+}
+
+.icra-section--compact {
+  padding-block: var(--icra-section-y-compact);
+}
+
+.icra-card {
+  border: 1px solid var(--icra-color-border);
+  border-radius: var(--icra-radius-md);
+  background: var(--icra-color-surface);
+  box-shadow: var(--icra-shadow-card);
+}
+
+.icra-card--warm { background: var(--icra-color-surface-warm); }
+.icra-card--cool { background: var(--icra-color-surface-cool); }
+.icra-card--dark {
+  border-color: transparent;
+  background: var(--icra-color-brand-deep);
+  color: var(--icra-color-inverse);
+}
+
+.icra-eyebrow {
+  margin: 0 0 1rem;
+  color: var(--icra-color-brand);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.icra-copy {
+  color: var(--icra-color-text-soft);
+  font-size: 1.125rem;
+  line-height: var(--icra-leading-body);
+}
+
+.icra-copy--inverse { color: rgb(255 255 255 / 0.88); }
+
+@media (min-width: 1024px) {
+  .icra-container { padding-inline: var(--icra-gutter-lg); }
+  .icra-section { padding-block: var(--icra-section-y-lg); }
+  .icra-section--compact { padding-block: var(--icra-section-y-compact-lg); }
+}

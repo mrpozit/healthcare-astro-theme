@@ -10,17 +10,25 @@
 :root {
   --icra-wide-accent-surface: #edf4f5;
   --icra-wide-accent-surface-strong: #e3eef0;
+  --icra-wide-text: #0f172a;
 }
 
-/* Existing full-width sections that still use the old dark footer class are
-   converted to the light wide-band treatment. Dark cards inside articles/divs
-   are intentionally untouched. */
-main section.bg-theme-primary-darker {
+/* Legacy full-width sections that still carry the old footer classes are
+   normalized here as one global rule. The old `text-white` on the section
+   itself no longer controls text on a light wide band. */
+main section.bg-theme-primary-darker,
+main section.bg-theme-primary-darker.text-white,
+main .icra-wide-band,
+main .icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface) !important;
-  color: #0f172a !important;
+  color: var(--icra-wide-text) !important;
 }
 
-/* Wide bands are light surfaces, so their headings are always dark. */
+main .icra-wide-band-strong {
+  background-color: var(--icra-wide-accent-surface-strong) !important;
+}
+
+/* Every heading on a light full-width band is dark. */
 main section.bg-theme-primary-darker h1,
 main section.bg-theme-primary-darker h2,
 main section.bg-theme-primary-darker h3,
@@ -39,19 +47,20 @@ main .icra-wide-band-strong h3,
 main .icra-wide-band-strong h4,
 main .icra-wide-band-strong h5,
 main .icra-wide-band-strong h6 {
-  color: #0f172a !important;
+  color: var(--icra-wide-text) !important;
+  -webkit-text-fill-color: var(--icra-wide-text) !important;
 }
 
-/* Some legacy sections explicitly carry Tailwind's !text-white utility.
-   Match the literal class attribute instead of relying on an escaped CSS
-   class selector, so those legacy important utilities cannot keep text white. */
+/* Legacy white text utilities inside a converted wide band become normal
+   dark content. Compact dark cards are not matched by these selectors. */
 main section.bg-theme-primary-darker [class~="!text-white"],
-main .icra-wide-band [class~="!text-white"],
-main .icra-wide-band-strong [class~="!text-white"],
 main section.bg-theme-primary-darker .text-white,
+main .icra-wide-band [class~="!text-white"],
 main .icra-wide-band .text-white,
+main .icra-wide-band-strong [class~="!text-white"],
 main .icra-wide-band-strong .text-white {
-  color: #0f172a !important;
+  color: var(--icra-wide-text) !important;
+  -webkit-text-fill-color: var(--icra-wide-text) !important;
 }
 
 main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
@@ -79,15 +88,15 @@ main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-stron
   color: var(--color-theme-primary-darker) !important;
 }
 
-/* Semantic classes for all new work. */
+/* Semantic classes for new work. */
 .icra-wide-band {
   background-color: var(--icra-wide-accent-surface);
-  color: #0f172a;
+  color: var(--icra-wide-text);
 }
 
 .icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface-strong);
-  color: #0f172a;
+  color: var(--icra-wide-text);
 }
 
 .icra-dark-card {

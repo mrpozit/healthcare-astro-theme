@@ -1,37 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Cta from '../components/CallToActionSection.astro';
+import Layout from "../layouts/Layout.astro";
+import JournalEntry from "../components/journal/JournalEntry.astro";
+import { getPublishedJournal } from "../lib/journal";
+
+const entries = await getPublishedJournal();
+const featuredEntries = entries.filter((entry) => entry.data.featured);
+const lead = featuredEntries[0] ?? entries[0];
+const rest = entries.filter((entry) => entry.id !== lead?.id);
 ---
-
-<Layout
-  title="Блог"
-  description="Статті про психологічне відновлення, адаптацію, арт-терапію та підтримку."
->
-  <main class="container mx-auto px-4 py-12">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <h1 class="text-4xl font-bold mb-4">Блог</h1>
-      <p class="text-lg text-theme-text-secondary">
-        Матеріали про психологічне відновлення, адаптацію та роботу з внутрішніми ресурсами.
-      </p>
-    </div>
-
-    <section class="grid gap-6 md:grid-cols-3">
-      <article class="rounded-2xl border border-theme-border p-6">
-        <h2 class="text-xl font-semibold mb-3">Як працює арт-терапія</h2>
-        <p class="text-theme-text-secondary">Про творчість як інструмент самодослідження та відновлення.</p>
-      </article>
-
-      <article class="rounded-2xl border border-theme-border p-6">
-        <h2 class="text-xl font-semibold mb-3">Відновлення ресурсу</h2>
-        <p class="text-theme-text-secondary">Що допомагає повертати опору після тривалого напруження.</p>
-      </article>
-
-      <article class="rounded-2xl border border-theme-border p-6">
-        <h2 class="text-xl font-semibold mb-3">Адаптація до змін</h2>
-        <p class="text-theme-text-secondary">Про те, як проходити періоди змін без вимоги бути незламним.</p>
-      </article>
+<Layout title="Життя ICRA | International Centre for Recovery and Adaptation" description="Зустрічі, нові матеріали, дослідження, проєкти та спостереження з повсякденного життя ICRA.">
+  <main>
+    <section class="section bg-theme-surface-muted">
+      <div class="container max-w-5xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-theme-primary mb-4">International Centre for Recovery and Adaptation</p>
+        <h1 class="text-4xl lg:text-6xl font-bold leading-tight text-theme-text-primary">Життя ICRA</h1>
+        <div class="mt-6 max-w-4xl space-y-4 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">
+          <p>Тут ми залишаємо сліди того, що відбувається в ICRA.</p>
+          <p>Зустрічі, нові матеріали, робота над книгами й методами, спостереження з практики, дослідження, проєкти та речі, про які ще зарано писати окрему статтю.</p>
+          <p class="font-semibold text-theme-text-primary">Не звіт про виконану роботу. Просто хроніка місця, яке продовжує жити.</p>
+        </div>
+      </div>
     </section>
-  </main>
 
-  <Cta />
+    {lead && <section class="section"><div class="container"><JournalEntry entry={lead} featured={true} /></div></section>}
+
+    {rest.length > 0 && (
+      <section class="section border-t border-theme-border">
+        <div class="container space-y-16 lg:space-y-24">
+          {rest.map((entry, index) => <JournalEntry entry={entry} reverse={index % 2 === 0} />)}
+        </div>
+      </section>
+    )}
+  </main>
 </Layout>

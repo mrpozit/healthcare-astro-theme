@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { formatJournalDate, journalSlug, journalTypeLabels } from "../../lib/journal";
+
+interface Props { entry: CollectionEntry<"journal">; featured?: boolean; reverse?: boolean; }
+const { entry, featured = false, reverse = false } = Astro.props;
+const href = `/blog/${journalSlug(entry.id)}/`;
+const type = journalTypeLabels[entry.data.type ?? "update"];
+---
+<article class:list={["journal-entry grid items-center gap-7 lg:gap-12", featured ? "lg:grid-cols-[1.15fr_0.85fr]" : "lg:grid-cols-2"]}>
+  {entry.data.cover && (
+    <a href={href} class:list={["block overflow-hidden rounded-2xl bg-theme-surface-muted", reverse && !featured ? "lg:order-2" : ""]}>
+      <Image src={entry.data.cover} alt={entry.data.title} class="block h-auto w-full" widths={[480, 768, 1100]} sizes={featured ? "(min-width:1024px) 58vw, 100vw" : "(min-width:1024px) 50vw, 100vw"} loading={featured ? "eager" : "lazy"} />
+    </a>
+  )}
+  <div class:list={["max-w-2xl", !entry.data.cover ? "lg:col-span-2 lg:max-w-3xl" : ""]}>
+    <p class="text-sm text-theme-text-muted"><time datetime={entry.data.date.toISOString()}>{formatJournalDate(entry.data.date)}</time> <span aria-hidden="true">·</span> {type}</p>
+    <h2 class:list={["mt-3 font-bold leading-tight text-theme-text-primary", featured ? "text-3xl lg:text-5xl" : "text-2xl lg:text-4xl"]}><a href={href} class="hover:text-theme-primary transition-colors">{entry.data.title}</a></h2>
+    {entry.data.excerpt && <p class="mt-4 text-lg leading-relaxed text-theme-text-secondary">{entry.data.excerpt}</p>}
+    <a href={href} class="mt-5 inline-flex font-semibold text-theme-primary hover:underline underline-offset-4">Читати →</a>
+  </div>
+</article>

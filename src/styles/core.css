@@ -25,10 +25,30 @@
   padding-block: var(--icra-section-y-compact);
 }
 
+.icra-heading {
+  margin: 0;
+  color: inherit;
+  font-weight: 700;
+  line-height: var(--icra-leading-heading);
+}
+
+.icra-heading--page {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.icra-heading--section {
+  font-size: clamp(1.875rem, 3vw, 2.5rem);
+}
+
+.icra-heading--subsection {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
 .icra-card {
   border: 1px solid var(--icra-color-border);
   border-radius: var(--icra-radius-md);
   background: var(--icra-color-surface);
+  color: var(--icra-color-text);
   box-shadow: var(--icra-shadow-card);
 }
 
@@ -49,13 +69,20 @@
   text-transform: uppercase;
 }
 
+.icra-card--dark .icra-eyebrow {
+  color: rgb(255 255 255 / 0.7);
+}
+
 .icra-copy {
   color: var(--icra-color-text-soft);
   font-size: 1.125rem;
   line-height: var(--icra-leading-body);
 }
 
-.icra-copy--inverse { color: rgb(255 255 255 / 0.88); }
+.icra-copy--inverse,
+.icra-card--dark .icra-copy {
+  color: rgb(255 255 255 / 0.88);
+}
 
 @media (min-width: 1024px) {
   .icra-container { padding-inline: var(--icra-gutter-lg); }

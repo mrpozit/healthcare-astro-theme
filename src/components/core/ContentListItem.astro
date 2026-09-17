@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  date?: string;
+  description?: string;
+  class?: string;
+}
+
+const {
+  title,
+  href,
+  date,
+  description,
+  class: className = "",
+} = Astro.props;
+---
+
+<article class:list={["icra-content-list__item", className]}>
+  {date && <div class="icra-content-list__date">{date}</div>}
+  <div class="icra-content-list__body">
+    <h3 class="icra-content-list__title"><a href={href}>{title}</a></h3>
+    {description && <p class="icra-content-list__description">{description}</p>}
+  </div>
+  <a class="icra-content-list__action" href={href} aria-label={`Переглянути: ${title}`}>
+    <span aria-hidden="true">→</span>
+  </a>
+</article>

@@ -2,11 +2,14 @@
 type Variant = "plain" | "panel";
 type MediaPosition = "left" | "right";
 type MediaRatio = "portrait" | "landscape";
+type MediaState = "none" | "image" | "placeholder";
 
 interface Props {
   variant?: Variant;
   mediaPosition?: MediaPosition;
   mediaRatio?: MediaRatio;
+  mediaState?: MediaState;
+  mediaPlaceholder?: string;
   class?: string;
 }
 
@@ -14,6 +17,8 @@ const {
   variant = "plain",
   mediaPosition = "right",
   mediaRatio = "landscape",
+  mediaState = "none",
+  mediaPlaceholder = "Фото буде додано після підготовки до публікації",
   class: className = "",
 } = Astro.props;
 
@@ -22,11 +27,16 @@ const classes = [
   `icra-feature--${variant}`,
   `icra-feature--media-${mediaPosition}`,
   `icra-feature--${mediaRatio}`,
+  `icra-feature--media-${mediaState}`,
   className,
 ].filter(Boolean).join(" ");
 ---
 
 <article class={classes}>
-  <div class="icra-feature__media"><slot name="media" /></div>
+  {mediaState !== "none" && (
+    <div class="icra-feature__media">
+      {mediaState === "image" ? <slot name="media" /> : <div class="icra-feature__media-placeholder">{mediaPlaceholder}</div>}
+    </div>
+  )}
   <div class="icra-feature__content"><slot /></div>
 </article>

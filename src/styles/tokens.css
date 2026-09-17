@@ -19,6 +19,22 @@
   --icra-surface-ice: #e6f4fa;
   --icra-surface-footer: #0c4a6e;
 
+  /* Women's Space palette. Page-specific character, shared through global tokens. */
+  --icra-women-wine: #54172d;
+  --icra-women-wine-deep: #3f1022;
+  --icra-women-wine-mid: #5b1831;
+  --icra-women-wine-soft: #6f2140;
+  --icra-women-rose: #7a2444;
+  --icra-women-gold: #c49a4a;
+  --icra-women-gold-dark: #a67c32;
+  --icra-women-gold-light: #d8b66a;
+  --icra-women-gold-pale: #e3c57c;
+  --icra-women-cream: #fffaf3;
+  --icra-women-blush: #f8eee8;
+  --icra-women-text: #604e53;
+  --icra-women-text-muted: #8b747a;
+  --icra-women-text-on-dark: #f2e2dd;
+
   --icra-container-full: 85.375rem;
   --icra-container-wide: 70rem;
   --icra-container-content: 56.25rem;

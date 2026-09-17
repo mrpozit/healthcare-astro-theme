@@ -1,9 +1,18 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import Heading from "../components/Heading.astro";
+import Heading from "../components/core/Heading.astro";
 import ExpandableText from "../components/content/ExpandableText.astro";
-import patriciaImage from "../assets/patricia-bozhko.jpg";
+import heroImage from "../assets/pages/women-space/01.jpg";
+import authorImage from "../assets/pages/women-space/04.jpg";
+import meeting05 from "../assets/pages/women-space/05.jpg";
+import meeting06 from "../assets/pages/women-space/06.jpg";
+import meeting07 from "../assets/pages/women-space/07.jpg";
+import meeting08 from "../assets/pages/women-space/08.jpg";
+import meeting09 from "../assets/pages/women-space/09.jpg";
+import meeting10 from "../assets/pages/women-space/10.jpg";
+
+const meetingImages = [meeting05, meeting06, meeting07, meeting08, meeting09, meeting10];
 ---
 
 <Layout
@@ -11,34 +20,33 @@ import patriciaImage from "../assets/patricia-bozhko.jpg";
   description="Жіночий простір Патриції Божко в ICRA. Дослідження власної точки А і точки Б, індивідуальне супроводження, відкриті зустрічі та простір для змін, які мають витримати реальне життя."
 >
   <main class="women-space">
-    <section class="section bg-[#fffaf3]" aria-labelledby="women-hero-title">
-      <div class="container grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div class="max-w-3xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#a67c32] mb-4">Жіночий простір</p>
-          <Heading level="h1" size="page" class="mb-6 text-[#54172d]" id="women-hero-title">Не краща версія себе. Своя.</Heading>
-          <p class="text-xl lg:text-2xl leading-relaxed font-medium text-[#54172d] mb-7">У якому житті я хочу одного дня виявити себе і як я хочу почуватися в цьому житті?</p>
-          <div class="space-y-3 text-lg leading-relaxed text-[#604e53]">
+    <section class="women-section women-cream" aria-labelledby="women-hero-title">
+      <div class="women-container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Жіночий простір</p>
+          <Heading level="h1" role="display" id="women-hero-title" class="women-heading">Не краща версія себе. Своя.</Heading>
+          <p class="lead">У якому житті я хочу одного дня виявити себе і як я хочу почуватися в цьому житті?</p>
+          <div class="body-stack">
             <p>Цей простір починається не з питання, якою жінкою вам потрібно стати.</p>
             <p>Він починається з іншого:</p>
-            <p class="font-semibold text-[#54172d]">яка я зараз, чого насправді хочу і яке життя відповідатиме саме мені?</p>
+            <p class="strong">яка я зараз, чого насправді хочу і яке життя відповідатиме саме мені?</p>
             <p>Не образу правильної жінки.<br />Не чужому сценарію.<br />Не списку того, що «вже час мати».</p>
-            <p class="text-2xl font-bold text-[#a67c32]">Мені.</p>
+            <Heading level="h3" role="h3" class="gold-heading">Мені.</Heading>
           </div>
-          <a href="#explore" class="inline-flex mt-8 font-semibold text-[#7a2444] hover:text-[#54172d] hover:underline underline-offset-4 rounded">Дослідити цей простір ↓</a>
+          <a href="#explore" class="text-link">Дослідити цей простір ↓</a>
         </div>
-        <figure class="space-y-3">
-          <Image src={patriciaImage} alt="Патриція Божко, авторка Жіночого простору ICRA" class="w-full h-[520px] lg:h-[680px] object-cover object-top rounded-2xl shadow-xl shadow-[#54172d]/10" loading="eager" fetchpriority="high" />
-          <figcaption class="text-sm text-[#8b747a]">Патриція Божко. Фото тимчасове, до заміни на patricia-womens-space.jpg.</figcaption>
+        <figure class="portrait hero-portrait">
+          <Image src={heroImage} alt="Патриція Божко, авторка Жіночого простору ICRA" widths={[640, 900, 1200]} sizes="(min-width: 1024px) 44vw, 100vw" loading="eager" fetchpriority="high" />
         </figure>
       </div>
     </section>
 
-    <section id="explore" class="section bg-[#f8eee8] scroll-mt-24" aria-labelledby="point-a-title">
-      <div class="container max-w-5xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-[#a67c32] mb-4">Точка А</p>
-        <Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="point-a-title">Спочатку зрозуміти, де я є</Heading>
-        <p class="text-lg text-[#604e53] leading-relaxed mb-7">Перш ніж будувати маршрут, варто переконатися, що його початкова точка справжня.</p>
-        <blockquote class="border-l-4 border-[#c49a4a] pl-6 py-2 text-2xl lg:text-3xl font-semibold leading-relaxed text-[#54172d] mb-7">Точка А має бути справжньою. Інакше будь-який маршрут із неї буде вигаданим.</blockquote>
+    <section id="explore" class="women-section women-blush scroll-target" aria-labelledby="point-a-title">
+      <div class="women-container reading-wide">
+        <p class="eyebrow">Точка А</p>
+        <Heading level="h2" role="h2" id="point-a-title" class="women-heading">Спочатку зрозуміти, де я є</Heading>
+        <p class="body-lg intro-gap">Перш ніж будувати маршрут, варто переконатися, що його початкова точка справжня.</p>
+        <blockquote class="quote quote-light">Точка А має бути справжньою. Інакше будь-який маршрут із неї буде вигаданим.</blockquote>
         <ExpandableText class="women-expand-light">
           <p>Ми часто починаємо зміни з майбутнього.</p>
           <p>Хочу іншу роботу.<br />Хочу стосунки.<br />Хочу більше заробляти.<br />Хочу схуднути.<br />Хочу переїхати.<br />Хочу нарешті зрозуміти, чого хочу.</p>
@@ -54,12 +62,12 @@ import patriciaImage from "../assets/patricia-bozhko.jpg";
       </div>
     </section>
 
-    <section class="section bg-[#5b1831] text-[#fffaf3]" aria-labelledby="point-b-title">
-      <div class="container max-w-6xl">
-        <p class="text-sm font-semibold uppercase tracking-wider text-[#d8b66a] mb-4">Точка Б</p>
-        <Heading level="h2" size="section" class="mb-7 text-[#fffaf3]" id="point-b-title">Точку Б теж потрібно знайти</Heading>
-        <blockquote class="max-w-5xl text-3xl lg:text-5xl font-bold leading-tight mb-8 text-white">У якому житті я хочу одного дня виявити себе і як я хочу почуватися в цьому житті?</blockquote>
-        <p class="max-w-3xl text-xl text-[#f2e2dd] leading-relaxed mb-7">Точка Б не починається зі списку придбань. Вона починається з уявлення про життя і про себе всередині нього.</p>
+    <section class="women-section women-wine" aria-labelledby="point-b-title">
+      <div class="women-container reading-wide">
+        <p class="eyebrow eyebrow-dark">Точка Б</p>
+        <Heading level="h2" role="h2" id="point-b-title" class="dark-heading">Точку Б теж потрібно знайти</Heading>
+        <Heading level="h3" role="display" class="statement-heading">У якому житті я хочу одного дня виявити себе і як я хочу почуватися в цьому житті?</Heading>
+        <p class="lead dark-copy">Точка Б не починається зі списку придбань. Вона починається з уявлення про життя і про себе всередині нього.</p>
         <ExpandableText class="women-expand-dark">
           <p>Коли ми питаємо людину про бажане майбутнє, відповідь часто дуже швидко перетворюється на список.</p>
           <p>Інша робота.<br />Більше грошей.<br />Стосунки.<br />Будинок.<br />Подорожі.<br />Інше тіло.<br />Новий гардероб.<br />Власна справа.</p>
@@ -76,12 +84,12 @@ import patriciaImage from "../assets/patricia-bozhko.jpg";
       </div>
     </section>
 
-    <section class="section bg-[#fffaf3]" aria-labelledby="satisfied-title">
-      <div class="container grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+    <section class="women-section women-cream" aria-labelledby="satisfied-title">
+      <div class="women-container split-grid split-top">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-wider text-[#a67c32] mb-4">Без нормативності</p>
-          <Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="satisfied-title">А якщо мене все влаштовує?</Heading>
-          <p class="text-2xl font-semibold leading-relaxed text-[#54172d]">Тоді, можливо, вам взагалі не потрібен цей простір.</p>
+          <p class="eyebrow">Без нормативності</p>
+          <Heading level="h2" role="h2" id="satisfied-title" class="women-heading">А якщо мене все влаштовує?</Heading>
+          <Heading level="h3" role="h3" class="substatement">Тоді, можливо, вам взагалі не потрібен цей простір.</Heading>
         </div>
         <ExpandableText class="women-expand-light">
           <p>Уявімо жінку.</p><p>Вона успішна хірургиня.</p><p>Говорить голосно і прямо.<br />Носить брючні костюми.<br />Не любить готувати.<br />Не хоче дітей.<br />П'є каву з простої чашки IKEA.<br />Любить дорогий годинник і спортивну машину.<br />Обожнює свою роботу.</p><p>І вона щаслива.</p><p>Що саме ми повинні в ній виправити?</p><p><strong>Нічого.</strong></p><p>Якщо ця жінка приходить до Патриції, перше питання буде дуже простим:</p><p>«А навіщо ти до мене прийшла? Який у тебе запит?»</p><p>Жіночий простір не існує для того, щоб привести різних жінок до одного зразка.</p><p>Не кожна відмінність від норми є проблемою. І не все в собі потрібно покращувати.</p><p>Питання не в тому, наскільки ваше життя схоже на правильну картинку. Питання в тому, наскільки воно ваше.</p>
@@ -89,54 +97,197 @@ import patriciaImage from "../assets/patricia-bozhko.jpg";
       </div>
     </section>
 
-    <section class="section bg-[#f8eee8]" aria-labelledby="being-title">
-      <div class="container">
-        <div class="max-w-4xl mb-10"><Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="being-title">Бути, а не здаватися</Heading><p class="text-lg text-[#604e53] leading-relaxed">Коли починає проявлятися власна точка Б, дуже практичними стають речі, які раніше здавалися окремими проблемами.</p></div>
-        <div class="grid gap-x-10 gap-y-0 md:grid-cols-2 border-y border-[#d8b66a]/60">
-          {["Не вмію позначати власні межі.","Боюся проявлятися.","Моя зовнішність не відповідає тому, як я себе відчуваю.","Не розумію власного стилю.","Для інших обираю хороше. Для себе залишаю «потім».","У мене є кар'єра, але все інше життя стало її обслуговуючим персоналом.","У мене є сім'я, але десь у ній зникла я сама.","Я знаю, якою хочу бути, але в звичному оточенні миттєво повертаюся до старої поведінки.","Не вмію говорити так, щоб мене чули.","Не вмію слухати.","Або постійно заповнюю собою весь простір, або зникаю з нього.","Купую те, що прийнято вважати красивим, але не знаю, що подобається саме мені."].map((item) => <p class="py-5 border-b border-[#d8b66a]/40 text-lg lg:text-xl leading-relaxed text-[#54172d]">{item}</p>)}
+    <section class="women-section women-blush" aria-labelledby="being-title">
+      <div class="women-container">
+        <div class="section-intro">
+          <Heading level="h2" role="h2" id="being-title" class="women-heading">Бути, а не здаватися</Heading>
+          <p class="body-lg">Коли починає проявлятися власна точка Б, дуже практичними стають речі, які раніше здавалися окремими проблемами.</p>
         </div>
-        <div class="max-w-4xl mt-9 space-y-3 text-lg leading-relaxed text-[#604e53]"><p>Усе це може стати матеріалом роботи.</p><p>Не тому, що існує правильний спосіб одягатися, говорити, будувати кар'єру, кохати чи бути жінкою.</p><p class="font-semibold text-[#54172d]">А тому, що зовнішнє поступово може почати відповідати внутрішньому.</p></div>
+        <div class="issue-grid">
+          {["Не вмію позначати власні межі.","Боюся проявлятися.","Моя зовнішність не відповідає тому, як я себе відчуваю.","Не розумію власного стилю.","Для інших обираю хороше. Для себе залишаю «потім».","У мене є кар'єра, але все інше життя стало її обслуговуючим персоналом.","У мене є сім'я, але десь у ній зникла я сама.","Я знаю, якою хочу бути, але в звичному оточенні миттєво повертаюся до старої поведінки.","Не вмію говорити так, щоб мене чули.","Не вмію слухати.","Або постійно заповнюю собою весь простір, або зникаю з нього.","Купую те, що прийнято вважати красивим, але не знаю, що подобається саме мені."].map((item) => <p>{item}</p>)}
+        </div>
+        <div class="body-stack closing-copy"><p>Усе це може стати матеріалом роботи.</p><p>Не тому, що існує правильний спосіб одягатися, говорити, будувати кар'єру, кохати чи бути жінкою.</p><p class="strong">А тому, що зовнішнє поступово може почати відповідати внутрішньому.</p></div>
       </div>
     </section>
 
-    <section class="section bg-[#fffaf3]" aria-labelledby="aesthetics-title">
-      <div class="container grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div class="rounded-2xl border border-dashed border-[#c49a4a] bg-[#f8eee8] min-h-[420px] lg:min-h-[560px] flex items-center justify-center p-8 text-center"><div><p class="font-semibold text-[#54172d]">Фото жіночої зустрічі або lifestyle-кадр</p><p class="mt-2 text-sm text-[#8b747a]">src/assets/womens-space-meeting-01.jpg</p></div></div>
-        <div><Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="aesthetics-title">Естетика повсякденності</Heading><p class="text-xl font-medium text-[#54172d] mb-7">Красивим життя роблять не особливі випадки.</p>
-          <ExpandableText class="women-expand-light"><p>Можна чекати ресторану, щоб одягнути красиву сукню.</p><p>Діставати хороший сервіз лише для гостей.</p><p>Користуватися улюбленими парфумами «з особливої нагоди».</p><p>Берегти красивий блокнот.</p><p>Відкладати хороші речі на той момент, коли життя нарешті стане достатньо важливим.</p><p>А потім одного дня помітити дивну річ: більша частина нашого життя складається саме зі звичайних вівторків.</p><p>Тому нас цікавить не естетика свята. Нас цікавить естетика звичайного життя.</p><p>Навіть чай відчувається інакше, коли ковтаєш його на ходу з паперового стаканчика і коли даєш собі десять хвилин випити його з чашки, яку любиш.</p><h3 class="mt-6 text-xl font-bold text-[#54172d]">Чому це не про чашку</h3><p>Тому що чашка сама по собі нічого не змінює.</p><p>Йдеться про увагу. Про ставлення до себе. Про здатність помічати власне життя, поки воно відбувається. Про дозвіл користуватися хорошим не колись, а зараз.</p><p>Про маленькі щоденні ритуали, з яких поступово складається відчуття: я живу у власному житті, а не чекаю, коли воно почнеться.</p></ExpandableText>
+    <section class="women-section women-cream meeting-section" aria-labelledby="meetings-title">
+      <div class="women-container">
+        <div class="meeting-intro">
+          <div>
+            <p class="eyebrow">Живий простір</p>
+            <Heading level="h2" role="h2" id="meetings-title" class="women-heading">Зустрічі, з яких він складається</Heading>
+          </div>
+          <p class="body-lg">Не декорація до концепції. Реальні зустрічі, розмови, практика і час, проведений разом.</p>
+        </div>
+      </div>
+      <div class="meeting-rail" aria-label="Фотографії жіночих зустрічей">
+        {meetingImages.map((img, index) => (
+          <figure class="meeting-card">
+            <Image src={img} alt={`Жіночий простір ICRA. Зустріч ${index + 1}`} widths={[520, 760]} sizes="(min-width: 768px) 34vw, 82vw" loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="women-section women-cream" aria-labelledby="aesthetics-title">
+      <div class="women-container reading-wide">
+        <Heading level="h2" role="h2" id="aesthetics-title" class="women-heading">Естетика повсякденності</Heading>
+        <p class="lead">Красивим життя роблять не особливі випадки.</p>
+        <ExpandableText class="women-expand-light">
+          <p>Можна чекати ресторану, щоб одягнути красиву сукню.</p><p>Діставати хороший сервіз лише для гостей.</p><p>Користуватися улюбленими парфумами «з особливої нагоди».</p><p>Берегти красивий блокнот.</p><p>Відкладати хороші речі на той момент, коли життя нарешті стане достатньо важливим.</p><p>А потім одного дня помітити дивну річ: більша частина нашого життя складається саме зі звичайних вівторків.</p><p>Тому нас цікавить не естетика свята. Нас цікавить естетика звичайного життя.</p><p>Навіть чай відчувається інакше, коли ковтаєш його на ходу з паперового стаканчика і коли даєш собі десять хвилин випити його з чашки, яку любиш.</p><Heading level="h3" role="h3" class="women-heading expand-heading">Чому це не про чашку</Heading><p>Тому що чашка сама по собі нічого не змінює.</p><p>Йдеться про увагу. Про ставлення до себе. Про здатність помічати власне життя, поки воно відбувається. Про дозвіл користуватися хорошим не колись, а зараз.</p><p>Про маленькі щоденні ритуали, з яких поступово складається відчуття: я живу у власному житті, а не чекаю, коли воно почнеться.</p>
+        </ExpandableText>
+      </div>
+    </section>
+
+    <section class="women-section women-wine" aria-labelledby="real-life-title">
+      <div class="women-container reading-wide">
+        <Heading level="h2" role="h2" id="real-life-title" class="dark-heading">Нове життя починається не в кабінеті</Heading>
+        <p class="lead dark-copy">На зустрічі можна багато зрозуміти. А жити з цим розумінням доведеться за її межами.</p>
+        <ExpandableText class="women-expand-dark"><p>Патриція іноді порівнює зміну з новою сукнею.</p><p>У безпечному просторі можна приміряти щось нове.</p><p>Інший спосіб говорити.<br />Нову межу.<br />Право відмовити.<br />Інше ставлення до себе.<br />Нову поведінку.</p><p>Подивитися в дзеркало і подумати: «Мені подобається ця жінка».</p><p>А потім повернутися додому.</p><p>Туди, де вас давно знають іншою.</p><p>У родину.<br />У стосунки.<br />На роботу.<br />До друзів.</p><p>Система навколо людини звикла до її попередньої конфігурації. І раптом нова сукня починає здаватися недоречною.</p><p>Ніби всі дивляться. Ніби стала білою вороною. І дуже легко знову вдягнути старе.</p><p>Не тому, що робота була марною. А тому, що зрозуміти зміну і інтегрувати її в життя не одне й те саме.</p><p>Тому нам важливо не створити місце, де людині добре бути іншою.</p><p><strong>Мета допомогти зробити так, щоб іншою вона змогла бути і за його межами.</strong></p><p>Саме тому між важливими зустрічами має залишатися життя.</p></ExpandableText>
+      </div>
+    </section>
+
+    <section class="women-section women-blush" aria-labelledby="time-title">
+      <div class="women-container split-grid">
+        <div><Heading level="h2" role="h2" id="time-title" class="women-heading">Час є частиною методу</Heading><p class="lead">Не все, що можна зрозуміти за годину, можна за годину навчитися жити.</p></div>
+        <div class="body-stack"><p>Ми можемо багато зрозуміти за одну розмову. Але жити з цим розумінням доведеться не під час розмови.</p><p>Тому тривале супроводження не будується навколо максимальної кількості сесій.</p><p>Між зустрічами повинно залишатися місце для життя.</p><p>Спробувати. Помітити. Помилитися. Відчути реакцію інших. Передумати. Змінити рішення. Зробити щось по-новому. Побачити, що спрацювало, а що існувало лише як гарна ідея.</p><p>І прийти на зустріч уже з новим матеріалом.</p><p>Іноді важлива зустріч потрібна через тиждень. Іноді значно пізніше.</p><p>Ми не намагаємося вмістити зміну життя в розклад курсу.</p><Heading level="h3" role="h3" class="rose-heading">Між зустрічами людина живе.</Heading></div>
+      </div>
+    </section>
+
+    <section class="women-section women-cream" aria-labelledby="join-title">
+      <div class="women-container">
+        <div class="section-intro"><p class="eyebrow">Формати</p><Heading level="h2" role="h2" id="join-title" class="women-heading">Як можна долучитися</Heading></div>
+        <div class="formats">
+          <article class="format-row"><div><p class="format-num">01</p><Heading level="h3" role="h3" class="women-heading">Відкриті зустрічі</Heading></div><div class="body-stack"><p>Лекції, вебінари, практикуми, майстер-класи та тематичні жіночі зустрічі.</p><p>Це можливість познайомитися з Патрицією, попрацювати з конкретною темою або інструментом і просто подивитися, чи відгукується вам цей простір.</p><p class="strong">Участь у відкритій зустрічі ні до чого не зобов'язує.</p></div></article>
+          <article class="format-row format-dark"><div><p class="format-num">02</p><Heading level="h3" role="h3" class="dark-heading">Тривале індивідуальне супроводження</Heading></div><div class="body-stack dark-copy"><p>Це штучна, індивідуальна робота.</p><p>Патриція одночасно супроводжує приблизно 3-5 людей і в цей період не набирає необмежену кількість нових індивідуальних клієнтів.</p><p>Зазвичай така робота триває від кількох місяців до пів року, року або довше, якщо це має сенс для процесу.</p><p>Люди, яких супроводжує Патриція, можуть взагалі не знати одне одного.</p><p>Кількість зустрічей не визначається тарифом. Ритм визначається реальною роботою і тим, що відбувається в житті між зустрічами.</p></div></article>
+          <article class="format-row format-last"><div><p class="format-num">03</p><Heading level="h3" role="h3" class="women-heading">Закрите коло</Heading></div><div class="body-stack"><p>З часом навколо індивідуальної роботи може формуватися невелике закрите жіноче коло.</p><p>Потрапити до нього можна лише після індивідуальної роботи з Патрицією і за запрошенням.</p><p>Причина не в ексклюзивності.</p><p>Люди всередині вже знають Патрицію, спосіб роботи, правила взаємодії, межі та цінність конфіденційності.</p><p>Це дозволяє працювати з темами, для яких відкритий формат був би занадто поверхневим або небезпечним.</p><Heading level="h3" role="h3" class="substatement">Закриті двері іноді потрібні не для винятковості.<br /><br />Вони потрібні, щоб усередині стало можливим те, що неможливе при відчинених дверях.</Heading></div></article>
         </div>
       </div>
     </section>
 
-    <section class="section bg-[#5b1831] text-white" aria-labelledby="real-life-title">
-      <div class="container max-w-5xl"><Heading level="h2" size="section" class="mb-5 text-white" id="real-life-title">Нове життя починається не в кабінеті</Heading><p class="text-xl text-[#f2e2dd] leading-relaxed mb-7">На зустрічі можна багато зрозуміти. А жити з цим розумінням доведеться за її межами.</p>
-        <ExpandableText class="women-expand-dark"><p>Патриція іноді порівнює зміну з новою сукнею.</p><p>У безпечному просторі можна приміряти щось нове.</p><p>Інший спосіб говорити.<br />Нову межу.<br />Право відмовити.<br />Інше ставлення до себе.<br />Нову поведінку.</p><p>Подивитися в дзеркало і подумати: «Мені подобається ця жінка».</p><p>А потім повернутися додому.</p><p>Туди, де вас давно знають іншою.</p><p>У родину.<br />У стосунки.<br />На роботу.<br />До друзів.</p><p>Система навколо людини звикла до її попередньої конфігурації. І раптом нова сукня починає здаватися недоречною.</p><p>Ніби всі дивляться. Ніби стала білою вороною. І дуже легко знову вдягнути старе.</p><p>Не тому, що робота була марною. А тому, що зрозуміти зміну і інтегрувати її в життя не одне й те саме.</p><p>Тому нам важливо не створити місце, де людині добре бути іншою.</p><p class="text-xl font-bold text-[#d8b66a]">Мета допомогти зробити так, щоб іншою вона змогла бути і за його межами.</p><p>Саме тому між важливими зустрічами має залишатися життя.</p></ExpandableText>
+    <section class="women-section women-blush" aria-labelledby="story-title">
+      <div class="women-container story-grid">
+        <div class="story-mark" aria-hidden="true"><span>А</span><span class="story-line"></span><span>Б</span></div>
+        <div>
+          <Heading level="h2" role="h2" id="story-title" class="women-heading">Одна історія. Не рецепт.</Heading>
+          <div class="body-stack story-copy"><p>Коли ми говоримо про точку Б, найпростіше показати її не схемою, а життям конкретної людини.</p><p>Одна з жінок, із якою довго працювала Патриція, колись була впевнена, що залишиться сама в чужій країні.</p><p>У її власній картині майбутнього вона одного дня помре нікому не потрібною, а поруч буде лише кіт.</p><p>Робота тривала близько року.</p><p>Не було моменту, після якого все життя раптом змінилося. Воно змінювалося частинами.</p><p>Вона розвивала свою онлайн-школу іноземних мов. Підняла вартість своєї роботи. Поступово почала заробляти достатньо, щоб постійна тривога про завтра перестала керувати життям.</p><p>Звільнила особистий час, хоча раніше працювала практично без вихідних.</p><p>Зайнялася станом шкіри і доглядом за собою. Знайшла неподалік спортивний зал, почала тренуватися, змінилося тіло і ставлення до нього.</p><p>Замість постійної критики поступово з'явилося відчуття: я собі подобаюся.</p><p>Потім у її житті з'явився чоловік. Вони одружилися.</p><p>Зараз вона живе з ним в Австрії, продовжує займатися улюбленою роботою і подорожує разом із чоловіком, тому що подорожі для неї важливі.</p><p>Що саме з цього вважати результатом роботи?</p><p>Дохід? Вільні вихідні? Інше ставлення до власного тіла? Стосунки? Переїзд? Подорожі?</p><p>Напевно, жоден пункт окремо.</p><blockquote class="quote quote-light">Вона поступово побудувала життя, в якому хотіла опинитися.</blockquote><p class="strong">У іншої жінки це життя буде зовсім іншим.</p></div>
+        </div>
       </div>
     </section>
 
-    <section class="section bg-[#f8eee8]" aria-labelledby="time-title"><div class="container grid gap-8 lg:grid-cols-[0.65fr_1.35fr]"><div><Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="time-title">Час є частиною методу</Heading><p class="text-xl font-medium leading-relaxed text-[#54172d]">Не все, що можна зрозуміти за годину, можна за годину навчитися жити.</p></div><div class="space-y-4 text-lg leading-relaxed text-[#604e53]"><p>Ми можемо багато зрозуміти за одну розмову. Але жити з цим розумінням доведеться не під час розмови.</p><p>Тому тривале супроводження не будується навколо максимальної кількості сесій.</p><p>Між зустрічами повинно залишатися місце для життя.</p><p>Спробувати. Помітити. Помилитися. Відчути реакцію інших. Передумати. Змінити рішення. Зробити щось по-новому. Побачити, що спрацювало, а що існувало лише як гарна ідея.</p><p>І прийти на зустріч уже з новим матеріалом.</p><p>Іноді важлива зустріч потрібна через тиждень. Іноді значно пізніше.</p><p>Ми не намагаємося вмістити зміну життя в розклад курсу.</p><p class="text-2xl font-bold text-[#7a2444]">Між зустрічами людина живе.</p></div></div></section>
+    <section class="women-section women-cream" aria-labelledby="patricia-title">
+      <div class="women-container author-grid">
+        <div>
+          <p class="eyebrow">Авторка простору</p>
+          <Heading level="h2" role="h2" id="patricia-title" class="women-heading">Патриція Божко</Heading>
+          <p class="lead">Цей простір виріс не лише з професійної практики.</p>
+          <div class="body-stack"><p>Для Патриції питання «як я насправді хочу жити?» не є темою, яку вона одного дня обрала для роботи з клієнтами.</p><p>Вона сама довго досліджувала, які стани, люди, місця, заняття, зовнішність, ритм і спосіб життя відповідають їй.</p><p>Що залишити. Від чого відмовитися. Що перестати робити лише тому, що «так треба».</p><p>Як виглядати так, щоб зовнішнє не сперечалося з внутрішнім.</p><p>Як поєднати професійну реалізацію, любов, турботу, красу, свободу і власні межі не за чужим рецептом, а у своїй конфігурації.</p><p>Саме тому «Жіночий простір» не пропонує жінці стати схожою на Патрицію.</p><p>Патриція тут радше приклад іншого принципу:</p></div>
+          <Heading level="h3" role="h3" class="author-quote">Можна не грати роль. Можна досліджувати, яка ти, і поступово будувати навколо цієї жінки власне життя.</Heading>
+          <a href="/about#people-title" class="text-link">Більше про Патрицію →</a>
+        </div>
+        <figure class="portrait author-portrait"><Image src={authorImage} alt="Патриція Божко" widths={[640, 900, 1200]} sizes="(min-width: 1024px) 44vw, 100vw" loading="lazy" /></figure>
+      </div>
+    </section>
 
-    <section class="section bg-[#fffaf3]" aria-labelledby="join-title"><div class="container"><div class="max-w-3xl mb-12"><p class="text-sm font-semibold uppercase tracking-wider text-[#a67c32] mb-4">Формати</p><Heading level="h2" size="section" class="text-[#54172d]" id="join-title">Як можна долучитися</Heading></div><div class="space-y-8">
-      <article class="grid gap-6 lg:grid-cols-[0.65fr_1.35fr] border-t border-[#d8b66a]/60 pt-8"><div><p class="text-sm font-semibold text-[#a67c32] mb-2">01</p><h3 class="text-2xl lg:text-3xl font-bold text-[#54172d]">Відкриті зустрічі</h3></div><div class="space-y-3 text-lg leading-relaxed text-[#604e53]"><p>Лекції, вебінари, практикуми, майстер-класи та тематичні жіночі зустрічі.</p><p>Це можливість познайомитися з Патрицією, попрацювати з конкретною темою або інструментом і просто подивитися, чи відгукується вам цей простір.</p><p class="font-semibold text-[#54172d]">Участь у відкритій зустрічі ні до чого не зобов'язує.</p></div></article>
-      <article class="rounded-2xl bg-[#5b1831] text-white p-7 lg:p-10 grid gap-6 lg:grid-cols-[0.65fr_1.35fr] shadow-lg shadow-[#54172d]/10"><div><p class="text-sm font-semibold text-[#d8b66a] mb-2">02</p><h3 class="text-2xl lg:text-3xl font-bold">Тривале індивідуальне супроводження</h3></div><div class="space-y-3 text-lg leading-relaxed text-[#f2e2dd]"><p>Це штучна, індивідуальна робота.</p><p>Патриція одночасно супроводжує приблизно 3-5 людей і в цей період не набирає необмежену кількість нових індивідуальних клієнтів.</p><p>Зазвичай така робота триває від кількох місяців до пів року, року або довше, якщо це має сенс для процесу.</p><p>Люди, яких супроводжує Патриція, можуть взагалі не знати одне одного.</p><p>Кількість зустрічей не визначається тарифом. Ритм визначається реальною роботою і тим, що відбувається в житті між зустрічами.</p></div></article>
-      <article class="grid gap-6 lg:grid-cols-[0.65fr_1.35fr] border-y border-[#d8b66a]/60 py-8"><div><p class="text-sm font-semibold text-[#a67c32] mb-2">03</p><h3 class="text-2xl lg:text-3xl font-bold text-[#54172d]">Закрите коло</h3></div><div class="space-y-3 text-lg leading-relaxed text-[#604e53]"><p>З часом навколо індивідуальної роботи може формуватися невелике закрите жіноче коло.</p><p>Потрапити до нього можна лише після індивідуальної роботи з Патрицією і за запрошенням.</p><p>Причина не в ексклюзивності.</p><p>Люди всередині вже знають Патрицію, спосіб роботи, правила взаємодії, межі та цінність конфіденційності.</p><p>Це дозволяє працювати з темами, для яких відкритий формат був би занадто поверхневим або небезпечним.</p><blockquote class="mt-6 text-xl lg:text-2xl font-bold text-[#54172d]">Закриті двері іноді потрібні не для винятковості.<br /><br />Вони потрібні, щоб усередині стало можливим те, що неможливе при відчинених дверях.</blockquote></div></article>
-    </div></div></section>
-
-    <section class="section bg-[#f8eee8]" aria-labelledby="story-title"><div class="container grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start"><div class="rounded-2xl border border-dashed border-[#c49a4a] bg-[#fffaf3] min-h-[440px] lg:sticky lg:top-28 flex items-center justify-center p-8 text-center"><div><p class="font-semibold text-[#54172d]">Фото жіночої зустрічі</p><p class="mt-2 text-sm text-[#8b747a]">src/assets/womens-space-meeting-02.jpg</p></div></div><div><Heading level="h2" size="section" class="mb-5 text-[#54172d]" id="story-title">Одна історія. Не рецепт.</Heading><div class="space-y-4 text-lg leading-relaxed text-[#604e53]"><p>Коли ми говоримо про точку Б, найпростіше показати її не схемою, а життям конкретної людини.</p><p>Одна з жінок, із якою довго працювала Патриція, колись була впевнена, що залишиться сама в чужій країні.</p><p>У її власній картині майбутнього вона одного дня помре нікому не потрібною, а поруч буде лише кіт.</p><p>Робота тривала близько року.</p><p>Не було моменту, після якого все життя раптом змінилося. Воно змінювалося частинами.</p><p>Вона розвивала свою онлайн-школу іноземних мов. Підняла вартість своєї роботи. Поступово почала заробляти достатньо, щоб постійна тривога про завтра перестала керувати життям.</p><p>Звільнила особистий час, хоча раніше працювала практично без вихідних.</p><p>Зайнялася станом шкіри і доглядом за собою. Знайшла неподалік спортивний зал, почала тренуватися, змінилося тіло і ставлення до нього.</p><p>Замість постійної критики поступово з'явилося відчуття: я собі подобаюся.</p><p>Потім у її житті з'явився чоловік. Вони одружилися.</p><p>Зараз вона живе з ним в Австрії, продовжує займатися улюбленою роботою і подорожує разом із чоловіком, тому що подорожі для неї важливі.</p><p>Що саме з цього вважати результатом роботи?</p><p>Дохід? Вільні вихідні? Інше ставлення до власного тіла? Стосунки? Переїзд? Подорожі?</p><p>Напевно, жоден пункт окремо.</p><blockquote class="my-7 border-l-4 border-[#c49a4a] pl-6 text-2xl lg:text-3xl font-bold text-[#54172d]">Вона поступово побудувала життя, в якому хотіла опинитися.</blockquote><p class="font-semibold text-[#54172d]">У іншої жінки це життя буде зовсім іншим.</p></div></div></div></section>
-
-    <section class="section bg-[#fffaf3]" aria-labelledby="patricia-title"><div class="container grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"><div><p class="text-sm font-semibold uppercase tracking-wider text-[#a67c32] mb-4">Авторка простору</p><Heading level="h2" size="section" class="mb-4 text-[#54172d]" id="patricia-title">Патриція Божко</Heading><p class="text-xl font-medium text-[#54172d] mb-7">Цей простір виріс не лише з професійної практики.</p><div class="space-y-4 text-lg leading-relaxed text-[#604e53]"><p>Для Патриції питання «як я насправді хочу жити?» не є темою, яку вона одного дня обрала для роботи з клієнтами.</p><p>Вона сама довго досліджувала, які стани, люди, місця, заняття, зовнішність, ритм і спосіб життя відповідають їй.</p><p>Що залишити. Від чого відмовитися. Що перестати робити лише тому, що «так треба».</p><p>Як виглядати так, щоб зовнішнє не сперечалося з внутрішнім.</p><p>Як поєднати професійну реалізацію, любов, турботу, красу, свободу і власні межі не за чужим рецептом, а у своїй конфігурації.</p><p>Саме тому «Жіночий простір» не пропонує жінці стати схожою на Патрицію.</p><p>Патриція тут радше приклад іншого принципу:</p></div><blockquote class="my-7 text-2xl lg:text-3xl font-bold leading-relaxed text-[#7a2444]">Можна не грати роль. Можна досліджувати, яка ти, і поступово будувати навколо цієї жінки власне життя.</blockquote><a href="/about#people-title" class="font-semibold text-[#7a2444] hover:underline underline-offset-4">Більше про Патрицію →</a></div><Image src={patriciaImage} alt="Патриція Божко" class="w-full h-[500px] lg:h-[640px] object-cover object-top rounded-2xl shadow-xl shadow-[#54172d]/10" loading="lazy" /></div></section>
-
-    <section class="section bg-[#5b1831] text-white" aria-labelledby="women-contact-title"><div class="container max-w-5xl"><Heading level="h2" size="section" class="mb-6 text-white" id="women-contact-title">Якщо вам відгукується цей простір</Heading><div class="max-w-3xl space-y-3 text-lg leading-relaxed text-[#f2e2dd]"><p>Можна почати з відкритої зустрічі.</p><p>Можна написати Патриції про індивідуальну роботу.</p><p>Можна спочатку просто почитати матеріали ICRA і повернутися пізніше.</p><p>А можна нічого не робити.</p><p class="font-semibold text-white">Тут не потрібно поспішати з рішенням про те, яким має бути ваше життя.</p></div><nav class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4" aria-label="Подальші кроки"><a href="/contact" class="inline-flex rounded-xl bg-[#c49a4a] px-6 py-3 font-semibold text-[#3f1022] hover:bg-[#d8b66a] transition-colors">Написати нам</a><a href="/services" class="font-semibold text-[#e3c57c] hover:underline underline-offset-4">Переглянути послуги</a><a href="/careers" class="font-semibold text-[#e3c57c] hover:underline underline-offset-4">Перейти до Бібліотеки</a></nav></div></section>
+    <section class="women-section women-wine" aria-labelledby="women-contact-title">
+      <div class="women-container reading-wide">
+        <Heading level="h2" role="h2" id="women-contact-title" class="dark-heading">Якщо вам відгукується цей простір</Heading>
+        <div class="body-stack dark-copy contact-copy"><p>Можна почати з відкритої зустрічі.</p><p>Можна написати Патриції про індивідуальну роботу.</p><p>Можна спочатку просто почитати матеріали ICRA і повернутися пізніше.</p><p>А можна нічого не робити.</p><p class="strong-light">Тут не потрібно поспішати з рішенням про те, яким має бути ваше життя.</p></div>
+        <nav class="contact-nav" aria-label="Подальші кроки"><a href="/contact" class="gold-button">Написати нам</a><a href="/services" class="dark-link">Переглянути послуги</a><a href="/careers" class="dark-link">Перейти до Бібліотеки</a></nav>
+      </div>
+    </section>
   </main>
 </Layout>
 
+<style>
+  .women-space { background:var(--icra-women-cream); color:var(--icra-women-text); }
+  .women-section { padding:var(--icra-section-spacious) 0; }
+  .women-container { width:min(calc(100% - 2 * var(--icra-gutter-mobile)), var(--icra-container-wide)); margin-inline:auto; }
+  .reading-wide { max-width:var(--icra-container-content); }
+  .women-cream { background:var(--icra-women-cream); }
+  .women-blush { background:var(--icra-women-blush); }
+  .women-wine { background:var(--icra-women-wine-mid); color:var(--icra-women-text-on-dark); }
+  .scroll-target { scroll-margin-top:6rem; }
+  .women-heading { color:var(--icra-women-wine); }
+  .dark-heading { color:var(--icra-women-cream); }
+  .gold-heading { color:var(--icra-women-gold-dark); margin-top:var(--icra-space-3); }
+  .rose-heading { color:var(--icra-women-rose); margin-top:var(--icra-space-3); }
+  .eyebrow { margin:0 0 var(--icra-space-2); color:var(--icra-women-gold-dark); font-size:var(--icra-text-eyebrow); font-weight:700; text-transform:uppercase; letter-spacing:.16em; }
+  .eyebrow-dark { color:var(--icra-women-gold-light); }
+  .lead { margin:var(--icra-space-3) 0; color:var(--icra-women-wine); font-size:var(--icra-text-lead-mobile); font-weight:600; line-height:var(--icra-leading-lead); }
+  .body-lg { margin:0; font-size:var(--icra-text-body-lg-mobile); line-height:var(--icra-leading-body); }
+  .body-stack { display:grid; gap:.8rem; font-size:var(--icra-text-body-lg-mobile); line-height:var(--icra-leading-body); }
+  .body-stack p { margin:0; }
+  .strong { color:var(--icra-women-wine); font-weight:700; }
+  .strong-light { color:var(--icra-women-cream); font-weight:700; }
+  .dark-copy { color:var(--icra-women-text-on-dark); }
+  .hero-grid,.author-grid,.split-grid,.story-grid { display:grid; gap:var(--icra-space-5); }
+  .hero-copy { align-self:center; }
+  .portrait { margin:0; overflow:hidden; border-radius:var(--icra-radius-media); box-shadow:0 18px 50px rgb(84 23 45 / .12); }
+  .portrait :global(img) { display:block; width:100%; aspect-ratio:3/5; object-fit:cover; object-position:center top; }
+  .text-link { display:inline-flex; margin-top:var(--icra-space-4); color:var(--icra-women-rose); font-weight:700; text-decoration:none; }
+  .text-link:hover { text-decoration:underline; text-underline-offset:.25rem; }
+  .intro-gap { margin:var(--icra-space-3) 0 var(--icra-space-4); }
+  .quote { margin:var(--icra-space-4) 0; padding:.35rem 0 .35rem var(--icra-space-3); border-left:4px solid var(--icra-women-gold); color:var(--icra-women-wine); font-size:var(--icra-text-h3-mobile); font-weight:700; line-height:var(--icra-leading-heading); }
+  .statement-heading { max-width:62rem; margin:var(--icra-space-3) 0 var(--icra-space-4); color:var(--icra-white); }
+  .substatement { margin-top:var(--icra-space-3); color:var(--icra-women-wine); line-height:1.35; }
+  .section-intro { max-width:52rem; margin-bottom:var(--icra-space-5); }
+  .section-intro .body-lg { margin-top:var(--icra-space-3); }
+  .issue-grid { display:grid; border-block:1px solid color-mix(in srgb,var(--icra-women-gold-light) 60%,transparent); }
+  .issue-grid p { margin:0; padding:1.15rem 0; border-bottom:1px solid color-mix(in srgb,var(--icra-women-gold-light) 40%,transparent); color:var(--icra-women-wine); font-size:var(--icra-text-body-lg-mobile); line-height:1.5; }
+  .closing-copy { max-width:52rem; margin-top:var(--icra-space-4); }
+  .meeting-section { overflow:hidden; }
+  .meeting-intro { display:grid; gap:var(--icra-space-3); align-items:end; margin-bottom:var(--icra-space-4); }
+  .meeting-intro .body-lg { max-width:36rem; }
+  .meeting-rail { display:flex; gap:var(--icra-space-2); overflow-x:auto; padding:0 max(var(--icra-gutter-mobile),calc((100vw - var(--icra-container-wide))/2)) var(--icra-space-2); scroll-snap-type:x proximity; scrollbar-width:thin; }
+  .meeting-card { flex:0 0 min(82vw,28rem); margin:0; overflow:hidden; border-radius:var(--icra-radius-media); scroll-snap-align:start; background:var(--icra-women-blush); }
+  .meeting-card :global(img) { display:block; width:100%; height:auto; }
+  .expand-heading { margin-top:var(--icra-space-4); }
+  .formats { display:grid; gap:var(--icra-space-4); }
+  .format-row { display:grid; gap:var(--icra-space-3); padding-top:var(--icra-space-4); border-top:1px solid color-mix(in srgb,var(--icra-women-gold-light) 60%,transparent); }
+  .format-last { padding-bottom:var(--icra-space-4); border-bottom:1px solid color-mix(in srgb,var(--icra-women-gold-light) 60%,transparent); }
+  .format-dark { padding:var(--icra-space-4); border:0; border-radius:var(--icra-radius-card); background:var(--icra-women-wine-mid); box-shadow:0 10px 28px rgb(84 23 45 / .1); }
+  .format-num { margin:0 0 var(--icra-space-1); color:var(--icra-women-gold-dark); font-size:var(--icra-text-small); font-weight:700; }
+  .format-dark .format-num { color:var(--icra-women-gold-light); }
+  .story-mark { display:flex; align-items:center; gap:var(--icra-space-2); align-self:start; color:var(--icra-women-gold-dark); font-size:var(--icra-text-h3); font-weight:700; }
+  .story-line { flex:1; height:1px; background:var(--icra-women-gold); }
+  .story-copy { margin-top:var(--icra-space-3); }
+  .author-quote { margin:var(--icra-space-4) 0 0; color:var(--icra-women-rose); line-height:1.4; }
+  .contact-copy { max-width:48rem; margin-top:var(--icra-space-3); }
+  .contact-nav { display:flex; flex-wrap:wrap; align-items:center; gap:var(--icra-space-3); margin-top:var(--icra-space-4); }
+  .gold-button { display:inline-flex; padding:.8rem 1.35rem; border-radius:var(--icra-radius-button); background:var(--icra-women-gold); color:var(--icra-women-wine-deep); font-weight:700; text-decoration:none; }
+  .gold-button:hover { background:var(--icra-women-gold-light); }
+  .dark-link { color:var(--icra-women-gold-pale); font-weight:700; text-decoration:none; }
+  .dark-link:hover { text-decoration:underline; text-underline-offset:.25rem; }
+
+  @media (min-width:48rem) {
+    .women-container { width:min(calc(100% - 2 * var(--icra-gutter-tablet)), var(--icra-container-wide)); }
+    .lead { font-size:var(--icra-text-lead); }
+    .body-lg,.body-stack { font-size:var(--icra-text-body-lg); }
+    .issue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:var(--icra-space-5); }
+    .meeting-intro { grid-template-columns:1fr 1fr; }
+    .meeting-card { flex-basis:min(46vw,30rem); }
+  }
+
+  @media (min-width:64rem) {
+    .women-container { width:min(calc(100% - 2 * var(--icra-gutter-desktop)), var(--icra-container-wide)); }
+    .hero-grid { grid-template-columns:1.05fr .95fr; align-items:center; }
+    .author-grid { grid-template-columns:1.05fr .95fr; align-items:center; }
+    .split-grid { grid-template-columns:.65fr 1.35fr; }
+    .split-top { grid-template-columns:.7fr 1.3fr; align-items:start; }
+    .story-grid { grid-template-columns:.35fr 1.65fr; align-items:start; }
+    .format-row { grid-template-columns:.65fr 1.35fr; gap:var(--icra-space-5); }
+    .meeting-card { flex-basis:min(34vw,31rem); }
+  }
+</style>
+
 <style is:global>
-  .women-space .women-expand-light { background: #fffaf3 !important; border-color: rgba(196,154,74,.55) !important; }
-  .women-space .women-expand-light summary { color: #7a2444 !important; }
-  .women-space .women-expand-light > div { color: #604e53 !important; }
-  .women-space .women-expand-light strong { color: #54172d; }
-  .women-space .women-expand-dark { background: #6f2140 !important; border-color: rgba(216,182,106,.55) !important; }
-  .women-space .women-expand-dark summary { color: #e3c57c !important; }
-  .women-space .women-expand-dark > div { color: #fffaf3 !important; }
-  .women-space .women-expand-dark strong { color: #ffffff; }
+  .women-space .women-expand-light { background:var(--icra-women-cream) !important; border-color:color-mix(in srgb,var(--icra-women-gold) 55%,transparent) !important; }
+  .women-space .women-expand-light summary { color:var(--icra-women-rose) !important; }
+  .women-space .women-expand-light > div { color:var(--icra-women-text) !important; }
+  .women-space .women-expand-light strong { color:var(--icra-women-wine); }
+  .women-space .women-expand-dark { background:var(--icra-women-wine-soft) !important; border-color:color-mix(in srgb,var(--icra-women-gold-light) 55%,transparent) !important; }
+  .women-space .women-expand-dark summary { color:var(--icra-women-gold-pale) !important; }
+  .women-space .women-expand-dark > div { color:var(--icra-women-cream) !important; }
+  .women-space .women-expand-dark strong { color:var(--icra-white); }
 </style>

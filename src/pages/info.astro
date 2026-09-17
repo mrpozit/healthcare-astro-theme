@@ -46,15 +46,23 @@ const teenagersImage = getAsset("social-teenagers.jpg");
     <div class="icra-content-blocks">
       <ContentBlock>
         <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
-          <div slot="media">{probationImage && <Image src={probationImage} alt="Робота ICRA з фахівцями пробації" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" />}</div>
+          <Heading level="h3" role="h3">Робота з ветеранами та людьми, звільненими з полону</Heading>
+          <Text>У психіатричному відділенні Патриція регулярно працює з невеликими групами ветеранів і людей, які пережили полон.</Text>
+          <Text>Ця робота стала одним із місць, де особливо виразно проявилася взаємодія тексту, арт-терапевтичної практики та подальшої роботи з психологом і психіатром.</Text>
+        </Feature>
+      </ContentBlock>
+
+      <ContentBlock>
+        <Feature variant="plain" mediaPosition="left" mediaRatio="landscape">
+          {probationImage && <div slot="media"><Image src={probationImage} alt="Робота ICRA з фахівцями пробації" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">Фахівці пробації</Heading>
           <Text>У співпраці з українською пробацією Патриція проводить безкоштовні заняття для фахівців. Це можуть бути навчальні формати або сесії психологічного розвантаження для людей, чия робота сама по собі пов'язана з постійним емоційним навантаженням.</Text>
         </Feature>
       </ContentBlock>
 
       <ContentBlock>
-        <Feature variant="panel" mediaPosition="left" mediaRatio="landscape">
-          <div slot="media">{valkyriesImage && <Image src={valkyriesImage} alt="Проєкт Українські Валькірії" widths={[640, 960]} sizes="(min-width: 768px) 40vw, 100vw" loading="lazy" />}</div>
+        <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
+          {valkyriesImage && <div slot="media"><Image src={valkyriesImage} alt="Проєкт Українські Валькірії" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">«Українські Валькірії»</Heading>
           <Text>У межах проєкту Патриція проводить лекції, вебінари, практикуми та майстер-класи для учасниць організації, жінок ВПО та фахівців допомагаючих професій.</Text>
           <Text>Теми і формат залежать від конкретної групи: від роботи зі стресом та емоційною саморегуляцією до арт-терапевтичних практик і психологічного відновлення.</Text>
@@ -62,8 +70,18 @@ const teenagersImage = getAsset("social-teenagers.jpg");
       </ContentBlock>
 
       <ContentBlock>
+        <Feature variant="plain" mediaPosition="left" mediaRatio="landscape">
+          <Heading level="h3" role="h3">Recovery Ukraine</Heading>
+          <Text>У межах проєктів Recovery Ukraine Патриція проводила заходи з психологічного розвантаження та відновлення для фахівців допомагаючих професій, які працюють із військовослужбовцями та ветеранами.</Text>
+          <Text>У допомагаючих професіях легко зосередитися лише на тому, кому допомагає спеціаліст. Але ресурс самого спеціаліста теж не безмежний.</Text>
+          <Text>Іноді допомога тим, хто допомагає іншим, є окремим важливим завданням.</Text>
+          <ActionLink href="https://recoveryua.org/" external>Recovery Ukraine</ActionLink>
+        </Feature>
+      </ContentBlock>
+
+      <ContentBlock>
         <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
-          <div slot="media">{teenagersImage && <Image src={teenagersImage} alt="Заняття ICRA з підлітками" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" />}</div>
+          {teenagersImage && <div slot="media"><Image src={teenagersImage} alt="Заняття ICRA з підлітками" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">Підлітки</Heading>
           <Text>Окремий напрям практики Патриції - робота з підлітками у школі.</Text>
           <Text>Зустрічі присвячені стресу, емоціям, способам помічати власний стан і простим інструментам саморегуляції. Тут особливо важливо говорити з людиною зрозумілою мовою, не перетворюючи психологію на лекцію про те, як вона «повинна правильно почуватися».</Text>

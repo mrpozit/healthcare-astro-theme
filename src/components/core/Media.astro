@@ -1,0 +1,31 @@
+---
+type Ratio = "portrait" | "landscape";
+type Width = "content" | "wide" | "full";
+
+interface Props {
+  src: string;
+  alt: string;
+  ratio?: Ratio;
+  width?: Width;
+  caption?: string;
+  loading?: "eager" | "lazy";
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  ratio = "landscape",
+  width = "wide",
+  caption,
+  loading = "lazy",
+  class: className = "",
+} = Astro.props;
+---
+
+<figure class:list={["icra-media", `icra-media--${ratio}`, `icra-media--${width}`, className]}>
+  <div class="icra-media__frame">
+    <img src={src} alt={alt} loading={loading} decoding="async" />
+  </div>
+  {caption && <figcaption class="icra-media__caption">{caption}</figcaption>}
+</figure>

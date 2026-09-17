@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<aside class:list={["icra-statement", className]}>
+  <div class="icra-statement__content">
+    <slot />
+  </div>
+</aside>

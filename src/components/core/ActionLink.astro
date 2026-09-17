@@ -1,0 +1,14 @@
+---
+interface Props {
+  href: string;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, external = false, class: className = "" } = Astro.props;
+---
+
+<a href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} class:list={["icra-action-link", className]}>
+  <span><slot /></span>
+  <span class="icra-action-link__arrow" aria-hidden="true">{external ? "↗" : "→"}</span>
+</a>

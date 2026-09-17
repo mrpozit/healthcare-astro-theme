@@ -1,87 +1,180 @@
 /*
- * ICRA core design contract.
- * Pages choose structure and meaning. Core components own visual decisions.
+ * ICRA clean design contract.
+ * Pages compose the system. They do not redesign it.
+ *
+ * This file currently implements only the approved foundation:
+ * surfaces, typography and geometry.
  */
+
+/* ---------- Base ---------- */
+
+html {
+  font-family: var(--icra-font);
+  color: var(--icra-text);
+  background: var(--icra-surface-white);
+}
+
+body {
+  margin: 0;
+}
+
+/* ---------- Containers ---------- */
 
 .icra-container {
   width: 100%;
-  max-width: var(--icra-container);
+  max-width: var(--icra-container-full);
   margin-inline: auto;
-  padding-inline: var(--icra-gutter);
+  padding-inline: var(--icra-gutter-mobile);
+  box-sizing: border-box;
 }
+
+.icra-measure {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.icra-measure--reading { max-width: var(--icra-container-reading); }
+.icra-measure--content { max-width: var(--icra-container-content); }
+.icra-measure--wide { max-width: var(--icra-container-wide); }
+.icra-measure--full { max-width: var(--icra-container-full); }
+
+/* ---------- Surface contract ---------- */
+
+.icra-surface {
+  --surface-background: var(--icra-surface-white);
+  --surface-heading: var(--icra-text);
+  --surface-text: var(--icra-text-soft);
+  --surface-muted: var(--icra-text-muted);
+  --surface-accent: var(--icra-brand);
+  --surface-link: var(--icra-brand-dark);
+  --surface-border: var(--icra-border);
+
+  background: var(--surface-background);
+  color: var(--surface-text);
+}
+
+.icra-surface--white { --surface-background: var(--icra-surface-white); }
+.icra-surface--mist { --surface-background: var(--icra-surface-mist); }
+.icra-surface--sky { --surface-background: var(--icra-surface-sky); }
+.icra-surface--aqua { --surface-background: var(--icra-surface-aqua); }
+.icra-surface--sand { --surface-background: var(--icra-surface-sand); }
+.icra-surface--ice { --surface-background: var(--icra-surface-ice); }
+
+.icra-surface--wine {
+  --surface-background: var(--icra-surface-wine);
+  --surface-heading: #ffffff;
+  --surface-text: #f9fafb;
+  --surface-muted: #e5e7eb;
+  --surface-accent: #ffffff;
+  --surface-link: #ffffff;
+  --surface-border: rgb(255 255 255 / 0.24);
+}
+
+/* Footer is deliberately not a surface variant. */
+
+/* ---------- Section rhythm ---------- */
 
 .icra-section {
-  padding-block: var(--icra-section-y);
-  background: var(--icra-color-surface);
-  color: var(--icra-color-text);
+  padding-block: 3rem; /* mobile normal: 48px */
 }
 
-.icra-section--base { background: var(--icra-color-surface); }
-.icra-section--alternate { background: var(--icra-color-surface-cool); }
-.icra-section--compact { padding-block: var(--icra-section-y-compact); }
+.icra-section--compact { padding-block: 2rem; }
+.icra-section--normal { padding-block: 3rem; }
+.icra-section--spacious { padding-block: 4rem; }
 
-.icra-heading {
+/* ---------- Typography ---------- */
+
+.icra-display,
+.icra-h1,
+.icra-h2,
+.icra-h3 {
   margin: 0;
-  color: inherit;
+  color: var(--surface-heading, var(--icra-text));
   font-weight: 700;
-  line-height: var(--icra-leading-heading);
   letter-spacing: -0.025em;
 }
 
-.icra-heading--page { font-size: clamp(2.25rem, 4vw, 3.5rem); }
-.icra-heading--section { font-size: clamp(1.875rem, 3vw, 2.5rem); }
-.icra-heading--subsection { font-size: clamp(1.5rem, 2.4vw, 2rem); }
-
-.icra-card {
-  border: 1px solid var(--icra-color-border);
-  border-radius: var(--icra-radius-md);
-  background: var(--icra-color-surface);
-  color: var(--icra-color-text);
-  box-shadow: var(--icra-shadow-card);
+.icra-display {
+  font-size: var(--icra-text-display-mobile);
+  line-height: var(--icra-leading-display);
 }
 
-.icra-card--accent {
-  border-color: color-mix(in srgb, var(--icra-color-brand) 25%, var(--icra-color-border));
-  background: var(--icra-color-surface-warm);
+.icra-h1 {
+  font-size: var(--icra-text-h1-mobile);
+  line-height: var(--icra-leading-heading);
+}
+
+.icra-h2 {
+  font-size: var(--icra-text-h2-mobile);
+  line-height: var(--icra-leading-heading);
+}
+
+.icra-h3 {
+  font-size: var(--icra-text-h3-mobile);
+  line-height: var(--icra-leading-heading);
+}
+
+.icra-lead {
+  margin: 0;
+  color: var(--surface-text, var(--icra-text-soft));
+  font-size: var(--icra-text-lead-mobile);
+  font-weight: 400;
+  line-height: var(--icra-leading-lead);
+}
+
+.icra-body-lg,
+.icra-body {
+  margin: 0;
+  color: var(--surface-text, var(--icra-text-soft));
+  font-weight: 400;
+  line-height: var(--icra-leading-body);
+}
+
+.icra-body-lg { font-size: var(--icra-text-body-lg-mobile); }
+.icra-body { font-size: var(--icra-text-body); }
+
+.icra-small {
+  margin: 0;
+  color: var(--surface-muted, var(--icra-text-muted));
+  font-size: var(--icra-text-small);
+  line-height: 1.5;
 }
 
 .icra-eyebrow {
-  margin: 0 0 1rem;
-  color: var(--icra-color-brand-dark);
-  font-size: 0.875rem;
+  margin: 0;
+  color: var(--surface-accent, var(--icra-brand-dark));
+  font-size: var(--icra-text-eyebrow);
   font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.icra-copy {
-  color: var(--icra-color-text-soft);
-  font-size: 1.125rem;
-  line-height: var(--icra-leading-body);
+.icra-text-link {
+  color: var(--surface-link, var(--icra-brand-dark));
 }
 
-.icra-callout {
-  border-left: 4px solid var(--icra-color-brand);
-  padding-left: 1.25rem;
-  color: var(--icra-color-brand-deep);
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  font-weight: 600;
-  line-height: 1.45;
+/* ---------- Responsive foundation ---------- */
+
+@media (min-width: 48rem) {
+  .icra-container {
+    padding-inline: var(--icra-gutter-tablet);
+  }
 }
 
-.icra-link {
-  color: var(--icra-color-brand-dark);
-  font-weight: 600;
-  text-decoration: none;
-}
+@media (min-width: 64rem) {
+  .icra-container {
+    padding-inline: var(--icra-gutter-desktop);
+  }
 
-.icra-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
-}
+  .icra-section--compact { padding-block: var(--icra-section-compact); }
+  .icra-section--normal { padding-block: var(--icra-section-normal); }
+  .icra-section--spacious { padding-block: var(--icra-section-spacious); }
 
-@media (min-width: 1024px) {
-  .icra-container { padding-inline: var(--icra-gutter-lg); }
-  .icra-section { padding-block: var(--icra-section-y-lg); }
-  .icra-section--compact { padding-block: var(--icra-section-y-compact-lg); }
+  .icra-display { font-size: var(--icra-text-display); }
+  .icra-h1 { font-size: var(--icra-text-h1); }
+  .icra-h2 { font-size: var(--icra-text-h2); }
+  .icra-h3 { font-size: var(--icra-text-h3); }
+  .icra-lead { font-size: var(--icra-text-lead); }
+  .icra-body-lg { font-size: var(--icra-text-body-lg); }
 }

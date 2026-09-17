@@ -1,4 +1,4 @@
-/* ICRA interactive and Hero system. Central system styles, never page-local. */
+/* ICRA interactive, Hero and composition system. Central system styles, never page-local. */
 .icra-button { display:inline-flex; min-height:3rem; align-items:center; justify-content:center; padding-inline:1.5rem; border:1px solid transparent; border-radius:var(--icra-radius-button); font:inherit; font-weight:600; line-height:1; text-decoration:none; transition:background-color 160ms ease,border-color 160ms ease,color 160ms ease,transform 160ms ease; }
 .icra-button--primary { background:var(--surface-accent,var(--icra-brand)); color:#fff; }
 .icra-button--primary:hover { background:var(--icra-brand-dark); }
@@ -15,13 +15,15 @@ a.icra-text-link:hover { text-decoration:underline; }
 .icra-button:focus-visible,.icra-action-link:focus-visible,a.icra-text-link:focus-visible,.icra-content-list a:focus-visible { outline:3px solid var(--surface-accent,var(--icra-brand)); outline-offset:4px; }
 .icra-surface--wine .icra-button:focus-visible,.icra-surface--wine .icra-action-link:focus-visible,.icra-surface--wine a.icra-text-link:focus-visible { outline-color:#fff; }
 
-.icra-hero { padding-block:4rem; }
+/* Ordinary Hero height is always content + system padding. */
+.icra-hero { padding-block:3.5rem; }
 .icra-hero__layout { display:grid; gap:var(--icra-space-5); align-items:center; }
 .icra-hero__content { display:flex; flex-direction:column; align-items:flex-start; gap:var(--icra-space-3); }
 .icra-hero__media { overflow:hidden; border-radius:var(--icra-radius-media); }
 .icra-hero--portrait .icra-hero__media { aspect-ratio:3 / 5; }
 .icra-hero--landscape .icra-hero__media { aspect-ratio:5 / 3; }
 .icra-hero__media img,.icra-feature__media img,.icra-card__media img { display:block; width:100%; height:100%; object-fit:cover; }
+/* Only deliberately poster-like Hero variants may own minimum height. */
 .icra-hero--statement .icra-hero__layout { min-height:28rem; }
 .icra-hero--statement .icra-hero__content { max-width:var(--icra-container-content); }
 
@@ -31,8 +33,13 @@ a.icra-text-link:hover { text-decoration:underline; }
 .icra-cluster { display:flex; flex-wrap:wrap; gap:var(--icra-space-2); align-items:center; }
 .icra-section-heading { max-width:var(--icra-container-content); margin-bottom:var(--icra-space-5); }
 
+/* A Section is a chapter. ContentBlocks are separate thoughts inside that chapter. */
+.icra-content-blocks { display:flex; flex-direction:column; gap:var(--icra-content-block-gap); }
+.icra-content-block { min-width:0; }
+.icra-content-block > .icra-stack { gap:var(--icra-space-3); }
+
 @media (min-width:48rem) {
-  .icra-hero { padding-block:5rem; }
+  .icra-hero { padding-block:4.5rem; }
   .icra-hero--split .icra-hero__layout,.icra-hero--editorial .icra-hero__layout { grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:var(--icra-space-6); }
   .icra-hero--media-left .icra-hero__media { order:1; }
   .icra-hero--media-left .icra-hero__content { order:2; }
@@ -41,5 +48,8 @@ a.icra-text-link:hover { text-decoration:underline; }
   .icra-hero--editorial .icra-hero__layout { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
   .icra-hero--statement .icra-hero__layout { min-height:34rem; }
 }
-@media (min-width:64rem) { .icra-hero { padding-block:var(--icra-section-spacious); } .icra-hero--editorial .icra-hero__layout { min-height:40rem; } }
+@media (min-width:64rem) {
+  .icra-hero { padding-block:4.5rem; }
+  .icra-hero--editorial .icra-hero__layout { min-height:40rem; }
+}
 @media (prefers-reduced-motion:reduce) { .icra-button,.icra-action-link__arrow { transition:none; } .icra-action-link:hover .icra-action-link__arrow { transform:none; } }

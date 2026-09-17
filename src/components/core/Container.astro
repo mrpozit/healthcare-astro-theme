@@ -1,0 +1,19 @@
+---
+type Width = "reading" | "content" | "wide" | "full";
+
+interface Props {
+  width?: Width;
+  class?: string;
+}
+
+const {
+  width = "full",
+  class: className = "",
+} = Astro.props;
+---
+
+<div class="icra-container">
+  <div class:list={["icra-measure", `icra-measure--${width}`, className]}>
+    <slot />
+  </div>
+</div>

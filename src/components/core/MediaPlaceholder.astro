@@ -1,0 +1,16 @@
+---
+type Ratio = "portrait" | "landscape";
+interface Props {
+  ratio?: Ratio;
+  label?: string;
+  class?: string;
+}
+const {
+  ratio = "landscape",
+  label = "Фото буде додано після підготовки до публікації",
+  class: className = "",
+} = Astro.props;
+---
+<div class:list={["icra-media-placeholder", `icra-media-placeholder--${ratio}`, className]} role="img" aria-label={label}>
+  <span>{label}</span>
+</div>

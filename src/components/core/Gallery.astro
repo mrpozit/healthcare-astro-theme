@@ -1,0 +1,17 @@
+---
+type Layout = "grid" | "editorial";
+
+interface Props {
+  layout?: Layout;
+  class?: string;
+}
+
+const {
+  layout = "grid",
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["icra-gallery", `icra-gallery--${layout}`, className]}>
+  <slot />
+</div>

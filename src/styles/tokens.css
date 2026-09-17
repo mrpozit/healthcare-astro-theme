@@ -1,40 +1,82 @@
 :root {
-  /* ICRA core palette */
-  --icra-color-brand: #0d9488;
-  --icra-color-brand-dark: #0f766e;
-  --icra-color-brand-deep: #115e59;
+  /* Brand */
+  --icra-brand: #0d9488;
+  --icra-brand-dark: #0f766e;
+  --icra-brand-deep: #115e59;
 
-  --icra-color-text: #111827;
-  --icra-color-text-soft: #374151;
-  --icra-color-text-muted: #6b7280;
-  --icra-color-inverse: #ffffff;
+  /* Neutral text */
+  --icra-text: #111827;
+  --icra-text-soft: #374151;
+  --icra-text-muted: #6b7280;
+  --icra-white: #ffffff;
+  --icra-border: #e5e7eb;
 
-  --icra-color-surface: #ffffff;
-  --icra-color-surface-warm: #f5f1e8;
-  --icra-color-surface-cool: #edf4f5;
-  --icra-color-surface-cool-strong: #e3eef0;
-  --icra-color-border: #e5e7eb;
+  /* Approved section surfaces */
+  --icra-surface-white: #ffffff;
+  --icra-surface-mist: #f9fafb;
+  --icra-surface-sky: #ebf8fe;
+  --icra-surface-aqua: #edf4f5;
+  --icra-surface-sand: #f5f1e8;
+  --icra-surface-wine: #54172d;
+  --icra-surface-ice: #e6f4fa;
 
-  /* Layout */
-  --icra-container: 85.375rem;
-  --icra-gutter: 1rem;
-  --icra-gutter-lg: 2rem;
-  --icra-section-y: 3rem;
-  --icra-section-y-lg: 4rem;
-  --icra-section-y-compact: 2rem;
-  --icra-section-y-compact-lg: 2.5rem;
+  /* Reserved for Footer only */
+  --icra-surface-footer: #0c4a6e;
+
+  /* Geometry */
+  --icra-container-full: 85.375rem; /* 1366px */
+  --icra-container-wide: 70rem;     /* 1120px */
+  --icra-container-content: 56.25rem; /* 900px */
+  --icra-container-reading: 45rem;  /* 720px */
+
+  --icra-gutter-mobile: 1rem;
+  --icra-gutter-tablet: 1.5rem;
+  --icra-gutter-desktop: 2rem;
+
+  /* Spacing scale */
+  --icra-space-1: 0.5rem;  /* 8 */
+  --icra-space-2: 1rem;    /* 16 */
+  --icra-space-3: 1.5rem;  /* 24 */
+  --icra-space-4: 2rem;    /* 32 */
+  --icra-space-5: 3rem;    /* 48 */
+  --icra-space-6: 4rem;    /* 64 */
+
+  /* Section rhythm: desktop values; responsive rules live in core.css */
+  --icra-section-compact: 2.5rem; /* 40 */
+  --icra-section-normal: 4rem;    /* 64 */
+  --icra-section-spacious: 6rem;  /* 96 */
 
   /* Shape */
-  --icra-radius-sm: 0.75rem;
-  --icra-radius-md: 1rem;
-  --icra-radius-lg: 1.5rem;
+  --icra-radius-media: 1rem;
+  --icra-radius-card: 1rem;
+  --icra-radius-button: 0.75rem;
 
   /* Typography */
   --icra-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --icra-leading-body: 1.65;
+
+  --icra-text-display: 4rem;    /* 64 */
+  --icra-text-h1: 3.25rem;      /* 52 */
+  --icra-text-h2: 2.375rem;     /* 38 */
+  --icra-text-h3: 1.625rem;     /* 26 */
+  --icra-text-lead: 1.375rem;   /* 22 */
+  --icra-text-body-lg: 1.125rem;/* 18 */
+  --icra-text-body: 1rem;       /* 16 */
+  --icra-text-small: 0.875rem;  /* 14 */
+  --icra-text-eyebrow: 0.8125rem; /* 13 */
+
+  --icra-text-display-mobile: 2.625rem; /* 42 */
+  --icra-text-h1-mobile: 2.375rem;      /* 38 */
+  --icra-text-h2-mobile: 1.875rem;      /* 30 */
+  --icra-text-h3-mobile: 1.4375rem;     /* 23 */
+  --icra-text-lead-mobile: 1.1875rem;   /* 19 */
+  --icra-text-body-lg-mobile: 1.0625rem;/* 17 */
+
+  --icra-leading-display: 1.05;
   --icra-leading-heading: 1.12;
+  --icra-leading-lead: 1.45;
+  --icra-leading-body: 1.65;
 
   /* Elevation */
-  --icra-shadow-card: 0 2px 8px -2px rgb(17 24 39 / 0.08);
-  --icra-shadow-card-hover: 0 10px 28px -10px rgb(17 24 39 / 0.16);
+  --icra-shadow-card: 0 2px 8px rgb(17 24 39 / 0.06);
+  --icra-shadow-card-hover: 0 10px 28px rgb(17 24 39 / 0.12);
 }

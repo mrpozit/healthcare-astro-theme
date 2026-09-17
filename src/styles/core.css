@@ -57,10 +57,12 @@ body { margin: 0; }
 /* Feature */
 .icra-feature { display: grid; gap: var(--icra-space-4); align-items: center; }
 .icra-feature--panel { padding: var(--icra-space-3); border: 1px solid var(--surface-border, var(--icra-border)); border-radius: var(--icra-radius-card); background: rgb(255 255 255 / 0.72); }
-.icra-feature__media { overflow: hidden; border-radius: var(--icra-radius-media); }
+.icra-feature__media { overflow: hidden; border-radius: var(--icra-radius-media); background: var(--icra-surface-mist); }
 .icra-feature--portrait .icra-feature__media { aspect-ratio: 3 / 5; }
 .icra-feature--landscape .icra-feature__media { aspect-ratio: 5 / 3; }
+.icra-feature__media-placeholder { display:flex; width:100%; height:100%; min-height:12rem; align-items:center; justify-content:center; box-sizing:border-box; padding:var(--icra-space-3); border:1px dashed var(--surface-border, var(--icra-border)); border-radius:inherit; color:var(--surface-muted, var(--icra-text-muted)); font-size:var(--icra-text-small); line-height:1.5; text-align:center; }
 .icra-feature__content { display: flex; flex-direction: column; gap: var(--icra-space-3); }
+.icra-feature--media-none { grid-template-columns:minmax(0,1fr); }
 
 /* Statement and Callout */
 .icra-statement { padding: var(--icra-space-4); border-radius: var(--icra-radius-card); background: rgb(255 255 255 / 0.58); }
@@ -105,7 +107,7 @@ body { margin: 0; }
   .icra-container { padding-inline: var(--icra-gutter-tablet); }
   .icra-card--horizontal { display: grid; grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.2fr); }
   .icra-card--horizontal .icra-card__media { aspect-ratio: auto; }
-  .icra-feature { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--icra-space-5); }
+  .icra-feature:not(.icra-feature--media-none) { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--icra-space-5); }
   .icra-feature--media-right .icra-feature__media { order: 2; }
   .icra-feature--media-right .icra-feature__content { order: 1; }
   .icra-feature--media-left .icra-feature__media { order: 1; }

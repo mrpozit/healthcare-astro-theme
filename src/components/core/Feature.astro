@@ -1,42 +1,34 @@
 ---
 type Variant = "plain" | "panel";
-type MediaPosition = "left" | "right";
-type MediaRatio = "portrait" | "landscape";
-type MediaState = "none" | "image" | "placeholder";
+type SecondaryPosition = "left" | "right";
+type Ratio = "balanced" | "primary" | "secondary";
 
 interface Props {
   variant?: Variant;
-  mediaPosition?: MediaPosition;
-  mediaRatio?: MediaRatio;
-  mediaState?: MediaState;
-  mediaPlaceholder?: string;
+  secondaryPosition?: SecondaryPosition;
+  ratio?: Ratio;
   class?: string;
 }
 
 const {
   variant = "plain",
-  mediaPosition = "right",
-  mediaRatio = "landscape",
-  mediaState = "none",
-  mediaPlaceholder = "Фото буде додано після підготовки до публікації",
+  secondaryPosition = "right",
+  ratio = "balanced",
   class: className = "",
 } = Astro.props;
 
+const hasSecondary = Astro.slots.has("secondary");
 const classes = [
   "icra-feature",
   `icra-feature--${variant}`,
-  `icra-feature--media-${mediaPosition}`,
-  `icra-feature--${mediaRatio}`,
-  `icra-feature--media-${mediaState}`,
+  hasSecondary ? "icra-feature--split" : "icra-feature--single",
+  `icra-feature--secondary-${secondaryPosition}`,
+  `icra-feature--ratio-${ratio}`,
   className,
 ].filter(Boolean).join(" ");
 ---
 
 <article class={classes}>
-  {mediaState !== "none" && (
-    <div class="icra-feature__media">
-      {mediaState === "image" ? <slot name="media" /> : <div class="icra-feature__media-placeholder">{mediaPlaceholder}</div>}
-    </div>
-  )}
-  <div class="icra-feature__content"><slot /></div>
+  <div class="icra-feature__primary"><slot /></div>
+  {hasSecondary && <div class="icra-feature__secondary"><slot name="secondary" /></div>}
 </article>

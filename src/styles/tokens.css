@@ -34,9 +34,11 @@
   --icra-space-5: 3rem;
   --icra-space-6: 4rem;
 
+  /* Content-driven vertical rhythm. Large empty bands are never the default. */
   --icra-section-compact: 2.5rem;
-  --icra-section-normal: 4rem;
-  --icra-section-spacious: 6rem;
+  --icra-section-normal: 3.5rem;
+  --icra-section-spacious: 5rem;
+  --icra-content-block-gap: 4rem;
 
   --icra-radius-media: 1rem;
   --icra-radius-card: 1rem;

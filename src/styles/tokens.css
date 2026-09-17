@@ -72,3 +72,17 @@
   --icra-shadow-card: 0 2px 8px rgb(17 24 39 / 0.06);
   --icra-shadow-card-hover: 0 10px 28px rgb(17 24 39 / 0.12);
 }
+
+/* Rare poster-scale heading. This is the only size above the standard 52px display. */
+.icra-display-xl {
+  margin: 0;
+  color: var(--surface-heading, var(--icra-text));
+  font-size: var(--icra-text-display-xl-mobile);
+  font-weight: 700;
+  line-height: var(--icra-leading-display);
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 64rem) {
+  .icra-display-xl { font-size: var(--icra-text-display-xl); }
+}

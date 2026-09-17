@@ -1,0 +1,23 @@
+---
+type As = "p" | "div" | "span";
+type Role = "lead" | "body-lg" | "body" | "small";
+
+interface Props {
+  as?: As;
+  role?: Role;
+  class?: string;
+}
+
+const {
+  as = "p",
+  role = "body",
+  class: className = "",
+} = Astro.props;
+
+const Element = as;
+const classes = [`icra-${role}`, className].filter(Boolean).join(" ");
+---
+
+<Element class={classes}>
+  <slot />
+</Element>

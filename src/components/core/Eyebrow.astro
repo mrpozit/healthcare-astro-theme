@@ -1,0 +1,17 @@
+---
+interface Props {
+  as?: "p" | "span" | "div";
+  class?: string;
+}
+
+const {
+  as = "p",
+  class: className = "",
+} = Astro.props;
+
+const Element = as;
+---
+
+<Element class:list={["icra-eyebrow", className]}>
+  <slot />
+</Element>

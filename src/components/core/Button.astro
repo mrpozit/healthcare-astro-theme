@@ -1,0 +1,17 @@
+---
+type Variant = "primary" | "secondary";
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const { href, variant = "primary", target, rel, class: className = "" } = Astro.props;
+---
+
+<a href={href} target={target} rel={rel} class:list={["icra-button", `icra-button--${variant}`, className]}>
+  <slot />
+</a>

@@ -1,0 +1,32 @@
+---
+type Variant = "plain" | "panel";
+type MediaPosition = "left" | "right";
+type MediaRatio = "portrait" | "landscape";
+
+interface Props {
+  variant?: Variant;
+  mediaPosition?: MediaPosition;
+  mediaRatio?: MediaRatio;
+  class?: string;
+}
+
+const {
+  variant = "plain",
+  mediaPosition = "right",
+  mediaRatio = "landscape",
+  class: className = "",
+} = Astro.props;
+
+const classes = [
+  "icra-feature",
+  `icra-feature--${variant}`,
+  `icra-feature--media-${mediaPosition}`,
+  `icra-feature--${mediaRatio}`,
+  className,
+].filter(Boolean).join(" ");
+---
+
+<article class={classes}>
+  <div class="icra-feature__media"><slot name="media" /></div>
+  <div class="icra-feature__content"><slot /></div>
+</article>

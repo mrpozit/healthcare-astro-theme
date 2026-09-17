@@ -1,0 +1,40 @@
+---
+type Layout = "text" | "split" | "editorial" | "statement";
+type Surface = "white" | "mist" | "sky" | "aqua" | "sand" | "wine" | "ice";
+type MediaPosition = "left" | "right";
+type MediaRatio = "portrait" | "landscape";
+type Width = "content" | "wide" | "full";
+
+interface Props {
+  layout?: Layout;
+  surface?: Surface;
+  mediaPosition?: MediaPosition;
+  mediaRatio?: MediaRatio;
+  width?: Width;
+  id?: string;
+  labelledby?: string;
+  class?: string;
+}
+
+const {
+  layout = "text",
+  surface = "white",
+  mediaPosition = "right",
+  mediaRatio = "landscape",
+  width = layout === "text" ? "content" : "full",
+  id,
+  labelledby,
+  class: className = "",
+} = Astro.props;
+
+const hasMedia = Astro.slots.has("media");
+---
+
+<section id={id} aria-labelledby={labelledby} class:list={["icra-surface", `icra-surface--${surface}`, "icra-hero", `icra-hero--${layout}`, hasMedia && `icra-hero--media-${mediaPosition}`, hasMedia && `icra-hero--${mediaRatio}`, className]}>
+  <div class="icra-container">
+    <div class:list={["icra-measure", `icra-measure--${width}`, "icra-hero__layout"]}>
+      <div class="icra-hero__content"><slot /></div>
+      {hasMedia && <div class="icra-hero__media"><slot name="media" /></div>}
+    </div>
+  </div>
+</section>

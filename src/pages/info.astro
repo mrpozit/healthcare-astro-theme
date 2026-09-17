@@ -45,7 +45,7 @@ const teenagersImage = getAsset("social-teenagers.jpg");
 
     <div class="icra-content-blocks">
       <ContentBlock>
-        <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
+        <Feature variant="panel" mediaPosition="right" mediaRatio="landscape">
           <Heading level="h3" role="h3">Робота з ветеранами та людьми, звільненими з полону</Heading>
           <Text>У психіатричному відділенні Патриція регулярно працює з невеликими групами ветеранів і людей, які пережили полон.</Text>
           <Text>Ця робота стала одним із місць, де особливо виразно проявилася взаємодія тексту, арт-терапевтичної практики та подальшої роботи з психологом і психіатром.</Text>
@@ -53,7 +53,7 @@ const teenagersImage = getAsset("social-teenagers.jpg");
       </ContentBlock>
 
       <ContentBlock>
-        <Feature variant="plain" mediaPosition="left" mediaRatio="landscape">
+        <Feature variant="panel" mediaPosition="left" mediaRatio="landscape">
           {probationImage && <div slot="media"><Image src={probationImage} alt="Робота ICRA з фахівцями пробації" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">Фахівці пробації</Heading>
           <Text>У співпраці з українською пробацією Патриція проводить безкоштовні заняття для фахівців. Це можуть бути навчальні формати або сесії психологічного розвантаження для людей, чия робота сама по собі пов'язана з постійним емоційним навантаженням.</Text>
@@ -61,7 +61,7 @@ const teenagersImage = getAsset("social-teenagers.jpg");
       </ContentBlock>
 
       <ContentBlock>
-        <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
+        <Feature variant="panel" mediaPosition="right" mediaRatio="landscape">
           {valkyriesImage && <div slot="media"><Image src={valkyriesImage} alt="Проєкт Українські Валькірії" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">«Українські Валькірії»</Heading>
           <Text>У межах проєкту Патриція проводить лекції, вебінари, практикуми та майстер-класи для учасниць організації, жінок ВПО та фахівців допомагаючих професій.</Text>
@@ -70,17 +70,18 @@ const teenagersImage = getAsset("social-teenagers.jpg");
       </ContentBlock>
 
       <ContentBlock>
-        <Feature variant="plain" mediaPosition="left" mediaRatio="landscape">
+        <Feature variant="panel" mediaPosition="left" mediaRatio="landscape">
           <Heading level="h3" role="h3">Recovery Ukraine</Heading>
           <Text>У межах проєктів Recovery Ukraine Патриція проводила заходи з психологічного розвантаження та відновлення для фахівців допомагаючих професій, які працюють із військовослужбовцями та ветеранами.</Text>
           <Text>У допомагаючих професіях легко зосередитися лише на тому, кому допомагає спеціаліст. Але ресурс самого спеціаліста теж не безмежний.</Text>
           <Text>Іноді допомога тим, хто допомагає іншим, є окремим важливим завданням.</Text>
+          <Callout>Допомога тим, хто щодня допомагає іншим.</Callout>
           <ActionLink href="https://recoveryua.org/" external>Recovery Ukraine</ActionLink>
         </Feature>
       </ContentBlock>
 
       <ContentBlock>
-        <Feature variant="plain" mediaPosition="right" mediaRatio="landscape">
+        <Feature variant="panel" mediaPosition="right" mediaRatio="landscape">
           {teenagersImage && <div slot="media"><Image src={teenagersImage} alt="Заняття ICRA з підлітками" widths={[640, 960]} sizes="(min-width: 768px) 55vw, 100vw" loading="lazy" /></div>}
           <Heading level="h3" role="h3">Підлітки</Heading>
           <Text>Окремий напрям практики Патриції - робота з підлітками у школі.</Text>

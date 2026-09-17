@@ -1,19 +1,33 @@
 ---
-type Variant = "default" | "accent";
+type Layout = "vertical" | "horizontal";
+type Media = "portrait" | "landscape" | "none";
 
 interface Props {
-  variant?: Variant;
+  layout?: Layout;
+  media?: Media;
+  interactive?: boolean;
   class?: string;
 }
 
-const { variant = "default", class: className = "" } = Astro.props;
+const {
+  layout = "vertical",
+  media = "none",
+  interactive = false,
+  class: className = "",
+} = Astro.props;
+
 const classes = [
   "icra-card",
-  variant === "accent" && "icra-card--accent",
+  `icra-card--${layout}`,
+  media !== "none" && `icra-card--media-${media}`,
+  interactive && "icra-card--interactive",
   className,
 ].filter(Boolean).join(" ");
 ---
 
-<div class={classes}>
-  <slot />
-</div>
+<article class={classes}>
+  {media !== "none" && <div class="icra-card__media"><slot name="media" /></div>}
+  <div class="icra-card__content">
+    <slot />
+  </div>
+</article>

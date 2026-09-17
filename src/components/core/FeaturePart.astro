@@ -1,0 +1,31 @@
+---
+type Tone = "plain" | "white" | "mist" | "sky" | "aqua" | "sand" | "ice" | "wine";
+type Padding = "none" | "normal" | "roomy";
+type Align = "start" | "center" | "end";
+
+interface Props {
+  tone?: Tone;
+  padding?: Padding;
+  align?: Align;
+  class?: string;
+}
+
+const {
+  tone = "plain",
+  padding = "normal",
+  align = "start",
+  class: className = "",
+} = Astro.props;
+
+const classes = [
+  "icra-feature-part",
+  `icra-feature-part--${tone}`,
+  `icra-feature-part--padding-${padding}`,
+  `icra-feature-part--align-${align}`,
+  tone !== "plain" ? "icra-surface" : "",
+  tone !== "plain" ? `icra-surface--${tone}` : "",
+  className,
+].filter(Boolean).join(" ");
+---
+
+<div class={classes}><slot /></div>

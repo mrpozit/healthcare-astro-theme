@@ -1,32 +1,39 @@
 ---
-type Tone = "base" | "alternate";
+type Surface = "white" | "mist" | "sky" | "aqua" | "sand" | "wine" | "ice";
+type Spacing = "compact" | "normal" | "spacious";
+type Width = "reading" | "content" | "wide" | "full";
 
 interface Props {
-  tone?: Tone;
-  compact?: boolean;
+  surface?: Surface;
+  spacing?: Spacing;
+  width?: Width;
   id?: string;
   labelledby?: string;
   class?: string;
 }
 
 const {
-  tone = "base",
-  compact = false,
+  surface = "white",
+  spacing = "normal",
+  width = "full",
   id,
   labelledby,
   class: className = "",
 } = Astro.props;
 
 const classes = [
+  "icra-surface",
+  `icra-surface--${surface}`,
   "icra-section",
-  `icra-section--${tone}`,
-  compact && "icra-section--compact",
+  `icra-section--${spacing}`,
   className,
 ].filter(Boolean).join(" ");
 ---
 
 <section id={id} aria-labelledby={labelledby} class={classes}>
   <div class="icra-container">
-    <slot />
+    <div class:list={["icra-measure", `icra-measure--${width}`]}>
+      <slot />
+    </div>
   </div>
 </section>

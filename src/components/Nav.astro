@@ -1,6 +1,4 @@
 ---
-import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
-import Icon from "./Icon.astro";
 import nav from "../data/navigation.json";
 import logo from "../assets/logo.png";
 
@@ -13,65 +11,65 @@ const isCurrentPage = (href: string) => {
 };
 ---
 
-<header class="sticky top-0 z-50 bg-theme-surface/98 backdrop-blur-lg supports-[backdrop-filter]:bg-theme-surface/95 border-b border-theme-border">
-  <div class="container">
-    <Astronav>
-      <div class="flex items-center justify-between w-full py-3 lg:py-4">
-        <a href="/" class="shrink-0 flex items-center group relative z-10" aria-label={nav.brand.name}>
-          <img src={logo.src} width={logo.width} height={logo.height} alt={nav.brand.name} class="block h-12 lg:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]" />
+<header class="icra-header">
+  <div class="icra-header__inner icra-container">
+    <a href="/" class="icra-header__brand" aria-label="ICRA - на головну">
+      <img src={logo.src} width={logo.width} height={logo.height} alt="ICRA" class="icra-header__logo" />
+    </a>
+
+    <nav class="icra-header__nav" aria-label="Основна навігація">
+      {nav.links.map((link) => (
+        <a class="icra-header__link" href={link.href} aria-current={isCurrentPage(link.href) ? "page" : undefined}>
+          {link.label}
         </a>
+      ))}
+    </nav>
 
-        <nav class="hidden lg:flex items-center gap-1">
-          <ul class="flex items-center gap-0.5">
-            {nav.links.map((link) => (
-              <li>
-                <a class="nav-link" href={link.href} aria-current={isCurrentPage(link.href) ? "page" : undefined}>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <a class="icra-header__cta" href={nav.cta.href}>{nav.cta.label}</a>
 
-          <div class="ml-4 pl-4 border-l border-theme-border">
-            <a class="button button-primary text-sm" href={nav.cta.href}>{nav.cta.label}</a>
-          </div>
-        </nav>
-
-        <div class="lg:hidden flex items-center">
-          <MenuIcon class="w-6 h-6 text-theme-text-secondary" />
-        </div>
-      </div>
-
-      <MenuItems class="hidden lg:hidden mobile-menu">
-        <nav class="bg-theme-surface border-t border-theme-border shadow-md">
-          <div class="max-w-md mx-auto px-4 py-6">
-            <ul class="space-y-1 mb-6">
-              {nav.links.map((link) => (
-                <li>
-                  <a class="mobile-nav-link group flex items-center px-4 py-3 text-base font-medium text-theme-text-secondary hover:text-theme-primary hover:bg-theme-surface-hover transition-colors duration-200 rounded-xl" href={link.href} aria-current={isCurrentPage(link.href) ? "page" : undefined}>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-theme-surface-muted group-hover:bg-theme-surface-hover transition-colors mr-3 flex items-center justify-center">
-                      <Icon name={link.icon as any} size="md" class="text-theme-text-secondary group-hover:text-theme-primary transition-colors" />
-                    </div>
-                    <span>{link.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div class="pt-4 border-t border-theme-border">
-              <a class="button button-primary w-full justify-center text-base" href={nav.cta.href}>{nav.cta.label}</a>
-            </div>
-          </div>
-        </nav>
-      </MenuItems>
-    </Astronav>
+    <button class="icra-header__menu-button" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="icra-mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+
+  <nav id="icra-mobile-nav" class="icra-header__mobile-nav" aria-label="Мобільна навігація" hidden>
+    <div class="icra-container icra-header__mobile-inner">
+      {nav.links.map((link) => (
+        <a class="icra-header__mobile-link" href={link.href} aria-current={isCurrentPage(link.href) ? "page" : undefined}>
+          {link.label}
+        </a>
+      ))}
+      <a class="icra-header__mobile-cta" href={nav.cta.href}>{nav.cta.label}</a>
+    </div>
+  </nav>
 </header>
 
-<style>
-  .mobile-menu { animation: slideDown 0.3s ease-out; }
-  @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-  .mobile-nav-link:active { transform: scale(0.98); }
-  .nav-link[aria-current="page"], .mobile-nav-link[aria-current="page"] { color: var(--color-theme-primary); background-color: var(--color-theme-surface-hover); }
-  #astronav-menu { padding: 0.5rem; margin-right: -0.5rem; border-radius: 0.5rem; transition: background-color 150ms ease; }
-  #astronav-menu:hover { background-color: var(--color-theme-surface-hover); }
-</style>
+<script>
+  function setupIcraMenu() {
+    const button = document.querySelector<HTMLButtonElement>(".icra-header__menu-button");
+    const menu = document.getElementById("icra-mobile-nav");
+    if (!button || !menu || button.dataset.bound === "true") return;
+    button.dataset.bound = "true";
+
+    const close = () => {
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Відкрити меню");
+      menu.hidden = true;
+    };
+
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      if (open) close();
+      else {
+        button.setAttribute("aria-expanded", "true");
+        button.setAttribute("aria-label", "Закрити меню");
+        menu.hidden = false;
+      }
+    });
+
+    menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
+  }
+
+  setupIcraMenu();
+  document.addEventListener("astro:page-load", setupIcraMenu);
+</script>

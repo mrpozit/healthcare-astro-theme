@@ -1,0 +1,19 @@
+---
+interface Props {
+  summary?: string;
+  open?: boolean;
+  class?: string;
+}
+const {
+  summary = "Читати більше",
+  open = false,
+  class: className = "",
+} = Astro.props;
+---
+<details class:list={["icra-disclosure", className]} open={open}>
+  <summary class="icra-disclosure__summary">
+    <span>{summary}</span>
+    <span class="icra-disclosure__icon" aria-hidden="true">⌄</span>
+  </summary>
+  <div class="icra-disclosure__content"><slot /></div>
+</details>

@@ -1,0 +1,17 @@
+---
+type Columns = "2" | "3" | "auto";
+
+interface Props {
+  columns?: Columns;
+  class?: string;
+}
+
+const {
+  columns = "3",
+  class: className = "",
+} = Astro.props;
+---
+
+<div class:list={["icra-grid", `icra-grid--${columns}`, className]}>
+  <slot />
+</div>

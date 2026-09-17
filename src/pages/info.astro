@@ -5,434 +5,96 @@ import Section from "../components/core/Section.astro";
 import Heading from "../components/core/Heading.astro";
 import Text from "../components/core/Text.astro";
 import Eyebrow from "../components/core/Eyebrow.astro";
-import Feature from "../components/core/Feature.astro";
-import FeaturePart from "../components/core/FeaturePart.astro";
-import MediaPlaceholder from "../components/core/MediaPlaceholder.astro";
 import Statement from "../components/core/Statement.astro";
 import Callout from "../components/core/Callout.astro";
 import ActionLink from "../components/core/ActionLink.astro";
 
-const assetModules = import.meta.glob("../assets/social/*.{jpg,jpeg,png,webp}", { eager: true });
-const getAsset = (name: string) => {
-  const module = assetModules[`../assets/social/${name}`] as { default: ImageMetadata } | undefined;
-  return module?.default;
-};
+const modules = import.meta.glob("../assets/pages/social/**/*.{jpg,jpeg,png,webp}", { eager: true });
+const projectImages = (project: string) => Object.entries(modules)
+  .filter(([path]) => path.includes(`/social/${project}/`))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => (mod as { default: ImageMetadata }).default);
 
-const heroImage = getAsset("social-activity-hero.jpg");
-const probationImage = getAsset("social-probation.jpg");
-const valkyriesImage = getAsset("social-valkyries.jpg");
-const teenagersImage = getAsset("social-teenagers.jpg");
+const kyrylivska = projectImages("kyrylivska");
+const probation = projectImages("probation");
+const valkyries = projectImages("valkyries");
+const osoblyvi = projectImages("osoblyvi-zhinky");
+const recovery = projectImages("recovery");
+const heroImage = kyrylivska[0] ?? probation[0] ?? valkyries[0];
 ---
 
-<Layout
-  title="Суспільна діяльність | ICRA"
-  description="Суспільна діяльність ICRA: робота з ветеранами, фахівцями допомагаючих професій, громадськими організаціями, підлітками та іншими групами."
->
+<Layout title="Суспільна діяльність | ICRA" description="Суспільна діяльність ICRA: жива практика, партнерські проєкти та робота з різними спільнотами.">
   <main class="overflow-hidden">
-    <Section surface="sky" spacing="roomy" width="wide" labelledby="social-title" class="social-hero">
-      <div class="social-hero-grid">
-        <div class="social-hero-copy">
+    <Section surface="sky" spacing="spacious" width="wide" labelledby="social-title" class="social-hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
           <Eyebrow>Суспільна діяльність</Eyebrow>
           <Heading level="h1" role="display" id="social-title">Частину важливої роботи ми просто робимо</Heading>
-          <div class="social-intro-stack">
+          <div class="copy-stack">
             <Text role="lead">Не вся робота ICRA починається з питання, хто за неї заплатить.</Text>
             <Text role="body-lg">Ми співпрацюємо з українськими організаціями, працюємо з ветеранами, звільненими з полону, фахівцями допомагаючих професій, жінками ВПО, підлітками та іншими групами.</Text>
             <Text>Іноді це партнерський проєкт. Іноді волонтерська робота. Іноді кілька зустрічей. Іноді робота, яка триває місяцями.</Text>
           </div>
           <ActionLink href="#projects">Подивитися проєкти</ActionLink>
         </div>
-
-        <div class="social-hero-media-wrap">
-          <div class="social-marker">НЕ ДЛЯ ЗВІТУ</div>
-          {heroImage ? (
-            <Image
-              src={heroImage}
-              alt="Патриція Божко під час групової роботи ICRA"
-              class="social-hero-image"
-              widths={[640, 960, 1280]}
-              sizes="(min-width: 1024px) 42vw, 100vw"
-              loading="eager"
-              fetchpriority="high"
-            />
-          ) : (
-            <MediaPlaceholder />
-          )}
-        </div>
+        {heroImage && <div class="hero-photo"><span class="tape">НЕ ДЛЯ ЗВІТУ</span><Image src={heroImage} alt="Суспільна практика ICRA" widths={[640,960]} sizes="(min-width:1024px) 40vw, 100vw" loading="eager" /></div>}
       </div>
-      <p class="social-hero-note">Це не окреме «соціальне обличчя» ICRA. Це просто частина того, що ми робимо.</p>
+      <p class="hero-note">Це не окреме «соціальне обличчя» ICRA. Це просто частина того, що ми робимо.</p>
     </Section>
 
-    <Section id="projects" surface="white" spacing="roomy" width="wide" labelledby="contexts-title">
-      <div class="social-section-heading">
-        <div>
-          <Eyebrow>Жива практика</Eyebrow>
-          <Heading level="h2" role="h2" id="contexts-title">Різні люди. Різні контексти.</Heading>
-        </div>
+    <Section id="projects" surface="white" spacing="spacious" width="wide" labelledby="contexts-title">
+      <div class="section-intro">
+        <div><Eyebrow>Жива практика</Eyebrow><Heading level="h2" role="h2" id="contexts-title">Різні люди. Різні контексти.</Heading></div>
         <Text role="lead">Метод або формат, який працює з однією групою, не можна механічно переносити на всіх. Саме тому суспільна робота ICRA відбувається в дуже різних середовищах.</Text>
       </div>
 
-      <div class="social-projects">
-        <article class="social-project social-project-k103">
-          <div class="social-project-number">01</div>
-          <div class="social-project-main">
-            <Eyebrow>Постійна практика</Eyebrow>
-            <Heading level="h3" role="h2">Кирилівська, 103</Heading>
-            <Text role="lead">Робота з ветеранами та людьми, звільненими з полону</Text>
-          </div>
-          <div class="social-project-detail">
-            <Text>У психіатричному відділенні Патриція регулярно працює з невеликими групами ветеранів і людей, які пережили полон.</Text>
-            <Text>Ця робота стала одним із місць, де особливо виразно проявилася взаємодія тексту, арт-терапевтичної практики та подальшої роботи з психологом і психіатром.</Text>
-            <Statement>Текст допомагає впізнати себе. Практика дозволяє торкнутися теми без примусу до сповіді. А далі стає можливою глибша робота.</Statement>
-          </div>
-        </article>
+      <article class="project project-k103">
+        <div class="project-head"><span class="num">01</span><div><Eyebrow>Постійна практика</Eyebrow><Heading level="h2" role="h2">Кирилівська, 103</Heading><Text role="lead">Робота з ветеранами та людьми, звільненими з полону</Text></div></div>
+        <div class="project-copy"><Text>У психіатричному відділенні Патриція регулярно працює з невеликими групами ветеранів і людей, які пережили полон.</Text><Text>Ця робота стала одним із місць, де особливо виразно проявилася взаємодія тексту, арт-терапевтичної практики та подальшої роботи з психологом і психіатром.</Text><Statement>Текст допомагає впізнати себе. Практика дозволяє торкнутися теми без примусу до сповіді. А далі стає можливою глибша робота.</Statement></div>
+        <div class="gallery gallery-k103">{kyrylivska.slice(1).map((img, i) => <Image src={img} alt={`Практика на Кирилівській, 103. Фото ${i + 1}`} widths={[480,720]} sizes="(min-width:768px) 33vw, 100vw" loading="lazy" />)}</div>
+      </article>
 
-        <div class="social-stagger-grid">
-          <Feature variant="panel" ratio="balanced" class="social-card social-card-probation">
-            <FeaturePart tone="sand" padding="roomy">
-              <span class="social-project-number small">02</span>
-              <Heading level="h3" role="h3">Фахівці пробації</Heading>
-              <Text>У співпраці з українською пробацією Патриція проводить безкоштовні заняття для фахівців. Це можуть бути навчальні формати або сесії психологічного розвантаження для людей, чия робота сама по собі пов'язана з постійним емоційним навантаженням.</Text>
-            </FeaturePart>
-            <FeaturePart slot="secondary" tone="sand" padding="none">
-              {probationImage ? <Image src={probationImage} alt="Робота ICRA з фахівцями пробації" class="icra-feature-image" widths={[640,960]} sizes="(min-width:768px) 50vw, 100vw" loading="lazy" /> : <MediaPlaceholder />}
-            </FeaturePart>
-          </Feature>
-
-          <Feature variant="panel" secondaryPosition="left" ratio="balanced" class="social-card social-card-valkyries">
-            <FeaturePart tone="wine" padding="roomy">
-              <span class="social-project-number small">03</span>
-              <Heading level="h3" role="h3">«Українські Валькірії»</Heading>
-              <Text>У межах проєкту Патриція проводить лекції, вебінари, практикуми та майстер-класи для учасниць організації, жінок ВПО та фахівців допомагаючих професій.</Text>
-              <Text>Теми і формат залежать від конкретної групи: від роботи зі стресом та емоційною саморегуляцією до арт-терапевтичних практик і психологічного відновлення.</Text>
-            </FeaturePart>
-            <FeaturePart slot="secondary" tone="wine" padding="none">
-              {valkyriesImage ? <Image src={valkyriesImage} alt="Проєкт Українські Валькірії" class="icra-feature-image" widths={[640,960]} sizes="(min-width:768px) 50vw, 100vw" loading="lazy" /> : <MediaPlaceholder />}
-            </FeaturePart>
-          </Feature>
-        </div>
-
-        <article class="social-quote-panel">
-          <p class="social-quote-kicker">Допомога тим, хто допомагає</p>
-          <p class="social-quote">«Ресурс спеціаліста теж не безмежний»</p>
-        </article>
-
-        <div class="social-recovery-grid">
-          <div class="social-recovery-copy">
-            <span class="social-project-number small">04</span>
-            <Heading level="h3" role="h2">Recovery Ukraine</Heading>
-            <Text role="body-lg">У межах проєктів Recovery Ukraine Патриція проводила заходи з психологічного розвантаження та відновлення для фахівців допомагаючих професій, які працюють із військовослужбовцями та ветеранами.</Text>
-            <Text>У допомагаючих професіях легко зосередитися лише на тому, кому допомагає спеціаліст. Але ресурс самого спеціаліста теж не безмежний.</Text>
-            <ActionLink href="https://recoveryua.org/" external>Recovery Ukraine</ActionLink>
-          </div>
-          <div class="social-recovery-statement">
-            <Callout>Допомога тим, хто щодня допомагає іншим.</Callout>
-          </div>
-        </div>
-
-        <Feature variant="panel" secondaryPosition="left" ratio="balanced" class="social-card social-card-teens">
-          <FeaturePart tone="white" padding="roomy">
-            <span class="social-project-number small">05</span>
-            <Heading level="h3" role="h3">Підлітки</Heading>
-            <Text>Окремий напрям практики Патриції - робота з підлітками у школі.</Text>
-            <Text>Зустрічі присвячені стресу, емоціям, способам помічати власний стан і простим інструментам саморегуляції.</Text>
-            <Text>Тут особливо важливо говорити з людиною зрозумілою мовою, не перетворюючи психологію на лекцію про те, як вона «повинна правильно почуватися».</Text>
-          </FeaturePart>
-          <FeaturePart slot="secondary" tone="white" padding="none">
-            {teenagersImage ? <Image src={teenagersImage} alt="Заняття ICRA з підлітками" class="icra-feature-image" widths={[640,960]} sizes="(min-width:768px) 50vw, 100vw" loading="lazy" /> : <MediaPlaceholder />}
-          </FeaturePart>
-        </Feature>
+      <div class="two-projects">
+        <article class="project-card sand"><span class="num small">02</span><Heading level="h3" role="h3">Фахівці пробації</Heading><Text>У співпраці з українською пробацією Патриція проводить безкоштовні заняття для фахівців. Це можуть бути навчальні формати або сесії психологічного розвантаження для людей, чия робота сама по собі пов'язана з постійним емоційним навантаженням.</Text><div class="gallery gallery-card">{probation.map((img, i) => <Image src={img} alt={`Робота з фахівцями пробації. Фото ${i + 1}`} widths={[420,640]} sizes="(min-width:768px) 24vw, 100vw" loading="lazy" />)}</div></article>
+        <article class="project-card wine"><span class="num small">03</span><Heading level="h3" role="h3">«Українські Валькірії»</Heading><Text>У межах проєкту Патриція проводить лекції, вебінари, практикуми та майстер-класи для учасниць організації, жінок ВПО та фахівців допомагаючих професій.</Text><Text>Теми і формат залежать від конкретної групи: від роботи зі стресом та емоційною саморегуляцією до арт-терапевтичних практик і психологічного відновлення.</Text><div class="gallery gallery-card">{valkyries.map((img, i) => <Image src={img} alt={`Українські Валькірії. Фото ${i + 1}`} widths={[420,640]} sizes="(min-width:768px) 24vw, 100vw" loading="lazy" />)}</div></article>
       </div>
+
+      <div class="poster"><Eyebrow>Допомога тим, хто допомагає</Eyebrow><Heading level="h2" role="display-xl">«Ресурс спеціаліста теж не безмежний»</Heading></div>
+
+      <article class="project recovery-project">
+        <div class="project-head"><span class="num">04</span><div><Heading level="h2" role="h2">Recovery Ukraine</Heading><Text role="body-lg">У межах проєктів Recovery Ukraine Патриція проводила заходи з психологічного розвантаження та відновлення для фахівців допомагаючих професій, які працюють із військовослужбовцями та ветеранами.</Text><Text>У допомагаючих професіях легко зосередитися лише на тому, кому допомагає спеціаліст. Але ресурс самого спеціаліста теж не безмежний.</Text><ActionLink href="https://recoveryua.org/" external>Recovery Ukraine</ActionLink></div></div>
+        <div class="gallery gallery-recovery">{recovery.map((img, i) => <Image src={img} alt={`Recovery Ukraine. Фото ${i + 1}`} widths={[480,720]} sizes="(min-width:768px) 30vw, 100vw" loading="lazy" />)}</div>
+      </article>
+
+      <article class="project special-project">
+        <div class="project-head"><span class="num">05</span><div><Eyebrow>Ще одна історія співпраці</Eyebrow><Heading level="h2" role="h2">«Особливі Жінки України»</Heading><Text role="lead">Цей проєкт додаємо до живої мапи суспільної практики ICRA.</Text></div></div>
+        <div class="gallery gallery-special">{osoblyvi.map((img, i) => <Image src={img} alt={`Особливі Жінки України. Фото ${i + 1}`} widths={[480,720]} sizes="(min-width:768px) 30vw, 100vw" loading="lazy" />)}</div>
+      </article>
+
+      <article class="teens"><span class="num small">06</span><div><Heading level="h3" role="h3">Підлітки</Heading><Text>Окремий напрям практики Патриції - робота з підлітками у школі.</Text><Text>Зустрічі присвячені стресу, емоціям, способам помічати власний стан і простим інструментам саморегуляції.</Text><Text>Тут особливо важливо говорити з людиною зрозумілою мовою, не перетворюючи психологію на лекцію про те, як вона «повинна правильно почуватися».</Text></div><p class="privacy-note">Тут навмисно немає фотографій дітей. Приватність важливіша за ілюстрацію.</p></article>
     </Section>
 
-    <Section surface="aqua" spacing="roomy" width="wide" labelledby="helpers-title" class="social-helper-section">
-      <div class="social-helper-grid">
-        <div class="social-helper-title">
-          <Eyebrow>Допомога тим, хто допомагає</Eyebrow>
-          <Heading level="h2" role="h2" id="helpers-title">Є робота, яку не видно зовні</Heading>
-        </div>
-        <div class="social-helper-copy">
-          <Text role="lead">Психологи. Соціальні працівники. Фахівці, які працюють із ветеранами. Працівники громадських організацій. Люди, які щодня мають справу з чужою кризою, болем або складними життєвими обставинами.</Text>
-          <Text role="body-lg">Допомагаюча професія не робить людину невразливою. Вона лише створює ситуацію, в якій власне виснаження дуже легко відкласти на потім.</Text>
-        </div>
-        <div class="social-helper-statement">
-          <Statement>Той, хто підтримує інших, теж потребує місця, де не потрібно нікого підтримувати.</Statement>
-        </div>
-      </div>
+    <Section surface="aqua" spacing="spacious" width="wide" labelledby="helpers-title">
+      <div class="helper-grid"><div><Eyebrow>Допомога тим, хто допомагає</Eyebrow><Heading level="h2" role="h2" id="helpers-title">Є робота, яку не видно зовні</Heading></div><div class="copy-stack"><Text role="lead">Психологи. Соціальні працівники. Фахівці, які працюють із ветеранами. Працівники громадських організацій. Люди, які щодня мають справу з чужою кризою, болем або складними життєвими обставинами.</Text><Text role="body-lg">Допомагаюча професія не робить людину невразливою. Вона лише створює ситуацію, в якій власне виснаження дуже легко відкласти на потім.</Text></div><Statement>Той, хто підтримує інших, теж потребує місця, де не потрібно нікого підтримувати.</Statement></div>
     </Section>
 
-    <Section surface="sand" spacing="roomy" width="wide" labelledby="small-title">
-      <div class="social-small-grid">
-        <div>
-          <span class="social-project-number small">06</span>
-          <Heading level="h2" role="h2" id="small-title">Невеликі спільноти теж мають значення</Heading>
-        </div>
-        <div>
-          <Text role="body-lg">Не кожна суспільна ініціатива повинна бути великим проєктом.</Text>
-          <Text>Іноді це безкоштовний майстер-клас із нейрографіки. Іноді подарункові сертифікати для учасників спільноти. Іноді невелика зустріч, яка просто може бути корисною людям саме зараз.</Text>
-        </div>
-        <div class="social-small-callout"><Callout>Ми не вимірюємо сенс роботи лише масштабом аудиторії.</Callout></div>
-      </div>
-    </Section>
+    <Section surface="sand" spacing="spacious" width="wide" labelledby="small-title"><div class="small-grid"><div><span class="num small">07</span><Heading level="h2" role="h2" id="small-title">Невеликі спільноти теж мають значення</Heading></div><div><Text role="body-lg">Не кожна суспільна ініціатива повинна бути великим проєктом.</Text><Text>Іноді це безкоштовний майстер-клас із нейрографіки. Іноді подарункові сертифікати для учасників спільноти. Іноді невелика зустріч, яка просто може бути корисною людям саме зараз.</Text></div><Callout>Ми не вимірюємо сенс роботи лише масштабом аудиторії.</Callout></div></Section>
 
-    <Section surface="wine" spacing="roomy" width="wide" labelledby="principle-title" class="social-final">
-      <div class="social-final-grid">
-        <div>
-          <Eyebrow>Принцип</Eyebrow>
-          <Heading level="h2" role="h2" id="principle-title">Суспільна робота для нас не окреме «соціальне обличчя»</Heading>
-        </div>
-        <div>
-          <Text role="lead">Іноді це партнерський проєкт. Іноді волонтерська робота. Іноді кілька зустрічей. Іноді робота, яка триває місяцями.</Text>
-          <Text role="body-lg">Це просто частина того, що ми робимо.</Text>
-          <ActionLink href="/contact">Зв'язатися з ICRA</ActionLink>
-        </div>
-      </div>
-    </Section>
+    <Section surface="wine" spacing="spacious" width="wide" labelledby="principle-title"><div class="final-grid"><div><Eyebrow>Принцип</Eyebrow><Heading level="h2" role="h2" id="principle-title">Суспільна робота для нас не окреме «соціальне обличчя»</Heading></div><div class="copy-stack"><Text role="lead">Іноді це партнерський проєкт. Іноді волонтерська робота. Іноді кілька зустрічей. Іноді робота, яка триває місяцями.</Text><Text role="body-lg">Це просто частина того, що ми робимо.</Text><ActionLink href="/contact">Зв'язатися з ICRA</ActionLink></div></div></Section>
   </main>
 </Layout>
 
 <style>
-  .social-hero-grid,
-  .social-section-heading,
-  .social-helper-grid,
-  .social-final-grid {
-    display: grid;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-
-  .social-hero-grid {
-    align-items: end;
-  }
-
-  .social-hero-copy {
-    max-width: 52rem;
-  }
-
-  .social-intro-stack {
-    display: grid;
-    gap: 1rem;
-    margin: 2rem 0 2.25rem;
-    max-width: 44rem;
-  }
-
-  .social-hero-media-wrap {
-    position: relative;
-    max-width: 38rem;
-    justify-self: end;
-  }
-
-  .social-hero-image {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 0 3rem 0 3rem;
-    box-shadow: 0 2rem 5rem rgb(18 42 48 / 0.18);
-    transform: rotate(1.2deg);
-  }
-
-  .social-marker {
-    position: absolute;
-    z-index: 2;
-    top: -1.15rem;
-    left: -1.5rem;
-    padding: 0.6rem 0.8rem;
-    background: var(--color-theme-primary, #0b6f72);
-    color: white;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    transform: rotate(-6deg);
-  }
-
-  .social-hero-note {
-    margin-top: clamp(2.5rem, 6vw, 6rem);
-    max-width: 40rem;
-    font-size: clamp(1.15rem, 2vw, 1.55rem);
-    line-height: 1.5;
-    font-weight: 700;
-  }
-
-  .social-section-heading {
-    margin-bottom: clamp(3rem, 7vw, 6.5rem);
-  }
-
-  .social-projects {
-    display: grid;
-    gap: clamp(2.5rem, 6vw, 6rem);
-  }
-
-  .social-project {
-    position: relative;
-    display: grid;
-    gap: 2rem;
-    padding: clamp(2rem, 5vw, 4rem);
-    border-radius: 2rem;
-    background: linear-gradient(135deg, rgba(209, 238, 237, .75), rgba(255,255,255,.96));
-    border: 1px solid rgba(0,0,0,.08);
-  }
-
-  .social-project-number {
-    font-size: clamp(3rem, 9vw, 7rem);
-    line-height: .8;
-    font-weight: 800;
-    opacity: .14;
-  }
-
-  .social-project-number.small {
-    display: inline-block;
-    margin-bottom: 1.25rem;
-    font-size: 2.4rem;
-    opacity: .18;
-  }
-
-  .social-project-detail {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .social-stagger-grid {
-    display: grid;
-    gap: 2rem;
-  }
-
-  .social-card {
-    overflow: hidden;
-    box-shadow: 0 1.5rem 4rem rgb(16 44 50 / .08);
-  }
-
-  .social-card-probation {
-    transform: translateX(-1rem);
-  }
-
-  .social-card-valkyries {
-    transform: translateX(1rem);
-  }
-
-  .social-quote-panel {
-    margin-inline: auto;
-    max-width: 70rem;
-    padding: clamp(3rem, 9vw, 8rem) clamp(1rem, 5vw, 4rem);
-    text-align: center;
-  }
-
-  .social-quote-kicker {
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: .14em;
-    font-size: .78rem;
-    font-weight: 800;
-    opacity: .6;
-  }
-
-  .social-quote {
-    margin: 0;
-    font-size: clamp(2.2rem, 6vw, 5.8rem);
-    line-height: .98;
-    font-weight: 800;
-    letter-spacing: -.035em;
-  }
-
-  .social-recovery-grid,
-  .social-small-grid {
-    display: grid;
-    gap: 2rem;
-    align-items: stretch;
-  }
-
-  .social-recovery-copy,
-  .social-recovery-statement,
-  .social-small-callout {
-    padding: clamp(2rem, 5vw, 4rem);
-    border-radius: 2rem;
-  }
-
-  .social-recovery-copy {
-    background: #f2f6f4;
-  }
-
-  .social-recovery-statement {
-    display: grid;
-    align-items: end;
-    background: #dcefee;
-  }
-
-  .social-helper-grid {
-    align-items: start;
-  }
-
-  .social-helper-copy {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .social-helper-statement {
-    align-self: end;
-  }
-
-  .social-small-grid {
-    align-items: center;
-  }
-
-  .social-small-callout {
-    background: rgba(255,255,255,.45);
-    transform: rotate(-1deg);
-  }
-
-  .social-final-grid {
-    align-items: end;
-  }
-
-  @media (min-width: 768px) {
-    .social-stagger-grid {
-      grid-template-columns: 1.05fr .95fr;
-      align-items: start;
-    }
-
-    .social-card-valkyries {
-      margin-top: 7rem;
-    }
-
-    .social-recovery-grid {
-      grid-template-columns: 1.25fr .75fr;
-    }
-
-    .social-small-grid {
-      grid-template-columns: 1fr 1fr .8fr;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .social-hero-grid {
-      grid-template-columns: 1.12fr .88fr;
-    }
-
-    .social-section-heading {
-      grid-template-columns: .82fr 1.18fr;
-      align-items: end;
-    }
-
-    .social-project-k103 {
-      grid-template-columns: .18fr .82fr 1fr;
-      align-items: start;
-    }
-
-    .social-helper-grid {
-      grid-template-columns: .8fr 1.1fr .8fr;
-    }
-
-    .social-final-grid {
-      grid-template-columns: 1.1fr .9fr;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .social-marker {
-      left: .5rem;
-    }
-
-    .social-card-probation,
-    .social-card-valkyries {
-      transform: none;
-    }
-  }
+  .hero-grid,.section-intro,.helper-grid,.final-grid,.small-grid{display:grid;gap:clamp(2rem,5vw,5rem)}
+  .hero-grid{align-items:end}.hero-copy{max-width:52rem}.copy-stack{display:grid;gap:1rem;margin:2rem 0}.hero-photo{position:relative;max-width:34rem;justify-self:end}.hero-photo :global(img){display:block;width:100%;aspect-ratio:3/5;object-fit:cover;border-radius:0 3rem 0 3rem;box-shadow:0 2rem 5rem rgb(18 42 48/.18);transform:rotate(1deg)}
+  .tape{position:absolute;z-index:2;top:-1rem;left:-1rem;padding:.6rem .8rem;background:var(--icra-brand-dark);color:white;font-size:.72rem;font-weight:800;letter-spacing:.12em;transform:rotate(-5deg)}.hero-note{margin-top:clamp(3rem,7vw,6rem);max-width:42rem;font-size:1.35rem;line-height:1.5;font-weight:700}
+  .section-intro{margin-bottom:clamp(4rem,9vw,8rem);align-items:end}.project{display:grid;gap:2.5rem;margin-bottom:clamp(5rem,10vw,10rem)}.project-head{display:grid;gap:2rem}.project-head>div{display:grid;gap:1rem}.project-copy{display:grid;gap:1rem;max-width:48rem;margin-left:auto}.num{font-size:clamp(4rem,9vw,7rem);font-weight:800;line-height:.8;opacity:.13}.num.small{font-size:2.4rem}.gallery{display:grid;gap:1rem}.gallery :global(img){display:block;width:100%;height:100%;object-fit:cover;border-radius:var(--icra-radius-media)}
+  .gallery-k103{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.gallery-k103 :global(img:nth-child(1)){grid-row:span 2;aspect-ratio:3/5}.gallery-k103 :global(img:not(:first-child)){aspect-ratio:5/3}
+  .two-projects{display:grid;gap:2rem;margin-bottom:clamp(4rem,9vw,8rem);align-items:start}.project-card{display:grid;gap:1.25rem;padding:clamp(1.5rem,4vw,3rem);border-radius:2rem}.project-card.sand{background:var(--icra-surface-sand)}.project-card.wine{margin-top:0;background:var(--icra-surface-wine);color:#fff;--surface-heading:#fff;--surface-text:#f9fafb;--surface-accent:#fff}.gallery-card{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}.gallery-card :global(img){aspect-ratio:5/3}.gallery-card :global(img:nth-child(3)){grid-column:1/-1}.gallery-card :global(img:nth-child(4)),.gallery-card :global(img:nth-child(5)){aspect-ratio:3/5}
+  .poster{max-width:70rem;margin:clamp(5rem,11vw,10rem) auto;text-align:center}.poster :global(.icra-eyebrow){margin-bottom:1.5rem}
+  .gallery-recovery,.gallery-special{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery-recovery :global(img),.gallery-special :global(img){aspect-ratio:5/3}.gallery-recovery :global(img:nth-child(2)),.gallery-special :global(img:nth-child(4)){aspect-ratio:3/5;grid-row:span 2}.gallery-recovery :global(img:nth-child(5)),.gallery-special :global(img:nth-child(5)){grid-column:1/-1}
+  .special-project{padding:clamp(2rem,5vw,4rem);background:linear-gradient(135deg,var(--icra-surface-ice),#fff);border-radius:2rem}.teens{display:grid;gap:2rem;padding:clamp(2rem,5vw,4rem);border:1px solid var(--icra-border);border-radius:2rem}.teens>div{display:grid;gap:1rem;max-width:48rem}.privacy-note{align-self:end;margin:0;max-width:24rem;color:var(--icra-text-muted);font-size:.875rem;line-height:1.5;font-style:italic}.helper-grid{align-items:start}.small-grid{align-items:center}.final-grid{align-items:end}
+  @media(min-width:48rem){.gallery-k103{grid-template-columns:1.1fr .9fr .9fr}.gallery-k103 :global(img:first-child){grid-row:span 2}.two-projects{grid-template-columns:1.05fr .95fr}.project-card.wine{margin-top:7rem}.gallery-recovery,.gallery-special{grid-template-columns:1.15fr .7fr .85fr}.teens{grid-template-columns:.18fr 1fr .65fr}.small-grid{grid-template-columns:1fr 1fr .8fr}}
+  @media(min-width:64rem){.hero-grid{grid-template-columns:1.12fr .88fr}.section-intro{grid-template-columns:.82fr 1.18fr}.project-head{grid-template-columns:.2fr 1fr;max-width:58rem}.project-k103{grid-template-columns:.8fr 1.2fr}.project-k103 .project-head{grid-column:1/-1}.project-k103 .gallery{grid-column:1/-1}.recovery-project,.special-project{grid-template-columns:.75fr 1.25fr}.recovery-project .gallery,.special-project .gallery{align-self:start}.helper-grid{grid-template-columns:.8fr 1.1fr .8fr}.final-grid{grid-template-columns:1.1fr .9fr}}
+  @media(max-width:47.99rem){.hero-photo{justify-self:stretch}.gallery-k103,.gallery-card,.gallery-recovery,.gallery-special{grid-template-columns:1fr}.gallery :global(img){aspect-ratio:5/3!important;grid-column:auto!important;grid-row:auto!important}.project-card.wine{margin-top:0}}
 </style>

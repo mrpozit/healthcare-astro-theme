@@ -23,6 +23,13 @@ a.icra-text-link:hover { text-decoration:underline; }
 .icra-hero--portrait .icra-hero__media { aspect-ratio:3 / 5; }
 .icra-hero--landscape .icra-hero__media { aspect-ratio:5 / 3; }
 .icra-hero__media img,.icra-feature__media img,.icra-card__media img { display:block; width:100%; height:100%; object-fit:cover; }
+
+/* Missing media never reserves layout space. This keeps components content-driven. */
+.icra-hero__media:not(:has(img, picture, video)) { display:none; aspect-ratio:auto; }
+.icra-hero__layout:not(:has(.icra-hero__media img, .icra-hero__media picture, .icra-hero__media video)) { grid-template-columns:minmax(0,1fr); }
+.icra-feature__media:not(:has(img, picture, video)) { display:none; aspect-ratio:auto; }
+.icra-feature:not(:has(.icra-feature__media img, .icra-feature__media picture, .icra-feature__media video)) { grid-template-columns:minmax(0,1fr); }
+
 /* Only deliberately poster-like Hero variants may own minimum height. */
 .icra-hero--statement .icra-hero__layout { min-height:28rem; }
 .icra-hero--statement .icra-hero__content { max-width:var(--icra-container-content); }
@@ -40,12 +47,12 @@ a.icra-text-link:hover { text-decoration:underline; }
 
 @media (min-width:48rem) {
   .icra-hero { padding-block:4.5rem; }
-  .icra-hero--split .icra-hero__layout,.icra-hero--editorial .icra-hero__layout { grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:var(--icra-space-6); }
+  .icra-hero--split .icra-hero__layout:has(.icra-hero__media img, .icra-hero__media picture, .icra-hero__media video),.icra-hero--editorial .icra-hero__layout:has(.icra-hero__media img, .icra-hero__media picture, .icra-hero__media video) { grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:var(--icra-space-6); }
   .icra-hero--media-left .icra-hero__media { order:1; }
   .icra-hero--media-left .icra-hero__content { order:2; }
   .icra-hero--media-right .icra-hero__content { order:1; }
   .icra-hero--media-right .icra-hero__media { order:2; }
-  .icra-hero--editorial .icra-hero__layout { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
+  .icra-hero--editorial .icra-hero__layout:has(.icra-hero__media img, .icra-hero__media picture, .icra-hero__media video) { grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
   .icra-hero--statement .icra-hero__layout { min-height:34rem; }
 }
 @media (min-width:64rem) {

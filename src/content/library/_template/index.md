@@ -8,8 +8,6 @@ language: "uk"
 status: "published"
 access: "free"
 description: "Короткий опис матеріалу для каталогу."
-cover: "./cover.jpg"
-pdf: "./file.pdf"
 featured: false
 draft: true
 ---

@@ -1,6 +1,27 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const library = defineCollection({
+  loader: glob({ pattern: "**/index.md", base: "./src/content/library" }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    author: z.string(),
+    type: z.enum(["book", "article", "practical", "story", "research", "video"]),
+    topics: z.array(z.string()).optional().default([]),
+    language: z.string().optional().default("uk"),
+    status: z.enum(["published", "in-progress", "evolving"]).optional().default("published"),
+    access: z.enum(["free", "paid"]).optional().default("free"),
+    description: z.string(),
+    cover: image().optional(),
+    pdf: z.string().optional(),
+    externalUrl: z.string().url().optional(),
+    externalLabel: z.string().optional(),
+    featured: z.boolean().optional().default(false),
+    editorialOrder: z.number().optional().default(99),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
 const journal = defineCollection({
   loader: glob({ pattern: "**/index.md", base: "./src/content/journal" }),
   schema: ({ image }) => z.object({
@@ -17,4 +38,4 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { journal };
+export const collections = { library, journal };

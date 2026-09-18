@@ -19,6 +19,18 @@
   --icra-surface-ice: #e6f4fa;
   --icra-surface-footer: #0c4a6e;
 
+  /* Library palette. Dark wood and warm paper, shared through global tokens. */
+  --icra-library-wood: #4a3024;
+  --icra-library-wood-dark: #352219;
+  --icra-library-wood-deep: #241711;
+  --icra-library-wood-soft: #6a4a3a;
+  --icra-library-paper: #f6f0e5;
+  --icra-library-paper-light: #fbf8f1;
+  --icra-library-ink: #241b17;
+  --icra-library-text: #5f5149;
+  --icra-library-border: #d9cbbb;
+  --icra-library-accent: #9a6b45;
+
   /* Women's Space palette. Page-specific character, shared through global tokens. */
   --icra-women-wine: #54172d;
   --icra-women-wine-deep: #3f1022;

@@ -1,330 +1,91 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import seniorCareImage from "../assets/hero-main.jpg";
-import professionalCareImage from "../assets/professional-care.jpg";
-import teamMemberImage from "../assets/team-member.jpg";
-import heroServicesImage from "../assets/hero-services.jpg";
-import ServicesIntroSection from "../components/ServicesIntroSection.astro";
-import FaqAccordion from "../components/FaqAccordion.astro";
-import faqs from "../data/faqs.json";
-import NumberCounter from "../components/NumberCounter.astro";
-import Button from "../components/Button.astro";
-import Icon from "../components/Icon.astro";
-import Link from "../components/Link.astro";
+import Heading from "../components/core/Heading.astro";
+import Eyebrow from "../components/core/Eyebrow.astro";
+import ActionLink from "../components/core/ActionLink.astro";
+import LibraryCover from "../components/library/LibraryCover.astro";
+import { libraryItems, libraryTypeLabels } from "../data/library";
+import { getPublishedJournal, formatJournalDate, journalSlug, journalTypeLabels } from "../lib/journal";
+import aboutHero from "../assets/pages/about/01.jpg";
+import patriciaImage from "../assets/pages/about/02.jpg";
+import brannImage from "../assets/pages/about/03.jpg";
+import womenImage from "../assets/pages/women-space/06.jpg";
+import socialImage from "../assets/pages/social/kyrylivska/02.jpg";
+import groupImage from "../assets/pages/social/probation/03.jpg";
+import recoveryImage from "../assets/pages/social/recovery/04.jpg";
 
-interface ServiceCard {
-	title: string;
-	description: string;
-	link: string;
-}
-
-const serviceCards: ServiceCard[] = [
-	{
-		title: "Professional Care Services",
-		description:
-			"Допомога у вирішенні особистих питань та труднощів",
-		link: "/services#care",
-	},
-	{
-		title: "Specialized Support",
-		description: "Підтримка та супровід на шляху до досягнення цілей",
-		link: "/services#specialty",
-	},
-	{
-		title: "24/7 Support",
-		description: "Бібліотека безкоштовної інформації з наших статей, досліджень, розробок, методик та книг ",
-		link: "/services#support",
-	},
-];
+const libraryPreview = [...libraryItems].sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99)).slice(0,4);
+const journal = (await getPublishedJournal()).slice(0,3);
+const lifePhotos = [womenImage, socialImage, groupImage, recoveryImage];
 ---
 
-<Layout
-	title="Healthcare at Home | Viva Medical"
-	description="Quality medical care delivered to your home by licensed professionals. Trusted by families since 2010."
->
-	<!-- Hero Section -->
-	<section
-		class="relative min-h-[70vh] md:min-h-screen lg:min-h-[50vh] flex items-center py-16 md:py-0"
-		role="banner"
-		aria-label="Hero Section"
-	>
-		<div class="absolute inset-0 z-0">
-			<Image
-				src={seniorCareImage}
-				alt="Professional healthcare services"
-				class="w-full h-full object-cover object-top"
-				loading="eager"
-				fetchpriority="high"
-				width={1920}
-				height={1080}
-			/>
-			<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/35">
-			</div>
-		</div>
+<Layout title="ICRA | Міжнародний центр відновлення і адаптації" description="ICRA. Відновлення, адаптація, дослідження, практика, матеріали та суспільні проєкти.">
+<main class="home">
+  <section class="hero">
+    <div class="wide hero-grid">
+      <div class="hero-copy">
+        <Eyebrow>International Centre for Recovery and Adaptation</Eyebrow>
+        <Heading level="h1" role="display-xl">Простір для життя, яке більше відповідає вам</Heading>
+        <p class="hero-line">Відновлення. Адаптація. Дослідження. Практика.</p>
+        <div class="prose">
+          <p>Іноді життя змінюється саме.</p><p>Іноді змінюємося ми.</p>
+          <p>А іноді зовні начебто все залишається на місці, але колишній спосіб жити більше не відповідає людині, якою ми стали.</p>
+          <p>ICRA виник саме навколо цього простору між «як було» і «як тепер може бути».</p>
+          <p>Тут ми працюємо з людьми, досліджуємо, пишемо, створюємо методи й матеріали, проводимо групи та суспільні проєкти.</p>
+          <p>І продовжуємо шукати способи, які витримують не лише кабінет, а й реальне життя.</p>
+        </div>
+        <div class="routes"><ActionLink href="#doors">Дослідити ICRA</ActionLink><ActionLink href="/about">Про нас</ActionLink></div>
+      </div>
+      <div class="hero-photo"><Image src={aboutHero} alt="ICRA" loading="eager" widths={[720,1000,1400]} sizes="(min-width:1024px) 46vw, 100vw" /></div>
+    </div>
+  </section>
 
-		<div class="container relative z-10">
-			<div class="max-w-3xl text-white text-center md:text-left mx-auto md:mx-0">
-				<h1
-					class="text-4xl md:text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.1] mb-4 md:mb-6 tracking-tight animate-fade-in"
-				>
-					Територія змін
-				</h1>
-				<p
-					class="text-lg md:text-[clamp(1rem,2vw,1.25rem)] mb-6 md:mb-10 opacity-95 leading-relaxed font-light max-w-md mx-auto md:mx-0 md:max-w-none"
-				>
-					Простір підтримки, корисної інформації та практичної допомоги
-				</p>
-				<div class="flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
-					<Button
-						variant="white"
-						size="lg"
-						href="/contact"
-						class="hover:shadow-xl hover:scale-105"
-					>
-						Get Started
-					</Button>
-					<Button
-						variant="primary"
-						size="lg"
-						href="/careers"
-						class="ring-2 ring-white/20 hover:shadow-xl hover:scale-105"
-					>
-						Join Our Team
-					</Button>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section class="recovery"><div class="content split">
+    <div><Eyebrow>Відновлення і адаптація</Eyebrow><Heading level="h2" role="h2">Відновлення не завжди означає повернення назад</Heading></div>
+    <div class="prose large"><p>Після кризи, втрати, виснаження або великої зміни природно хотіти «стати таким, як раніше».</p><p>Але іноді того життя вже немає.</p><p>Іноді змінилася реальність.</p><p>Іноді змінилася сама людина.</p><p>А іноді нічого драматичного взагалі не сталося. Просто одного дня можна помітити:</p><p><strong>я більше не хочу прожити наступні двадцять років так само, як попередні двадцять.</strong></p><p>Тому для нас відновлення не означає реставрацію старої версії себе.</p><p>Це повернення достатньої опори, ясності й контакту із собою, щоб побачити:</p><p>де я зараз?<br/>що зі мною?<br/>що в мене залишилося?<br/>що змінилося?<br/>і що я хочу робити далі?</p></div>
+  </div><div class="content statement"><Heading level="h2" role="h2">Не обов'язково повертатися до колишнього життя. Іноді потрібно побудувати наступне.</Heading><ActionLink href="/about">Як ми розуміємо відновлення й адаптацію</ActionLink></div></section>
 
-	<!-- About Section - Asymmetric editorial layout -->
-	<section class="section bg-theme-surface">
-		<div class="container">
-			<div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-				<div class="order-2 lg:order-1">
-					<p class="text-sm font-medium tracking-widest uppercase text-theme-primary mb-4">
-					 Про нас
-					</p>
-					<h2 class="mb-6">
-						Простір дослідників та практиків
-					</h2>
-					<p class="text-theme-text-secondary text-lg leading-relaxed mb-6">
-						Тут ви можете ознайомитися з нашою філософією життя, напрацюваннями, практичними інструментами і матеріалами, що допоможуть вам змінити своє життя на краще. 
-					</p>
-					<ul class="space-y-5 mb-6">
-						{
-							serviceCards.map((service) => (
-								<li class="flex items-start group">
-									<div class="flex-shrink-0 w-7 h-7 rounded-full bg-theme-primary-lighter/20 flex items-center justify-center mr-4 mt-0.5 group-hover:bg-theme-primary transition-colors duration-300">
-										<Icon
-											name="check"
-											size="sm"
-											class="text-theme-primary group-hover:text-white transition-colors duration-300"
-										/>
-									</div>
-									<span class="text-theme-text-secondary text-lg">
-										{service.description}
-									</span>
-								</li>
-							))
-						}
-					</ul>
-					<div class="text-center md:text-left">
-						<Link href="/about">Детальніше про нас</Link>
-					</div>
-				</div>
-				<div class="order-1 lg:order-2">
-					<div class="relative">
-						<div class="rounded-2xl overflow-hidden shadow-xl">
-							<Image
-								src={professionalCareImage}
-								alt="Healthcare provider with patient"
-								class="w-full h-auto"
-								loading="lazy"
-							/>
-						</div>
-						<!-- Decorative accent -->
-						<div class="absolute -bottom-4 -left-4 w-24 h-24 bg-theme-primary-lighter/30 rounded-2xl -z-10"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section class="people"><div class="wide">
+    <div class="section-head"><Eyebrow>Ядро ICRA</Eyebrow><Heading level="h2" role="h2">Двоє людей. Різні способи роботи. Один простір.</Heading><p>ICRA не створювався як мережа спеціалістів. Його ядро сьогодні складають Патриція Божко та Brann Solen.</p></div>
+    <div class="people-grid">
+      <article class="person patricia"><Image src={patriciaImage} alt="Патриція Божко" widths={[480,720]} /><div><Eyebrow>Патриція Божко</Eyebrow><Heading level="h3" role="h3">Працює безпосередньо з людьми.</Heading><p>Коучинг, арт-терапія, авторський метод АКТ, індивідуальна та групова робота, тривале супроводження, робота з організаціями й суспільні проєкти.</p><p>Її цікавить не те, як привести різних людей до правильної відповіді.</p><p>Її цікавить, як допомогти людині побачити власну.</p><ActionLink href="/about#patricia">Познайомитися з Патрицією</ActionLink></div></article>
+      <article class="person brann"><div><Eyebrow>Brann Solen</Eyebrow><Heading level="h3" role="h3">Пише, досліджує, систематизує і створює.</Heading><p>Книги, оповідання, терапевтичні притчі, методичні матеріали, моделі, робочі зошити та тексти, частина яких використовується у практичній роботі ICRA.</p><p>Його територія тут не кабінет консультанта.</p><p>Це ідеї, тексти, спостереження і спроби зрозуміти, як влаштовані речі, які нас цікавлять.</p><ActionLink href="/about#serhii">Познайомитися з Brann Solen</ActionLink></div><Image src={brannImage} alt="Brann Solen" widths={[480,720]} /></article>
+    </div>
+  </div></section>
 
-	<!-- Services Section -->
-	<section class="section bg-gradient-to-b from-theme-primary-lighter/10 via-theme-primary-lighter/5 to-theme-surface">
-		<ServicesIntroSection />
-	</section>
+  <section class="doors" id="doors"><div class="wide">
+    <div class="section-head"><Eyebrow>Фойє</Eyebrow><Heading level="h2" role="display">Куди далі?</Heading><p>У цього простору немає одного правильного маршруту.</p></div>
+    <div class="door-grid">
+      <article class="door services"><span>01</span><Heading level="h3" role="h3">Попрацювати разом</Heading><p>Індивідуальна робота з Патрицією, тривале супроводження, групові формати, практикуми, майстер-класи та робота з організаціями.</p><ActionLink href="/services">Послуги</ActionLink></article>
+      <article class="door library"><span>02</span><Heading level="h3" role="h3">Читати. Досліджувати. Забирати своє.</Heading><p>Книги, статті, оповідання, притчі, практичні матеріали, методики, дослідження і речі, які ще перебувають у процесі.</p><p>Частина безкоштовна. Частина стане книгами та великими роботами.</p><p>Але бібліотека не є вітриною магазину. Вона існує, щоб матеріали не лежали в шухлядах.</p><ActionLink href="/careers">Бібліотека</ActionLink></article>
+      <article class="door women"><span>03</span><Heading level="h3" role="h3">Не краща версія себе. Своя.</Heading><p>Простір Патриції для жінок, які хочуть дослідити не лише те, що змінити, а значно складніше питання:</p><p>у якому житті я хочу одного дня виявити себе і як хочу почуватися в цьому житті?</p><ActionLink href="/women-space">Жіночий простір</ActionLink></article>
+      <article class="door social"><span>04</span><Heading level="h3" role="h3">Робота, яку ми вважаємо важливою</Heading><p>Ветерани й люди, звільнені з полону, фахівці допомагаючих професій, громадські організації, жінки ВПО, підлітки та інші групи.</p><p>Частина цієї роботи відбувається безкоштовно.</p><ActionLink href="/info">Суспільна діяльність</ActionLink></article>
+      <article class="door life"><span>05</span><Heading level="h3" role="h3">Що тут відбувається зараз</Heading><p>Зустрічі, нові матеріали, робота над книгами й методами, спостереження, дослідження, проєкти та маленькі події.</p><p>Не звіт. Просто хроніка місця, яке продовжує жити.</p><ActionLink href="/blog">Життя ICRA</ActionLink></article>
+    </div>
+  </div></section>
 
-	<!-- Statistics Section with Oval Design -->
-	<section class="bg-theme-surface pt-4 pb-12 md:pt-8 md:pb-16">
-		<div class="container">
-			<div class="text-center mb-16">
-				<h2 class="text-3xl lg:text-4xl font-bold text-theme-text-primary mb-4">
-					Over 15 Years of Excellence
-				</h2>
-				<p class="text-lg text-theme-text-secondary">
-					Trusted healthcare since 2010
-				</p>
-			</div>
+  <section class="library-fragment"><div class="wide">
+    <div class="section-head horizontal"><div><Eyebrow>З Бібліотеки</Eyebrow><Heading level="h2" role="h2">Дещо, що вже можна відкрити</Heading></div><p>Дещо з того, що вже можна відкрити, прочитати або забрати із собою.</p></div>
+    <div class="books">{libraryPreview.map(item=><article class="book"><a href={"/library/"+item.slug}><LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author}/></a><p>{libraryTypeLabels[item.type]}</p><Heading level="h3" role="h3">{item.title}</Heading></article>)}</div>
+    <ActionLink href="/careers">Уся Бібліотека</ActionLink>
+  </div></section>
 
-			<div class="mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
-				<!-- Oval Image Container -->
-				<div class="lg:w-1/2">
-					<div class="relative">
-						<!-- Oval mask for the image -->
-						<div class="aspect-[16/9] rounded-[50%] overflow-hidden shadow-2xl ring-1 ring-black/5">
-							<Image
-								src={teamMemberImage}
-								alt="Professional healthcare provider"
-								class="w-full h-full object-cover"
-								loading="lazy"
-							/>
+  <section class="loop"><div class="content split"><div><Eyebrow>Практика і матеріали</Eyebrow><Heading level="h2" role="h2">У ICRA речі рідко існують окремо</Heading></div><div class="prose large"><p>Іноді все починається з тексту.</p><p>Патриція читає його перед групою, і люди впізнають у чужій історії щось своє.</p><p>Потім починається практична робота.</p><p>Після неї залишаються спостереження, записи, питання і новий досвід.</p><p>Ми їх систематизуємо.</p><p>З цього може вирости стаття, методичний матеріал, нова практика, дослідження або наступний текст.</p><p>А потім він знову повертається до людей.</p></div></div><div class="wide flow" aria-label="Цикл роботи ICRA"><span>Текст</span><b>→</b><span>практика</span><b>→</b><span>спостереження</span><b>→</b><span>осмислення</span><b>→</b><span>новий матеріал</span><b>→</b><span>практика</span></div></section>
 
-							<!-- Stats Overlay -->
-							<div class="absolute inset-0 flex justify-between items-center px-4 stats-container">
-								<!-- Left Stat -->
-								<div class="stats-circle w-28 h-28 md:w-36 md:h-36 bg-sky-600/95 rounded-full flex flex-col items-center justify-center text-white transform hover:scale-110 transition-all duration-300 shadow-2xl ring-4 ring-white/30">
-									<NumberCounter
-										number="500+"
-										class="text-xl md:text-2xl font-bold"
-									/>
-									<span class="text-xs mt-1 font-medium">
-										Monthly visits
-									</span>
-								</div>
+  <section class="real-life"><div class="wide"><div class="section-head"><Eyebrow>Реальна робота</Eyebrow><Heading level="h2" role="h2">Це не задум на майбутнє</Heading><p>ICRA продовжує формуватися. Але робота, з якої він виріс, уже відбувається.</p></div><div class="life-grid">{lifePhotos.map((img,i)=><figure class:list={["life-photo","p"+i]}><Image src={img} alt="Практична робота ICRA" widths={[480,720,1000]} sizes="(min-width:1024px) 30vw, 50vw"/></figure>)}</div><div class="life-copy"><p>Групи.<br/>Індивідуальні зустрічі.<br/>Робота з ветеранами.<br/>Жіночі зустрічі.<br/>Організації.<br/>Книги.<br/>Методичні матеріали.<br/>Дослідження.<br/>Розмови.<br/>Експерименти.</p><p>За останні роки через різні формати практичної роботи Патриції пройшло понад тисячу людей.</p><p>А бібліотека продовжує наповнюватися тим, що ми створюємо паралельно з цією роботою.</p></div></div></section>
 
-								<!-- Right Stat -->
-								<div class="stats-circle w-28 h-28 md:w-36 md:h-36 bg-orange-500/95 rounded-full flex flex-col items-center justify-center text-white transform hover:scale-110 transition-all duration-300 shadow-2xl ring-4 ring-white/30">
-									<NumberCounter
-										number="75+"
-										class="text-xl md:text-2xl font-bold"
-									/>
-									<span class="text-xs mt-1 font-medium">
-										Professionals
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+  <section class="now"><div class="wide"><div class="section-head horizontal"><div><Eyebrow>Життя ICRA</Eyebrow><Heading level="h2" role="h2">Зараз у ICRA</Heading></div><p>Кілька останніх слідів життя цього місця.</p></div><div class="now-grid">{journal.map(entry=><article><p class="meta"><time datetime={entry.data.date.toISOString()}>{formatJournalDate(entry.data.date)}</time> · {journalTypeLabels[entry.data.type ?? "update"]}</p><Heading level="h3" role="h3"><a href={"/blog/"+journalSlug(entry.id)+"/"}>{entry.data.title}</a></Heading>{entry.data.excerpt&&<p>{entry.data.excerpt}</p>}<ActionLink href={"/blog/"+journalSlug(entry.id)+"/"}>Читати</ActionLink></article>)}</div><ActionLink href="/blog">Усе Життя ICRA</ActionLink></div></section>
 
-				<!-- Content -->
-				<div class="lg:w-1/2 space-y-6">
-					<div class="prose prose-lg max-w-none text-theme-text-secondary">
-						<p class="text-lg leading-relaxed">
-							<strong class="text-theme-text-primary">Founded in 2010,</strong> Viva
-							Medical has established itself as a trusted provider of comprehensive
-							healthcare services. Our commitment to excellence and patient-centered
-							care has made us a leader in the healthcare industry.
-						</p>
-						<p class="text-lg leading-relaxed">
-							Today, as a regional healthcare agency, we proudly serve communities across
-							the region with over 500 monthly visits and a dedicated team of more than
-							75 skilled healthcare professionals who bring compassionate care directly
-							to patients' homes.
-						</p>
-					</div>
-					<div class="pt-6">
-						<Link href="/about">Learn more about our journey</Link>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section class="guest"><div class="content split"><div><Eyebrow>Відкритий дім</Eyebrow><Heading level="h2" role="h2">Тут не обов'язково щось купувати</Heading></div><div class="prose large"><p>Можна прийти за консультацією.</p><p>Можна працювати з Патрицією довго.</p><p>Можна запросити ICRA до співпраці.</p><p>А можна п'ять років час від часу заходити до Бібліотеки, читати те, що вам цікаво, і ніколи не стати нашим клієнтом.</p><p>З цим усе гаразд.</p><p>У відкритому домі не кожен гість повинен щось купити.</p><ActionLink href="/careers">Зайти до Бібліотеки</ActionLink></div></div><div class="content guest-line"><Heading level="h2" role="h2">Візьміть те, що вам потрібно. Решту можна залишити тут.</Heading></div></section>
 
-	<!-- FAQ Section -->
-	<section class="section bg-gradient-to-b from-theme-surface-muted to-theme-surface">
-		<div class="container">
-			<div class="narrow mx-auto">
-				<div class="text-center mb-12">
-					<p class="text-sm font-medium tracking-widest uppercase text-theme-primary mb-4">
-						FAQ
-					</p>
-					<h2>Common Questions</h2>
-				</div>
-				<FaqAccordion items={faqs.slice(0, 4)} />
-				<div class="text-center mt-10">
-					<Link href="/info">View all FAQs</Link>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- CTA Section -->
-	<section class="relative py-20 lg:py-28 overflow-hidden">
-		<div class="absolute inset-0">
-			<Image
-				src={heroServicesImage}
-				alt="Healthcare environment"
-				class="w-full h-full object-cover"
-				loading="lazy"
-			/>
-			<div class="absolute inset-0 bg-theme-primary-darker/90"></div>
-		</div>
-		<div class="relative container">
-			<div class="max-w-2xl mx-auto text-center text-white">
-				<h2 class="mb-6">Ready to get started?</h2>
-				<p class="text-lg mb-10 text-white/80 font-primary">
-					Contact us to discuss how we can support your healthcare needs at home.
-				</p>
-				<Button variant="white" href="/contact">
-					Contact Us
-				</Button>
-			</div>
-		</div>
-	</section>
+  <section class="final"><div class="content"><Eyebrow>ICRA</Eyebrow><Heading level="h2" role="display">Ласкаво просимо до ICRA</Heading><div class="final-copy"><p>Ми ще будуємо це місце.</p><p>Додаємо книги.<br/>Перевіряємо методи.<br/>Проводимо зустрічі.<br/>Пишемо.<br/>Спостерігаємо.<br/>Змінюємо те, що перестало працювати.<br/>Залишаємо те, що витримало практику.</p><p>Тому тут навряд чи колись буде остаточно «готово».</p><p>І, здається, саме так і має бути з живим простором.</p></div><nav class="final-routes"><ActionLink href="/about">Про нас</ActionLink><ActionLink href="/careers">Бібліотека</ActionLink><ActionLink href="/services">Послуги</ActionLink><ActionLink href="/blog">Життя ICRA</ActionLink></nav></div></section>
+</main>
 </Layout>
 
 <style>
-	.stats-circle {
-		opacity: 0;
-		animation: fadeInScale 0.8s ease-out forwards;
-		animation-play-state: paused;
-	}
-
-	@keyframes fadeInScale {
-		from {
-			opacity: 0;
-			transform: scale(0.8);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
+.home{background:var(--icra-white);color:var(--icra-text)}.wide,.content{width:min(calc(100% - 2*var(--icra-gutter-mobile)),var(--icra-container-wide));margin-inline:auto}.content{max-width:var(--icra-container-content)}section{padding:var(--icra-section-spacious) 0}.hero{background:var(--icra-surface-mist);padding-top:var(--icra-section-normal)}.hero-grid{display:grid;gap:var(--icra-space-5);align-items:center}.hero-copy{max-width:43rem}.hero-line{font-size:var(--icra-text-lead-mobile);font-weight:700;color:var(--icra-brand);margin:1.5rem 0}.hero-photo img{display:block;width:100%;height:auto;border-radius:var(--icra-radius-media)}.prose{display:grid;gap:.85rem;color:var(--icra-text-soft);line-height:var(--icra-leading-body)}.prose p{margin:0}.prose.large{font-size:var(--icra-text-body-lg-mobile)}.routes,.final-routes{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2rem}.split{display:grid;gap:var(--icra-space-5)}.recovery{background:var(--icra-surface-sand)}.statement{margin-top:var(--icra-space-6);padding-top:var(--icra-space-5);border-top:1px solid color-mix(in srgb,var(--icra-text) 18%,transparent)}.statement h2{max-width:45rem}.people{background:var(--icra-white)}.section-head{max-width:50rem;margin-bottom:var(--icra-space-6)}.section-head>p{font-size:var(--icra-text-body-lg);color:var(--icra-text-muted);line-height:1.65}.people-grid{display:grid;gap:var(--icra-space-6)}.person{display:grid;gap:var(--icra-space-4);align-items:center}.person img{width:100%;height:auto;border-radius:var(--icra-radius-media)}.person p{color:var(--icra-text-soft);line-height:1.65}.brann{background:var(--icra-brand-deep);color:var(--icra-white);padding:var(--icra-space-4);border-radius:var(--icra-radius-card)}.brann p{color:color-mix(in srgb,var(--icra-white) 80%,transparent)}.brann :global(.icra-eyebrow){color:#99f6e4}.doors{background:var(--icra-surface-mist)}.door-grid{display:grid;gap:1rem}.door{padding:var(--icra-space-4);border-radius:var(--icra-radius-card);min-height:20rem;display:flex;flex-direction:column;align-items:flex-start}.door>span{font-size:var(--icra-text-small);font-weight:700;letter-spacing:.14em}.door p{line-height:1.6}.door :global(.icra-action-link){margin-top:auto}.door.services{background:var(--icra-surface-aqua)}.door.library{background:var(--icra-library-wood-deep);color:var(--icra-library-paper-light)}.door.library p{color:color-mix(in srgb,var(--icra-library-paper-light) 78%,transparent)}.door.women{background:var(--icra-women-wine);color:var(--icra-women-cream)}.door.women p{color:var(--icra-women-text-on-dark)}.door.social{background:var(--icra-surface-sand)}.door.life{background:var(--icra-brand-deep);color:var(--icra-white)}.door.life p{color:color-mix(in srgb,var(--icra-white) 78%,transparent)}.library-fragment{background:var(--icra-library-paper)}.horizontal{display:grid;gap:1rem}.books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--icra-space-4);margin-bottom:var(--icra-space-4)}.book>a{display:block;max-width:16rem}.book>p{font-size:var(--icra-text-small);text-transform:uppercase;letter-spacing:.08em;color:var(--icra-library-wood);font-weight:700}.loop{background:var(--icra-white)}.flow{display:flex;gap:1rem;align-items:center;overflow-x:auto;padding-top:var(--icra-space-5);font-weight:700}.flow span{flex:none;border:1px solid var(--icra-border);border-radius:999px;padding:.8rem 1.1rem}.flow b{color:var(--icra-brand)}.real-life{background:var(--icra-surface-mist)}.life-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.life-photo{margin:0}.life-photo img{display:block;width:100%;height:auto;border-radius:var(--icra-radius-media)}.life-copy{display:grid;gap:1rem;margin-top:var(--icra-space-5);max-width:48rem;font-size:var(--icra-text-body-lg);line-height:1.65}.now{background:var(--icra-white)}.now-grid{display:grid;gap:var(--icra-space-5);margin-bottom:var(--icra-space-5)}.now-grid article{padding-top:1rem;border-top:1px solid var(--icra-border)}.now-grid .meta{font-size:var(--icra-text-small);color:var(--icra-text-muted)}.now-grid h3 a{color:inherit;text-decoration:none}.now-grid article>p:not(.meta){color:var(--icra-text-soft);line-height:1.6}.guest{background:var(--icra-surface-sand)}.guest-line{margin-top:var(--icra-space-6);padding-top:var(--icra-space-5);border-top:1px solid var(--icra-library-border)}.final{background:var(--icra-brand-deep);color:var(--icra-white)}.final-copy{max-width:42rem;margin-top:var(--icra-space-4);font-size:var(--icra-text-body-lg);line-height:1.7;color:color-mix(in srgb,var(--icra-white) 82%,transparent)}
+@media(min-width:48rem){.wide,.content{width:min(calc(100% - 2*var(--icra-gutter-tablet)),var(--icra-container-wide))}.prose.large{font-size:var(--icra-text-body-lg)}.books{grid-template-columns:repeat(3,minmax(0,1fr))}.now-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.horizontal{grid-template-columns:1fr .8fr;align-items:end}}
+@media(min-width:64rem){.wide,.content{width:min(calc(100% - 2*var(--icra-gutter-desktop)),var(--icra-container-wide))}.hero-grid{grid-template-columns:1.05fr .95fr}.split{grid-template-columns:.9fr 1.1fr}.people-grid{grid-template-columns:1fr 1fr}.person{grid-template-columns:.8fr 1.2fr}.brann{grid-template-columns:1.2fr .8fr}.door-grid{grid-template-columns:repeat(12,1fr)}.door.services{grid-column:span 5}.door.library{grid-column:span 7}.door.women{grid-column:span 7}.door.social{grid-column:span 5}.door.life{grid-column:3/span 8}.books{grid-template-columns:repeat(4,minmax(0,1fr))}.life-grid{grid-template-columns:repeat(12,1fr);align-items:start}.life-photo.p0{grid-column:1/span 4}.life-photo.p1{grid-column:5/span 3;margin-top:4rem}.life-photo.p2{grid-column:8/span 5}.life-photo.p3{grid-column:3/span 4;margin-top:-1rem}.life-copy{margin-left:auto;margin-right:8%}}
+@media(prefers-reduced-motion:no-preference){.door{transition:transform .3s ease}.door:hover{transform:translateY(-4px)}}
 </style>
-
-<script>
-	// Single IntersectionObserver for stats animation (memory efficient)
-	const statsObserver = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					const circles = entry.target.querySelectorAll(".stats-circle");
-					circles.forEach((circle) => {
-						(circle as HTMLElement).style.animationPlayState = "running";
-					});
-					statsObserver.unobserve(entry.target);
-				}
-			});
-		},
-		{ threshold: 0.2 }
-	);
-
-	function initStatsAnimation() {
-		const section = document.querySelector(".stats-container");
-		if (section) {
-			// Reset animation state for view transitions
-			const circles = section.querySelectorAll(".stats-circle");
-			circles.forEach((circle) => {
-				(circle as HTMLElement).style.animationPlayState = "paused";
-			});
-			statsObserver.observe(section);
-		}
-	}
-
-	// Run on initial load and after view transitions
-	initStatsAnimation();
-	document.addEventListener("astro:page-load", initStatsAnimation);
-</script>

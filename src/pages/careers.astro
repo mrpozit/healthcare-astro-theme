@@ -1,168 +1,70 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Heading from "../components/core/Heading.astro";
 import LibraryCover from "../components/library/LibraryCover.astro";
-import LibraryItemCard from "../components/library/LibraryItemCard.astro";
 import { libraryItems, libraryTypeLabels } from "../data/library";
 
-const featured = [...libraryItems].filter((item) => item.featured).sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99))[0];
-const recent = [...libraryItems].sort((a, b) => (a.editorialOrder ?? 99) - (b.editorialOrder ?? 99)).slice(0, 4);
-const categories = [
-  ["all", "Усі"],
-  ...Object.entries(libraryTypeLabels),
-];
+const items = [...libraryItems].sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99));
+const categories = [["all","Усе"], ...Object.entries(libraryTypeLabels)];
 ---
 
-<Layout
-  title="Бібліотека ICRA | Книги, тексти, дослідження та матеріали"
-  description="Бібліотека ICRA: книги, статті, практичні матеріали, дослідження, оповідання, притчі, відео та інші результати нашої роботи."
->
-  <main>
-    <section class="section-sm bg-theme-surface-muted" aria-labelledby="library-title">
-      <div class="container">
-        <div class="max-w-4xl">
-          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-4">ICRA</p>
-          <h1 id="library-title" class="text-4xl lg:text-5xl font-bold leading-tight text-theme-text-primary">Бібліотека ICRA</h1>
-          <div class="mt-6 max-w-3xl space-y-4 text-base lg:text-lg leading-relaxed text-theme-text-secondary">
-            <p>Тут ми збираємо те, що народжується з нашої роботи, досліджень, спостережень і звичайного життя.</p>
-            <p>Книги й статті. Практичні матеріали та методики. Дослідження. Оповідання, терапевтичні історії й притчі. Відео. Іноді речі, яким ми ще не знайшли кращої назви.</p>
-            <p>Частина матеріалів завершена. Частина продовжує змінюватися разом із нашими уявленнями. Щось можна прочитати або завантажити безкоштовно. Щось існує як окрема книга.</p>
-            <p>Ми не збирали цю бібліотеку як шлях до консультації.</p>
-          </div>
-          <p class="mt-7 max-w-3xl rounded-xl border-l-4 border-theme-primary bg-theme-surface px-5 py-4 text-lg lg:text-xl font-semibold leading-relaxed text-theme-text-primary">
-            Наша справа залишити тут те, що в нас є. Ваша взяти те, що виявиться вам потрібним.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-theme-surface border-y border-theme-border" aria-label="Навігація бібліотеки">
-      <div class="container py-5">
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <nav class="flex gap-2 overflow-x-auto pb-1" aria-label="Типи матеріалів" data-library-filters>
-            {categories.map(([value, label], index) => (
-              <button type="button" data-filter={value} aria-pressed={index === 0 ? "true" : "false"} class="shrink-0 rounded-full border border-theme-border bg-theme-surface px-4 py-2 text-sm font-semibold text-theme-text-secondary hover:border-theme-primary hover:text-theme-primary aria-pressed:border-theme-primary aria-pressed:bg-theme-primary aria-pressed:text-white transition-colors">{label}</button>
-            ))}
-          </nav>
-          <label class="relative block w-full lg:w-72">
-            <span class="sr-only">Пошук у бібліотеці</span>
-            <input id="library-search" type="search" placeholder="Пошук у бібліотеці" class="w-full rounded-full border border-theme-border bg-theme-surface px-4 py-2.5 text-sm text-theme-text-primary focus:border-theme-primary focus:outline-none focus:ring-2 focus:ring-theme-primary-lighter/30" />
-          </label>
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-theme-surface-muted" aria-labelledby="featured-title">
-      <div class="container">
-        <div class="flex items-end justify-between gap-6 mb-8">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-2">Вибір редакції</p>
-            <h2 id="featured-title" class="text-2xl lg:text-3xl font-bold text-theme-text-primary">З чого можна почати</h2>
-          </div>
-        </div>
-
-        <div class="grid gap-6 lg:grid-cols-[0.75fr_1.5fr_0.75fr] lg:items-stretch">
-          <aside class="order-2 lg:order-1 rounded-2xl border border-theme-border bg-theme-surface p-6 flex flex-col justify-between min-h-52">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">Місце для наступного матеріалу</p>
-              <h3 class="mt-3 text-xl font-bold text-theme-text-primary">Бібліотека тільки починає наповнюватися</h3>
-              <p class="mt-3 text-sm leading-relaxed text-theme-text-secondary">Тут з'явиться окремий матеріал з власною обкладинкою, коли ми його додамо.</p>
-            </div>
-          </aside>
-
-          {featured && (
-            <article class="order-1 lg:order-2 rounded-2xl border border-theme-border bg-theme-surface p-6 lg:p-8 shadow-sm">
-              <a href={`/library/${featured.slug}`} class="grid gap-7 sm:grid-cols-[minmax(180px,0.8fr)_1.2fr] items-center group">
-                <div class="max-w-[300px] w-full mx-auto">
-                  <LibraryCover src={featured.cover} alt={featured.coverAlt} title={featured.title} author={featured.author} loading="eager" />
-                </div>
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">{libraryTypeLabels[featured.type]} · {featured.author}</p>
-                  <h3 class="mt-3 text-3xl lg:text-4xl font-bold leading-tight text-theme-text-primary group-hover:text-theme-primary transition-colors">{featured.title}</h3>
-                  <p class="mt-4 text-base lg:text-lg leading-relaxed text-theme-text-secondary">{featured.description}</p>
-                  <span class="inline-flex mt-6 font-semibold text-theme-primary">Відкрити матеріал →</span>
-                </div>
-              </a>
-            </article>
-          )}
-
-          <aside class="order-3 rounded-2xl bg-theme-primary-darker p-6 text-white flex flex-col justify-between min-h-52">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-white/65">Ще один напрям</p>
-              <h3 class="mt-3 text-xl font-bold">Тут буде несподіване</h3>
-              <p class="mt-3 text-sm leading-relaxed text-white/75">Стаття, дослідження, відео, оповідання або річ, для якої ще немає зручної категорії.</p>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-sm bg-theme-surface" aria-labelledby="recent-title">
-      <div class="container">
-        <h2 id="recent-title" class="text-2xl font-bold text-theme-text-primary mb-6">Нещодавно додали</h2>
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {recent.map((item) => <LibraryItemCard item={item} compact={true} />)}
-          {Array.from({ length: Math.max(0, 4 - recent.length) }).map(() => (
-            <div class="grid grid-cols-[72px_1fr] gap-4 items-start opacity-60" aria-hidden="true">
-              <div class="aspect-[1/1.414] rounded-lg bg-theme-surface-muted border border-theme-border"></div>
-              <div class="pt-2"><div class="h-3 w-16 rounded bg-theme-border"></div><div class="mt-3 h-4 w-full rounded bg-theme-border"></div><div class="mt-2 h-4 w-2/3 rounded bg-theme-border"></div></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-theme-surface-muted" aria-labelledby="editorial-title">
-      <div class="container grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
+<Layout title="Бібліотека ICRA | Матеріали, тексти та книги" description="Бібліотека ICRA. Тексти, книги, практичні матеріали, дослідження та інші результати нашої роботи.">
+  <main class="library-page">
+    <section class="library-hero">
+      <div class="library-container hero-grid">
         <div>
-          <h2 id="editorial-title" class="text-2xl lg:text-3xl font-bold text-theme-text-primary mb-8">Матеріали</h2>
-          <div class="space-y-7" data-editorial-list>
-            {libraryItems.map((item) => <LibraryItemCard item={item} />)}
-          </div>
+          <p class="eyebrow">ICRA / Бібліотека</p>
+          <Heading level="h1" role="display">Місце, де речі залишаються</Heading>
         </div>
-
-        <aside class="space-y-6" aria-label="Редакційні добірки">
-          {featured && (
-            <section class="rounded-2xl border border-theme-border bg-theme-surface p-6">
-              <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary">Можливо, ви прийшли саме за цим</p>
-              <a href={`/library/${featured.slug}`} class="block mt-4 group">
-                <h3 class="text-xl font-bold text-theme-text-primary group-hover:text-theme-primary transition-colors">{featured.title}</h3>
-                <p class="mt-2 text-sm text-theme-text-muted">{featured.author} · {libraryTypeLabels[featured.type]}</p>
-              </a>
-            </section>
-          )}
-          <section class="rounded-2xl bg-theme-primary-darker p-6 text-white">
-            <p class="text-sm font-semibold uppercase tracking-wider text-white/65">Досліджуємо зараз</p>
-            <p class="mt-4 text-sm leading-relaxed text-white/80">Цей блок готовий до наповнення. Додамо сюди 2–3 реальні поточні напрями, коли сформулюємо їх для публікації.</p>
-          </section>
-        </aside>
+        <div class="hero-copy">
+          <p>Тексти, книги, практичні матеріали, дослідження та історії, які народжуються з роботи ICRA.</p>
+          <p>Щось можна прочитати тут. Щось завантажити. Деякі матеріали ведуть до окремої книги або зовнішнього ресурсу.</p>
+          <p class="strong">Не стрічка новин. Сховище того, до чого можна повернутися.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section bg-theme-surface" aria-labelledby="all-title">
-      <div class="container">
-        <div class="max-w-3xl mb-8">
-          <p class="text-sm font-semibold uppercase tracking-wider text-theme-primary mb-2">Архів</p>
-          <h2 id="all-title" class="text-3xl lg:text-4xl font-bold text-theme-text-primary">Усі матеріали</h2>
+    <section class="library-tools" aria-label="Навігація бібліотеки">
+      <div class="library-container tools-row">
+        <nav class="filters" aria-label="Типи матеріалів" data-library-filters>
+          {categories.map(([value,label],i)=><button type="button" data-filter={value} aria-pressed={i===0?"true":"false"}>{label}</button>)}
+        </nav>
+        <label class="search"><span class="sr-only">Пошук у бібліотеці</span><input id="library-search" type="search" placeholder="Знайти матеріал" /></label>
+      </div>
+    </section>
+
+    <section class="library-shelf" aria-labelledby="materials-title">
+      <div class="library-container">
+        <div class="shelf-head">
+          <div><p class="eyebrow">Колекція</p><Heading level="h2" role="h2" id="materials-title">Матеріали</Heading></div>
+          <p class="shelf-note">У кожного матеріалу своя обкладинка і свій спосіб доступу.</p>
         </div>
-        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-all-materials>
-          {libraryItems.map((item) => (
-            <article class="rounded-2xl border border-theme-border bg-theme-surface-muted p-5" data-library-item data-type={item.type} data-search={`${item.title} ${item.author} ${item.description} ${item.topics.join(" ")}`.toLowerCase()}>
-              <a href={`/library/${item.slug}`} class="grid grid-cols-[100px_1fr] gap-5 group">
+
+        <div class="book-grid" data-library-grid>
+          {items.map((item)=>(
+            <article class="book" data-library-item data-type={item.type} data-search={`${item.title} ${item.author} ${item.description} ${item.topics.join(" ")}`.toLowerCase()}>
+              <a href={`/library/${item.slug}`} class="cover-link">
                 <LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author} />
-                <div class="pt-1">
-                  <p class="text-xs font-semibold uppercase tracking-wider text-theme-primary">{libraryTypeLabels[item.type]}</p>
-                  <h3 class="mt-2 text-lg font-bold leading-tight text-theme-text-primary group-hover:text-theme-primary transition-colors">{item.title}</h3>
-                  <p class="mt-2 text-sm text-theme-text-muted">{item.author}</p>
-                </div>
               </a>
+              <div class="book-meta">
+                <p class="type">{libraryTypeLabels[item.type]}</p>
+                <Heading level="h3" role="h3"><a href={`/library/${item.slug}`}>{item.title}</a></Heading>
+                <p class="author">{item.author}</p>
+                <p class="description">{item.description}</p>
+                <a class="open-link" href={`/library/${item.slug}`}>Відкрити матеріал →</a>
+              </div>
             </article>
           ))}
         </div>
-        <p id="library-empty" class="hidden mt-8 rounded-xl border border-theme-border bg-theme-surface-muted p-6 text-theme-text-secondary">За цим запитом матеріалів поки немає.</p>
-        <div class="mt-8 text-center">
-          <button type="button" disabled class="rounded-full border border-theme-border px-5 py-2.5 text-sm font-semibold text-theme-text-muted opacity-60 cursor-not-allowed">Показати ще</button>
-          <p class="mt-2 text-xs text-theme-text-muted">Кнопка стане активною, коли бібліотека виросте.</p>
-        </div>
+        <p id="library-empty" class="empty" hidden>За цим запитом матеріалів поки немає.</p>
+      </div>
+    </section>
+
+    <section class="library-principle">
+      <div class="library-container principle-grid">
+        <p class="eyebrow">Принцип</p>
+        <Heading level="h2" role="h2">Бібліотека не просить читати все.</Heading>
+        <p>Візьміть те, що виявиться потрібним. Решта може просто залишитися на полиці до свого часу.</p>
       </div>
     </section>
   </main>
@@ -174,29 +76,29 @@ const categories = [
       const items = Array.from(document.querySelectorAll<HTMLElement>("[data-library-item]"));
       const empty = document.querySelector<HTMLElement>("#library-empty");
       let activeType = "all";
-
       const apply = () => {
-        const query = search?.value.trim().toLowerCase() ?? "";
-        let visible = 0;
-        items.forEach((item) => {
-          const typeMatch = activeType === "all" || item.dataset.type === activeType;
-          const searchMatch = !query || (item.dataset.search ?? "").includes(query);
-          const show = typeMatch && searchMatch;
-          item.classList.toggle("hidden", !show);
-          if (show) visible += 1;
+        const q = search?.value.trim().toLowerCase() ?? "";
+        let visible=0;
+        items.forEach((item)=>{
+          const show=(activeType==="all" || item.dataset.type===activeType) && (!q || (item.dataset.search ?? "").includes(q));
+          item.hidden=!show; if(show) visible++;
         });
-        empty?.classList.toggle("hidden", visible > 0);
+        if(empty) empty.hidden=visible!==0;
       };
-
-      filters.forEach((button) => button.addEventListener("click", () => {
-        activeType = button.dataset.filter ?? "all";
-        filters.forEach((candidate) => candidate.setAttribute("aria-pressed", String(candidate === button)));
+      filters.forEach((button)=>button.addEventListener("click",()=>{
+        activeType=button.dataset.filter ?? "all";
+        filters.forEach((b)=>b.setAttribute("aria-pressed",String(b===button)));
         apply();
       }));
-      search?.addEventListener("input", apply);
+      search?.addEventListener("input",apply);
     };
-
-    document.addEventListener("astro:page-load", initLibrary);
+    document.addEventListener("astro:page-load",initLibrary);
     initLibrary();
   </script>
 </Layout>
+
+<style>
+.library-page{background:var(--icra-white);color:var(--icra-text)}.library-container{width:min(calc(100% - 2 * var(--icra-gutter-mobile)),var(--icra-container-wide));margin-inline:auto}.library-hero{padding:var(--icra-section-spacious) 0;background:var(--icra-surface)}.hero-grid{display:grid;gap:var(--icra-space-5)}.eyebrow{margin:0 0 var(--icra-space-2);font-size:var(--icra-text-eyebrow);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--icra-primary)}.hero-copy{display:grid;gap:1rem;align-self:end;max-width:42rem;font-size:var(--icra-text-body-lg-mobile);line-height:var(--icra-leading-body);color:var(--icra-text-muted)}.hero-copy p{margin:0}.hero-copy .strong{color:var(--icra-text);font-weight:700}.library-tools{position:sticky;top:0;z-index:10;border-block:1px solid var(--icra-border);background:color-mix(in srgb,var(--icra-white) 94%,transparent);backdrop-filter:blur(12px)}.tools-row{display:flex;flex-direction:column;gap:1rem;padding-block:1rem}.filters{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filters button{flex:none;border:1px solid var(--icra-border);border-radius:999px;background:var(--icra-white);padding:.65rem 1rem;font:inherit;font-size:var(--icra-text-small);font-weight:700;color:var(--icra-text-muted);cursor:pointer}.filters button[aria-pressed="true"]{border-color:var(--icra-primary);background:var(--icra-primary);color:var(--icra-white)}.search input{width:100%;border:1px solid var(--icra-border);border-radius:999px;background:var(--icra-white);padding:.7rem 1rem;font:inherit;color:var(--icra-text)}.library-shelf{padding:var(--icra-section-spacious) 0}.shelf-head{display:grid;gap:1rem;margin-bottom:var(--icra-space-5)}.shelf-note{margin:0;max-width:30rem;color:var(--icra-text-muted);line-height:1.6}.book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--icra-space-5) var(--icra-space-3);align-items:start}.book{min-width:0}.cover-link{display:block;max-width:18rem;text-decoration:none}.book-meta{padding-top:1rem}.type,.author,.description{margin:0}.type{font-size:var(--icra-text-small);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--icra-primary)}.book-meta h3{margin-top:.45rem}.book-meta h3 a{color:inherit;text-decoration:none}.author{margin-top:.4rem;color:var(--icra-text-muted);font-size:var(--icra-text-small)}.description{display:none;margin-top:.8rem;line-height:1.6;color:var(--icra-text-muted)}.open-link{display:inline-flex;margin-top:.8rem;color:var(--icra-primary);font-weight:700;text-decoration:none}.empty{padding:2rem;border:1px solid var(--icra-border);border-radius:var(--icra-radius-card);color:var(--icra-text-muted)}.library-principle{padding:var(--icra-section-spacious) 0;background:var(--icra-primary-darker);color:var(--icra-white)}.principle-grid{display:grid;gap:var(--icra-space-3)}.principle-grid .eyebrow{color:var(--icra-primary-lighter)}.principle-grid p:last-child{margin:0;max-width:42rem;font-size:var(--icra-text-body-lg-mobile);line-height:var(--icra-leading-body);color:color-mix(in srgb,var(--icra-white) 78%,transparent)}
+@media(min-width:48rem){.library-container{width:min(calc(100% - 2 * var(--icra-gutter-tablet)),var(--icra-container-wide))}.hero-copy{font-size:var(--icra-text-body-lg)}.tools-row{flex-direction:row;align-items:center;justify-content:space-between}.search{width:18rem;flex:none}.shelf-head{grid-template-columns:1fr auto;align-items:end}.book-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--icra-space-6) var(--icra-space-4)}.description{display:block}.principle-grid p:last-child{font-size:var(--icra-text-body-lg)}}
+@media(min-width:64rem){.library-container{width:min(calc(100% - 2 * var(--icra-gutter-desktop)),var(--icra-container-wide))}.hero-grid{grid-template-columns:1.1fr .9fr}.book-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.principle-grid{grid-template-columns:.35fr 1fr 1fr;align-items:start}}
+</style>

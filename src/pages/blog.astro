@@ -1,35 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Heading from "../components/core/Heading.astro";
 import JournalEntry from "../components/journal/JournalEntry.astro";
 import { getPublishedJournal } from "../lib/journal";
 
 const entries = await getPublishedJournal();
-const featuredEntries = entries.filter((entry) => entry.data.featured);
-const lead = featuredEntries[0] ?? entries[0];
-const rest = entries.filter((entry) => entry.id !== lead?.id);
+const lead = entries.find((entry)=>entry.data.featured) ?? entries[0];
+const rest = entries.filter((entry)=>entry.id !== lead?.id);
 ---
-<Layout title="Життя ICRA | International Centre for Recovery and Adaptation" description="Зустрічі, нові матеріали, дослідження, проєкти та спостереження з повсякденного життя ICRA.">
-  <main>
-    <section class="section bg-theme-surface-muted">
-      <div class="container max-w-5xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-theme-primary mb-4">International Centre for Recovery and Adaptation</p>
-        <h1 class="text-4xl lg:text-6xl font-bold leading-tight text-theme-text-primary">Життя ICRA</h1>
-        <div class="mt-6 max-w-4xl space-y-4 text-lg lg:text-xl leading-relaxed text-theme-text-secondary">
-          <p>Тут ми залишаємо сліди того, що відбувається в ICRA.</p>
-          <p>Зустрічі, нові матеріали, робота над книгами й методами, спостереження з практики, дослідження, проєкти та речі, про які ще зарано писати окрему статтю.</p>
-          <p class="font-semibold text-theme-text-primary">Не звіт про виконану роботу. Просто хроніка місця, яке продовжує жити.</p>
-        </div>
+
+<Layout title="Життя ICRA | Хроніка" description="Зустрічі, події, нові матеріали, робота та спостереження з повсякденного життя ICRA.">
+  <main class="life-page">
+    <section class="life-hero">
+      <div class="life-container hero-grid">
+        <div><p class="eyebrow">Хроніка</p><Heading level="h1" role="display">Життя ICRA</Heading></div>
+        <div class="hero-copy"><p>Тут залишається те, що відбувається між великими словами про місію і методи.</p><p>Зустрічі. Групи. Нові матеріали. Люди. Робочі процеси. Маленькі події, з яких поступово складається історія ICRA.</p><p class="strong">Не звіт. Не пресцентр. Живий слід.</p></div>
       </div>
     </section>
 
-    {lead && <section class="section"><div class="container"><JournalEntry entry={lead} featured={true} /></div></section>}
+    {lead && <section class="lead-entry"><div class="life-container"><p class="eyebrow">Останнє / важливе</p><JournalEntry entry={lead} featured={true} /></div></section>}
 
-    {rest.length > 0 && (
-      <section class="section border-t border-theme-border">
-        <div class="container space-y-16 lg:space-y-24">
-          {rest.map((entry, index) => <JournalEntry entry={entry} reverse={index % 2 === 0} />)}
-        </div>
-      </section>
-    )}
+    {rest.length>0 && <section class="chronicle" aria-labelledby="chronicle-title"><div class="life-container"><div class="chronicle-head"><div><p class="eyebrow">За датою</p><Heading level="h2" role="h2" id="chronicle-title">Хроніка</Heading></div><p>Нові записи з'являються зверху. Старі залишаються як пам'ять про шлях.</p></div><div class="timeline">{rest.map((entry,index)=><div class:list={["timeline-item",index%2===1&&"offset"]}><JournalEntry entry={entry} reverse={index%2===0} /></div>)}</div></div></section>}
+
+    <section class="life-footer"><div class="life-container footer-grid"><p class="eyebrow">ICRA</p><Heading level="h2" role="h2">Організація стає видимою через те, що вона робить.</Heading><p>Тому ми залишаємо тут не тільки завершені результати, а й сам рух.</p></div></section>
   </main>
 </Layout>
+
+<style>
+.life-page{background:var(--icra-white);color:var(--icra-text)}.life-container{width:min(calc(100% - 2 * var(--icra-gutter-mobile)),var(--icra-container-wide));margin-inline:auto}.life-hero{padding:var(--icra-section-spacious) 0;background:var(--icra-surface)}.hero-grid{display:grid;gap:var(--icra-space-5)}.eyebrow{margin:0 0 var(--icra-space-2);font-size:var(--icra-text-eyebrow);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--icra-primary)}.hero-copy{display:grid;gap:1rem;align-self:end;max-width:42rem;font-size:var(--icra-text-body-lg-mobile);line-height:var(--icra-leading-body);color:var(--icra-text-muted)}.hero-copy p{margin:0}.hero-copy .strong{color:var(--icra-text);font-weight:700}.lead-entry{padding:var(--icra-section-spacious) 0;border-bottom:1px solid var(--icra-border)}.chronicle{padding:var(--icra-section-spacious) 0;background:var(--icra-surface)}.chronicle-head{display:grid;gap:1rem;margin-bottom:var(--icra-space-6)}.chronicle-head>p{margin:0;max-width:34rem;color:var(--icra-text-muted);line-height:1.6}.timeline{position:relative;display:grid;gap:var(--icra-space-7)}.timeline:before{content:"";position:absolute;left:.35rem;top:0;bottom:0;width:1px;background:var(--icra-border)}.timeline-item{position:relative;padding-left:2rem}.timeline-item:before{content:"";position:absolute;left:0;top:1rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--icra-primary);box-shadow:0 0 0 .35rem var(--icra-surface)}.life-footer{padding:var(--icra-section-spacious) 0;background:var(--icra-primary-darker);color:var(--icra-white)}.footer-grid{display:grid;gap:var(--icra-space-3)}.footer-grid .eyebrow{color:var(--icra-primary-lighter)}.footer-grid>p:last-child{margin:0;max-width:40rem;font-size:var(--icra-text-body-lg-mobile);line-height:var(--icra-leading-body);color:color-mix(in srgb,var(--icra-white) 78%,transparent)}
+@media(min-width:48rem){.life-container{width:min(calc(100% - 2 * var(--icra-gutter-tablet)),var(--icra-container-wide))}.hero-copy{font-size:var(--icra-text-body-lg)}.chronicle-head{grid-template-columns:1fr auto;align-items:end}.footer-grid>p:last-child{font-size:var(--icra-text-body-lg)}}
+@media(min-width:64rem){.life-container{width:min(calc(100% - 2 * var(--icra-gutter-desktop)),var(--icra-container-wide))}.hero-grid{grid-template-columns:1.05fr .95fr}.timeline{gap:var(--icra-space-8)}.timeline-item{padding-left:3rem}.timeline-item.offset{margin-left:7%}.footer-grid{grid-template-columns:.3fr 1fr .8fr;align-items:start}}
+</style>

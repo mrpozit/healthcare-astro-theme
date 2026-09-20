@@ -10,6 +10,13 @@
   --icra-white: #ffffff;
   --icra-border: #e5e7eb;
 
+  /* Surface contrast contract. Components should read text colors from these
+     semantic variables instead of guessing from a page-local background. */
+  --surface-heading: var(--icra-text);
+  --surface-text: var(--icra-text-soft);
+  --surface-muted: var(--icra-text-muted);
+  --surface-link: var(--icra-brand-deep);
+
   --icra-surface-white: #ffffff;
   --icra-surface-mist: #f9fafb;
   --icra-surface-sky: #ebf8fe;
@@ -114,3 +121,27 @@
 @media (min-width: 64rem) {
   .icra-display-xl { font-size: var(--icra-text-display-xl); }
 }
+
+
+/* Explicit surface modes. Add .surface-light or .surface-dark to any colored
+   container. This keeps heading/body/link contrast predictable site-wide. */
+.surface-light {
+  --surface-heading: var(--icra-text);
+  --surface-text: var(--icra-text-soft);
+  --surface-muted: var(--icra-text-muted);
+  --surface-link: var(--icra-brand-deep);
+  color: var(--surface-text);
+}
+.surface-dark {
+  --surface-heading: var(--icra-white);
+  --surface-text: color-mix(in srgb, var(--icra-white) 88%, transparent);
+  --surface-muted: color-mix(in srgb, var(--icra-white) 72%, transparent);
+  --surface-link: var(--icra-white);
+  color: var(--surface-text);
+}
+.surface-dark :where(.icra-display-xl,.icra-display,.icra-h1,.icra-h2,.icra-h3),
+.surface-dark :where(h1,h2,h3,h4,h5,h6) {
+  color: var(--surface-heading);
+}
+.surface-dark :where(p,li) { color: var(--surface-text); }
+.surface-dark :where(a) { color: var(--surface-link); }

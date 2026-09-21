@@ -5,13 +5,15 @@ import Heading from "../components/core/Heading.astro";
 import Eyebrow from "../components/core/Eyebrow.astro";
 import ActionLink from "../components/core/ActionLink.astro";
 import LibraryCover from "../components/library/LibraryCover.astro";
-import { libraryItems, libraryTypeLabels } from "../data/library";
+import { getCollection } from "astro:content";
+import { libraryTypeLabels } from "../data/library";
 import { getPublishedJournal, formatJournalDate, journalSlug, journalTypeLabels } from "../lib/journal";
 import homeHero from "../assets/pages/home/hero.jpg";
 import patriciaImage from "../assets/pages/about/02.jpg";
 import brannImage from "../assets/pages/about/03.jpg";
 
-const libraryPreview = [...libraryItems].sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99)).slice(0,4);
+const libraryEntries = await getCollection("library", ({ data }) => !data.draft);
+const libraryPreview = libraryEntries.map((entry) => ({ slug: entry.id.replace(/\\/g, "/").replace(/\/index$/, ""), ...entry.data })).sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99)).slice(0,4);
 const journal = (await getPublishedJournal()).slice(0,3);
 ---
 
@@ -62,7 +64,7 @@ const journal = (await getPublishedJournal()).slice(0,3);
 
   <section class="library-fragment"><div class="wide">
     <div class="section-head horizontal"><div><Eyebrow>З Бібліотеки</Eyebrow><Heading level="h2" role="h2">Дещо, що вже можна відкрити</Heading></div><p>Дещо з того, що вже можна відкрити, прочитати або забрати із собою.</p></div>
-    <div class="books">{libraryPreview.map(item=><article class="book"><a href={"/library/"+item.slug}><LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author}/></a><p>{libraryTypeLabels[item.type]}</p><Heading level="h3" role="h3">{item.title}</Heading></article>)}</div>
+    <div class="books">{libraryPreview.map(item=><article class="book"><a href={"/library/"+item.slug}><LibraryCover src={item.cover?.src} title={item.title} author={item.author}/></a><p>{libraryTypeLabels[item.type]}</p><Heading level="h3" role="h3">{item.title}</Heading></article>)}</div>
     <ActionLink href="/careers">Уся Бібліотека</ActionLink>
   </div></section>
 

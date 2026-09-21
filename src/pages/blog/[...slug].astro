@@ -20,7 +20,7 @@ const description = entry.data.excerpt ?? entry.data.title;
       <h1 class="mt-4 text-4xl lg:text-6xl font-bold leading-tight text-theme-text-primary">{entry.data.title}</h1>
       {entry.data.excerpt && <p class="mt-6 text-xl lg:text-2xl leading-relaxed text-theme-text-secondary">{entry.data.excerpt}</p>}
       {entry.data.author && <p class="mt-4 text-sm font-semibold text-theme-text-muted">{entry.data.author}</p>}
-      {entry.data.cover && <Image src={entry.data.cover} alt={entry.data.title} class="mt-10 block h-auto w-full rounded-2xl" widths={[640, 960, 1280]} sizes="(min-width:1024px) 896px, 100vw" loading="eager" />}
+      {entry.data.cover && <Image src={entry.data.cover} alt={entry.data.title} class="journal-cover mt-10 block rounded-2xl" widths={[480, 720, 960]} sizes="(min-width:768px) 720px, calc(100vw - 2rem)" loading="eager" />}
       <div class="journal-prose mt-10 text-lg leading-relaxed text-theme-text-secondary"><Content /></div>
       <footer class="mt-12 border-t border-theme-border pt-8 flex flex-wrap gap-x-8 gap-y-4">
         <a href="/blog" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
@@ -32,6 +32,7 @@ const description = entry.data.excerpt ?? entry.data.title;
 </Layout>
 
 <style is:global>
+  .journal-cover { width:auto; max-width:min(100%, 720px); max-height:72vh; height:auto; object-fit:contain; margin-left:auto; margin-right:auto; }
   .journal-prose p { margin-top: 1.15em; }
   .journal-prose h2 { margin-top: 1.8em; font-size: 1.65em; line-height: 1.2; font-weight: 700; color: var(--color-theme-text-primary); }
   .journal-prose h3 { margin-top: 1.6em; font-size: 1.3em; line-height: 1.25; font-weight: 700; color: var(--color-theme-text-primary); }

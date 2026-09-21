@@ -40,5 +40,5 @@ const description = entry.data.excerpt ?? entry.data.title;
   .journal-prose ul { list-style: disc; }
   .journal-prose ol { list-style: decimal; }
   .journal-prose a { color: var(--color-theme-primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-  .journal-prose img { margin: 2rem auto; max-width: 100%; height: auto; border-radius: 1rem; }
+  .journal-prose img { display:block; margin:2.25rem auto; width:auto; max-width:min(100%, 720px); max-height:72vh; height:auto; object-fit:contain; border-radius:1rem; }
 </style>

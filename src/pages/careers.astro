@@ -2,9 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Heading from "../components/core/Heading.astro";
 import LibraryCover from "../components/library/LibraryCover.astro";
-import { libraryItems, libraryTypeLabels } from "../data/library";
+import { getCollection } from "astro:content";
+import { libraryTypeLabels } from "../data/library";
 
-const items = [...libraryItems].sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99));
+const entries = await getCollection("library", ({ data }) => !data.draft);
+const items = entries
+  .map((entry) => ({ slug: entry.id.replace(/\/index$/, ""), ...entry.data }))
+  .sort((a,b)=>(a.editorialOrder ?? 99)-(b.editorialOrder ?? 99));
 const categories = [["all","Усе"], ...Object.entries(libraryTypeLabels)];
 ---
 
@@ -44,7 +48,7 @@ const categories = [["all","Усе"], ...Object.entries(libraryTypeLabels)];
           {items.map((item)=>(
             <article class="book" data-library-item data-type={item.type} data-search={`${item.title} ${item.author} ${item.description} ${item.topics.join(" ")}`.toLowerCase()}>
               <a href={`/library/${item.slug}`} class="cover-link">
-                <LibraryCover src={item.cover} alt={item.coverAlt} title={item.title} author={item.author} />
+                <LibraryCover src={item.cover?.src} title={item.title} author={item.author} />
               </a>
               <div class="book-meta">
                 <p class="type">{libraryTypeLabels[item.type]}</p>

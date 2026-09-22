@@ -1,68 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Button from "../components/Button.astro";
-import Heading from "../components/Heading.astro";
+import Heading from "../components/core/Heading.astro";
+import ActionLink from "../components/core/ActionLink.astro";
 ---
 
-<Layout
-  title="Page Not Found"
-  description="The page you're looking for could not be found."
->
-  <section class="min-h-[70vh] flex items-center justify-center px-4 section">
-    <div class="max-w-2xl mx-auto text-center">
-      <!-- 404 Number -->
-      <div class="mb-8">
-        <p class="text-9xl font-bold text-theme-primary/20 select-none">404</p>
-      </div>
-
-      <!-- Heading -->
-      <Heading level="h1" size="section" class="mb-4"> Page Not Found </Heading>
-
-      <!-- Description -->
-      <p class="text-lg text-theme-text-secondary mb-8 max-w-md mx-auto">
-        Sorry, we couldn't find the page you're looking for. The page may have
-        been moved or doesn't exist.
-      </p>
-
-      <!-- Actions -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <Button variant="primary" href="/" showIcon={true}>
-          Back to Home
-        </Button>
-        <Button variant="white-outline" href="/contact"> Contact Us </Button>
-      </div>
-
-      <!-- Helpful Links -->
-      <div class="mt-12 pt-8 border-t border-theme-border">
-        <p class="text-sm text-theme-text-muted mb-4">
-          You might be looking for:
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center text-sm">
-          <a
-            href="/services"
-            class="text-theme-primary hover:text-theme-primary-dark font-medium"
-            >Services</a
-          >
-          <span class="text-theme-border">•</span>
-          <a
-            href="/about"
-            class="text-theme-primary hover:text-theme-primary-dark font-medium"
-            >About Us</a
-          >
-          <span class="text-theme-border">•</span>
-          <a
-            href="/careers"
-            class="text-theme-primary hover:text-theme-primary-dark font-medium"
-            >Careers</a
-          >
-          <span class="text-theme-border">•</span>
-          <a
-            href="/info"
-            class="text-theme-primary hover:text-theme-primary-dark font-medium"
-            >Info</a
-          >
-        </div>
-      </div>
+<Layout title="Сторінку не знайдено | ICRA" description="Запитану сторінку ICRA не знайдено.">
+  <section class="icra-section icra-section--spacious icra-surface icra-surface--mist error-page">
+    <div class="icra-container error-inner">
+      <p class="error-code" aria-hidden="true">404</p>
+      <Heading level="h1" role="display">Цієї сторінки тут немає</Heading>
+      <p class="icra-lead">Можливо, адресу було змінено або сторінка більше не існує.</p>
+      <div class="error-actions"><ActionLink href="/">На головну</ActionLink><ActionLink href="/library">До Бібліотеки</ActionLink></div>
     </div>
   </section>
 </Layout>
+
+<style>
+.error-page{min-height:65vh;display:grid;align-items:center}.error-inner{max-width:var(--icra-container-content);text-align:center}.error-code{margin:0 0 1rem;color:color-mix(in srgb,var(--icra-brand) 24%,transparent);font-size:clamp(5rem,18vw,10rem);font-weight:700;line-height:.8}.error-inner .icra-lead{max-width:38rem;margin:1.5rem auto 0}.error-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2rem}
+</style>

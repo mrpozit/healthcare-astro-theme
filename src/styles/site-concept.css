@@ -2,7 +2,7 @@
  * These rules normalize broad accent bands inherited by older page compositions
  * without requiring a page mode or compatibility class. */
 
-{
+:root {
   --icra-wide-accent-surface: #edf4f5;
   --icra-wide-accent-surface-strong: #e3eef0;
   --icra-wide-text: #0f172a;

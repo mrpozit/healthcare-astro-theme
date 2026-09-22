@@ -1,182 +1,168 @@
-# Healthcare Astro Theme
+# ICRA Website
 
-A free, open-source Astro theme for healthcare and medical service websites. It includes a clean multi-page layout, reusable UI components, Tailwind CSS v4 styling, and a simple structure that is easy to customize for clinics, home care agencies, private practices, and related service businesses.
+Official website of the **International Centre for Recovery and Adaptation (ICRA)** / **Міжнародний центр відновлення і адаптації**.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Astro](https://img.shields.io/badge/Astro-7%2B-FF5D01?logo=astro)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)
+This repository is the ICRA website itself. It began from an Astro healthcare starter, but the current architecture, content model, visual language and components are ICRA-specific. Do not treat this repository as a reusable healthcare theme.
 
-## Overview
+## Production
 
-- Built with Astro 7, Tailwind CSS v4, and TypeScript
-- Includes 7 ready-to-use pages
-- Uses reusable components for heroes, cards, CTAs, icons, and FAQ sections
-- Designed to be easy to adapt for real client work or personal portfolio projects
-- Fully static by default, so it deploys easily to most hosting platforms
+- Framework: Astro 7
+- Language: Ukrainian
+- Styling: ICRA semantic CSS tokens + Tailwind CSS utilities
+- Content: Astro Content Collections
+- Deployment: Vercel
+- Canonical working/production branch: `icra-home-a`
+- Node.js: 22.12.0+
 
-## Best For
+## Routes
 
-- Clinics and private practices
-- Home healthcare and care agencies
-- Medical service providers
-- Developers looking for a clean Astro starter theme
-- Portfolio or template marketplace submissions
+| Route | Purpose |
+| --- | --- |
+| `/` | Main ICRA page |
+| `/about` | About ICRA and its people |
+| `/services` | Consultations, formats and methods |
+| `/library` | ICRA Library |
+| `/library/[slug]` | Individual library material |
+| `/life` | Життя ICRA, journal/chronicle |
+| `/life/[slug]` | Individual journal entry |
+| `/social` | Social activity |
+| `/women-space` | Women's Space |
+| `/contact` | Contacts |
 
-## Included Pages
+Historical route names such as `/careers`, `/info` and `/blog` must not be used in new code. If compatibility redirects exist, they are redirects only.
 
-- Home
-- About
-- Services
-- Contact
-- Careers
-- Info / FAQ
-- Custom 404 page
+## Repository map
 
-## Highlights
+```text
+src/
+├── assets/
+│   ├── brand/          # logo and brand assets
+│   ├── shared/         # assets genuinely shared by several pages
+│   └── pages/          # page-owned visual assets
+├── components/
+│   ├── core/           # reusable ICRA primitives
+│   ├── journal/        # journal presentation
+│   ├── library/        # library presentation
+│   └── sections/       # large semantic page sections
+├── content/
+│   ├── journal/        # one folder per Життя ICRA entry
+│   └── library/        # one folder per library item
+├── data/               # small site-wide static data, primarily navigation
+├── layouts/            # global page shell
+├── lib/                # content helpers and shared logic
+├── pages/              # Astro routes
+├── styles/             # global ICRA design system
+└── content.config.ts   # Content Collection schemas
+```
 
-- Healthcare-focused visual style
-- Responsive layout across mobile and desktop
-- SEO-friendly page structure and metadata
-- Accessible semantic markup and ARIA usage
-- Reusable design tokens and utility classes
-- Image optimization through Astro assets
-- Smooth client-side navigation with `ClientRouter`
-- Straightforward file structure for quick editing
+## Content model
 
-## Tech Stack
+### Library
 
-- [Astro](https://astro.build/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [astro-navbar](https://www.npmjs.com/package/astro-navbar)
+Each material is self-contained:
 
-## Getting Started
+```text
+src/content/library/<slug>/
+├── index.md
+├── cover.jpg
+└── optional files
+```
 
-### Requirements
+The frontmatter schema is defined in `src/content.config.ts`. Start new entries from `src/content/library/_template/`. Publishing instructions live in `src/content/library/README.md`.
 
-- Node.js `22.12.0` or later
-- npm, pnpm, or yarn
+### Життя ICRA
 
-### Local Development
+Each journal entry is self-contained:
+
+```text
+src/content/journal/YYYY-MM-DD-slug/
+├── index.md
+├── cover.jpg
+├── 01.jpg
+├── 02.jpg
+└── ...
+```
+
+Start from `src/content/journal/_template/`. Publishing instructions live in `src/content/journal/README.md`.
+
+Content images stay with their Markdown entry. They do not belong in `src/assets/pages/`.
+
+## Design system
+
+Global design rules live in `src/styles/`.
+
+- `tokens.css`: design tokens only: color, spacing, typography, radii, shadows.
+- `core.css`: containers, semantic surfaces, typography and reusable primitives.
+- `shell.css`: header, navigation and footer.
+- `interactive.css`: interactive behavior and reusable action styles.
+- `site-concept.css`: intentional ICRA-wide visual compositions that are not generic primitives.
+- page-local `<style>`: only composition unique to that page.
+
+See `src/styles/README.md` for the contract.
+
+### Typography
+
+The canonical heading scale is:
+
+- 72px: rare poster/display accent
+- 52px: display / H1
+- 38px: H2
+- 26px: H3
+
+Do not invent page-specific heading sizes when a design token already exists.
+
+### Surfaces
+
+A semantic surface owns both its background and its text contrast. Components should read `--surface-heading`, `--surface-text`, `--surface-muted`, `--surface-link`, `--surface-accent` and `--surface-border`.
+
+Do not create parallel light/dark contrast systems.
+
+## Assets
+
+Page images belong under `src/assets/pages/<page>/`. Brand assets belong under `src/assets/brand/`. Use `src/assets/shared/` only when an asset is genuinely shared.
+
+Journal and Library images live beside their Markdown.
+
+Do not add demo assets, template screenshots, stock starter images or an `originals/` archive to production source. Source/original files that are not used by the site should live outside the production repository.
+
+## Components and pages
+
+Pages should read as compositions, not as giant component implementations. Large semantic sections belong in `src/components/sections/<area>/`; reusable primitives belong in `src/components/core/`.
+
+Avoid atomizing ordinary markup. Extract a component when it represents a reusable primitive or a meaningful section with its own responsibility.
+
+## Naming
+
+- Components: PascalCase, e.g. `JournalEntry.astro`
+- Routes and content slugs: lowercase kebab-case
+- CSS design-system classes: `icra-*`
+- CSS variables: `--icra-*` for global tokens and `--surface-*` for semantic surface values
+- Content entry folder: descriptive slug; journal entries start with ISO date
+
+Names must describe current ICRA meaning, not the page/component's origin in the old starter.
+
+## Public copy
+
+The public site is Ukrainian unless a deliberate bilingual element is part of the design.
+
+Do not use the long em dash character in public copy. Preserve existing approved wording unless the task explicitly includes copy editing.
+
+## Development
 
 ```bash
-git clone https://github.com/web-stacked/healthcare-astro-theme.git
-cd healthcare-astro-theme
 npm install
-npm run dev
-```
-
-Open [http://localhost:4321](http://localhost:4321).
-
-### Production Build
-
-```bash
-npm run check
-npm run build
-```
-
-The production output is generated in `dist/`.
-
-## What To Customize First
-
-If you are adapting this theme for a real site, these are the highest-impact changes:
-
-1. Replace the demo brand content in `src/data/navigation.json`
-2. Update page text in `src/pages/`
-3. Swap the bundled images in `src/assets/`
-4. Edit brand and contact details in `src/data/navigation.json`
-5. Adjust colors and spacing tokens in `src/styles/tailwind.css`
-
-Theme switcher preview for the token-driven design system:
-
-![Healthcare theme switcher demo](./README-assets/demo-images/healthcare-theme-switcher.gif)
-
-## Available Scripts
-
-```bash
 npm run dev
 npm run check
 npm run build
 npm run preview
 ```
 
-## Customization
+Before deployment, `npm run check` and `npm run build` should pass.
 
-For a full walkthrough, see [CUSTOMIZATION.md](CUSTOMIZATION.md).
+## Architecture decisions
 
-Common edits you will likely make first:
+Read `ARCHITECTURE.md` before making structural changes. It is the handoff document for a developer or AI entering the project without prior conversation context.
 
-1. Update the branding and navigation in `src/data/navigation.json`
-2. Replace the images in `src/assets/`
-3. Edit the page copy in `src/pages/`
-4. Update brand and contact details in `src/data/navigation.json`
-5. Adjust colors, spacing, and design tokens in `src/styles/tailwind.css`
-6. Replace `public/favicon.svg` and `src/assets/logo.png`
+## License and provenance
 
-The theme is intentionally simple to edit without needing a CMS, adapter, or backend setup.
-
-The included contact form is a front-end demo. Connect it to your preferred form provider before deploying a production site. You should also confirm that every bundled image is suitable for your intended use or replace the images with your own licensed assets.
-
-## Project Structure
-
-```text
-/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── data/
-│   ├── layouts/
-│   ├── lib/
-│   ├── pages/
-│   ├── styles/
-│   └── types/
-├── astro.config.mjs
-├── package.json
-├── tsconfig.json
-└── CUSTOMIZATION.md
-```
-
-## Main Components
-
-- `PageHero.astro`
-- `Button.astro`
-- `Card.astro`
-- `ServiceCard.astro`
-- `CallToActionSection.astro`
-- `FaqAccordion.astro`
-- `Heading.astro`
-- `Icon.astro`
-- `NumberCounter.astro`
-
-## Deployment
-
-This theme is static by default and can be deployed to platforms such as:
-
-- Netlify
-- Vercel
-- Cloudflare Pages
-- GitHub Pages
-- Any static hosting provider
-
-## Submission Notes
-
-This project is currently upgraded to Astro 7 and validated with:
-
-- `npm run check`
-- `npm run build`
-
-It is intended to be a lightweight open-source theme rather than a full application starter.
-
-## Contributing
-
-Contributions, fixes, and improvements are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
-
-## Author
-
-TechStacked  
-[techstacked.dev](https://techstacked.dev)
+The repository retains the license required by its original open-source base where applicable. Current ICRA-specific code, structure, content and design are maintained as the ICRA website.

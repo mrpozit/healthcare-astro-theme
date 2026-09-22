@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Heading from "../components/core/Heading.astro";
 import LibraryCover from "../components/library/LibraryCover.astro";
 import { getCollection } from "astro:content";
-import { libraryTypeLabels } from "../data/library";
+import { libraryTypeLabels } from "../lib/library";
 
 const entries = await getCollection("library", ({ data }) => !data.draft);
 const items = entries

@@ -1,4 +1,15 @@
 ---
-const { slug } = Astro.params;
-return Astro.redirect(`/life/${slug ?? ""}`, 301);
+import { getCollection } from "astro:content";
+import { journalSlug } from "../../lib/journal";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("journal", ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: journalSlug(entry.id) },
+    props: { destination: `/life/${journalSlug(entry.id)}` },
+  }));
+}
+
+const { destination } = Astro.props;
+return Astro.redirect(destination, 301);
 ---

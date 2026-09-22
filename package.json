@@ -1,35 +1,25 @@
 {
-  "name": "healthcare-astro-theme",
+  "name": "icra-website",
   "type": "module",
   "version": "1.0.0",
   "packageManager": "npm@10.9.2",
-  "description": "A modern, professional Astro theme for healthcare and medical service providers. Built with Tailwind CSS v4, TypeScript, and optimized for performance.",
+  "description": "Official Astro website of the International Centre for Recovery and Adaptation (ICRA).",
   "keywords": [
+    "icra",
     "astro",
-    "astro-theme",
-    "healthcare",
-    "medical",
-    "responsive",
-    "tailwind",
-    "tailwindcss-v4",
-    "typescript",
-    "static-site",
-    "medical-website",
-    "healthcare-template"
+    "website",
+    "recovery",
+    "adaptation",
+    "ukraine"
   ],
   "author": {
-    "name": "TechStacked",
-    "url": "https://techstacked.dev"
+    "name": "ICRA"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/web-stacked/healthcare-astro-theme.git"
+    "url": "https://github.com/mrpozit/healthcare-astro-theme.git"
   },
-  "bugs": {
-    "url": "https://github.com/web-stacked/healthcare-astro-theme/issues"
-  },
-  "homepage": "https://github.com/web-stacked/healthcare-astro-theme#readme",
   "engines": {
     "node": ">=22.12.0"
   },

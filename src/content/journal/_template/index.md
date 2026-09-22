@@ -4,7 +4,8 @@ date: 2026-09-16
 type: update
 author: "ICRA"
 excerpt: "Короткий опис, який буде видно у стрічці."
-draft: true
+cover: "./cover.jpg"
+draft: false
 featured: false
 ---
 

@@ -16,7 +16,6 @@ interface Props {
 
 const { title, description } = Astro.props;
 const pathname = Astro.url.pathname;
-const isRebuiltCorePage = pathname === "/info" || pathname === "/info/" || pathname === "/women-space" || pathname === "/women-space/";
 const canonicalUrl = new URL(pathname, Astro.url.origin).href;
 
 const defaultTitle = nav.brand.name;
@@ -43,7 +42,7 @@ const defaultDescription = "Міжнародний центр відновлен
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
-	<body class:list={["bg-theme-surface-muted font-sans text-theme-text-primary antialiased selection:bg-theme-primary-lighter/50 selection:text-theme-primary-darker", !isRebuiltCorePage && "icra-legacy"]}>
+	<body class="bg-theme-surface-muted font-sans text-theme-text-primary antialiased selection:bg-theme-primary-lighter/50 selection:text-theme-primary-darker">
 		<Nav />
 		<main>
 			<slot />

@@ -1,97 +1,93 @@
-/*
- * Legacy visual compatibility layer.
- *
- * This file exists only while old template-based pages are being migrated.
- * Every rule is scoped to .icra-legacy so rebuilt ICRA pages cannot be
- * affected by historical overrides.
- */
+/* ICRA site-wide visual compositions.
+ * These rules normalize broad accent bands inherited by older page compositions
+ * without requiring a page mode or compatibility class. */
 
-.icra-legacy {
+{
   --icra-wide-accent-surface: #edf4f5;
   --icra-wide-accent-surface-strong: #e3eef0;
   --icra-wide-text: #0f172a;
 }
 
-.icra-legacy main section.bg-theme-primary-darker,
-.icra-legacy main section.bg-theme-primary-darker.text-white,
-.icra-legacy main .icra-wide-band,
-.icra-legacy main .icra-wide-band-strong {
+main section.bg-theme-primary-darker,
+main section.bg-theme-primary-darker.text-white,
+main .icra-wide-band,
+main .icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface) !important;
   color: var(--icra-wide-text) !important;
 }
 
-.icra-legacy main .icra-wide-band-strong {
+main .icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface-strong) !important;
 }
 
-.icra-legacy main section.bg-theme-primary-darker h1,
-.icra-legacy main section.bg-theme-primary-darker h2,
-.icra-legacy main section.bg-theme-primary-darker h3,
-.icra-legacy main section.bg-theme-primary-darker h4,
-.icra-legacy main section.bg-theme-primary-darker h5,
-.icra-legacy main section.bg-theme-primary-darker h6,
-.icra-legacy main .icra-wide-band h1,
-.icra-legacy main .icra-wide-band h2,
-.icra-legacy main .icra-wide-band h3,
-.icra-legacy main .icra-wide-band h4,
-.icra-legacy main .icra-wide-band h5,
-.icra-legacy main .icra-wide-band h6,
-.icra-legacy main .icra-wide-band-strong h1,
-.icra-legacy main .icra-wide-band-strong h2,
-.icra-legacy main .icra-wide-band-strong h3,
-.icra-legacy main .icra-wide-band-strong h4,
-.icra-legacy main .icra-wide-band-strong h5,
-.icra-legacy main .icra-wide-band-strong h6 {
+main section.bg-theme-primary-darker h1,
+main section.bg-theme-primary-darker h2,
+main section.bg-theme-primary-darker h3,
+main section.bg-theme-primary-darker h4,
+main section.bg-theme-primary-darker h5,
+main section.bg-theme-primary-darker h6,
+main .icra-wide-band h1,
+main .icra-wide-band h2,
+main .icra-wide-band h3,
+main .icra-wide-band h4,
+main .icra-wide-band h5,
+main .icra-wide-band h6,
+main .icra-wide-band-strong h1,
+main .icra-wide-band-strong h2,
+main .icra-wide-band-strong h3,
+main .icra-wide-band-strong h4,
+main .icra-wide-band-strong h5,
+main .icra-wide-band-strong h6 {
   color: var(--icra-wide-text) !important;
   -webkit-text-fill-color: var(--icra-wide-text) !important;
 }
 
-.icra-legacy main section.bg-theme-primary-darker [class~="!text-white"],
-.icra-legacy main section.bg-theme-primary-darker .text-white,
-.icra-legacy main .icra-wide-band [class~="!text-white"],
-.icra-legacy main .icra-wide-band .text-white,
-.icra-legacy main .icra-wide-band-strong [class~="!text-white"],
-.icra-legacy main .icra-wide-band-strong .text-white {
+main section.bg-theme-primary-darker [class~="!text-white"],
+main section.bg-theme-primary-darker .text-white,
+main .icra-wide-band [class~="!text-white"],
+main .icra-wide-band .text-white,
+main .icra-wide-band-strong [class~="!text-white"],
+main .icra-wide-band-strong .text-white {
   color: var(--icra-wide-text) !important;
   -webkit-text-fill-color: var(--icra-wide-text) !important;
 }
 
-.icra-legacy main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
   :is(.text-white\/90, .text-white\/85, .text-white\/80) {
   color: var(--color-theme-text-secondary) !important;
 }
 
-.icra-legacy main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
   :is(.text-white\/75, .text-white\/70, .text-white\/65, .text-white\/60) {
   color: var(--color-theme-text-muted) !important;
 }
 
-.icra-legacy main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
   :is(.bg-white\/10, .\!bg-white\/10) {
   background-color: rgba(255, 255, 255, 0.72) !important;
 }
 
-.icra-legacy main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
   :is(.border-white\/60, .border-white\/20, .\!border-white\/20) {
   border-color: var(--color-theme-primary) !important;
 }
 
-.icra-legacy main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
+main :is(section.bg-theme-primary-darker, .icra-wide-band, .icra-wide-band-strong)
   a:not(.button) {
   color: var(--color-theme-primary-darker) !important;
 }
 
-.icra-legacy .icra-wide-band {
+.icra-wide-band {
   background-color: var(--icra-wide-accent-surface);
   color: var(--icra-wide-text);
 }
 
-.icra-legacy .icra-wide-band-strong {
+.icra-wide-band-strong {
   background-color: var(--icra-wide-accent-surface-strong);
   color: var(--icra-wide-text);
 }
 
-.icra-legacy .icra-dark-card {
+.icra-dark-card {
   background-color: var(--color-theme-primary-darker);
   color: var(--color-theme-text-on-dark);
 }

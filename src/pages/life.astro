@@ -20,7 +20,7 @@ const rest = entries.filter((entry)=>entry.id !== lead?.id);
 
     {lead && <section class="lead-entry"><div class="life-container"><p class="eyebrow">Останнє / важливе</p><JournalEntry entry={lead} featured={true} /></div></section>}
 
-    {rest.length>0 && <section class="chronicle" aria-labelledby="chronicle-title"><div class="life-container"><div class="chronicle-head"><div><p class="eyebrow">За датою</p><Heading level="h2" role="h2" id="chronicle-title">Хроніка</Heading></div><p>Нові записи з'являються зверху. Старі залишаються як пам'ять про шлях.</p></div><div class="timeline">{rest.map((entry,index)=><div class:list={["timeline-item",index%2===1&&"offset"]}><JournalEntry entry={entry} reverse={index%2===0} /></div>)}</div></div></section>}
+    {rest.length>0 && <section class="chronicle" aria-labelledby="chronicle-title"><div class="life-container"><div class="chronicle-head"><div><p class="eyebrow">За датою</p><Heading level="h2" role="h2" id="chronicle-title">Хроніка</Heading></div><p>Нові записи з'являються зверху. Старі залишаються як пам'ять про шлях.</p></div><div class="timeline">{rest.map((entry,index)=><div class:list={["timeline-item",index%2===1&&"offset"]}><JournalEntry entry={entry} /></div>)}</div></div></section>}
 
     <section class="life-footer"><div class="life-container footer-grid"><p class="eyebrow">ICRA</p><Heading level="h2" role="h2">Організація стає видимою через те, що вона робить.</Heading><p>Тому ми залишаємо тут не тільки завершені результати, а й сам рух.</p></div></section>
   </main>

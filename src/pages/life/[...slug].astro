@@ -23,7 +23,7 @@ const description = entry.data.excerpt ?? entry.data.title;
       {entry.data.cover && <Image src={entry.data.cover} alt={entry.data.title} class="journal-cover mt-10 block rounded-2xl" widths={[480, 720, 960]} sizes="(min-width:768px) 720px, calc(100vw - 2rem)" loading="eager" />}
       <div class="journal-prose mt-10 text-lg leading-relaxed text-theme-text-secondary"><Content /></div>
       <footer class="mt-12 border-t border-theme-border pt-8 flex flex-wrap gap-x-8 gap-y-4">
-        <a href="/blog" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
+        <a href="/life" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
         {entry.data.relatedLibraryItem && <a href={entry.data.relatedLibraryItem} class="font-semibold text-theme-primary hover:underline underline-offset-4">Матеріал у Бібліотеці →</a>}
         {entry.data.externalUrl && <a href={entry.data.externalUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-theme-primary hover:underline underline-offset-4">Перейти →</a>}
       </footer>

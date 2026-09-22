@@ -21,6 +21,8 @@ body { margin: 0; }
 .icra-surface--aqua { --surface-background: var(--icra-surface-aqua); }
 .icra-surface--sand { --surface-background: var(--icra-surface-sand); }
 .icra-surface--ice { --surface-background: var(--icra-surface-ice); }
+.icra-surface--light { --surface-heading:var(--icra-text); --surface-text:var(--icra-text-soft); --surface-muted:var(--icra-text-muted); --surface-accent:var(--icra-brand); --surface-link:var(--icra-brand-deep); --surface-border:var(--icra-border); }
+.icra-surface--dark { --surface-heading:var(--icra-white); --surface-text:color-mix(in srgb,var(--icra-white) 88%,transparent); --surface-muted:color-mix(in srgb,var(--icra-white) 72%,transparent); --surface-accent:var(--icra-white); --surface-link:var(--icra-white); --surface-border:rgb(255 255 255 / .24); }
 .icra-surface--wine { --surface-background: var(--icra-surface-wine); --surface-heading: #ffffff; --surface-text: #f9fafb; --surface-muted: #e5e7eb; --surface-accent: #ffffff; --surface-link: #ffffff; --surface-border: rgb(255 255 255 / 0.24); }
 
 /* Section rhythm */

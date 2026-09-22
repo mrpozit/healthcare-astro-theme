@@ -4,6 +4,7 @@ date: 2026-09-22
 type: social
 author: "ICRA"
 excerpt: "на Кирилівській, 103 відбулося нове арт-терапевтичне заняття з ветеранами."
+cover: "./cover.jpg"
 draft: false
 featured: false
 ---

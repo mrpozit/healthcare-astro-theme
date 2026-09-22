@@ -1,6 +1,6 @@
 ---
 import nav from "../data/navigation.json";
-import logo from "../assets/logo.png";
+import logo from "../assets/brand/logo.png";
 
 const normalizePath = (path: string) => path === "/" ? "/" : path.replace(/\/$/, "");
 const currentPath = normalizePath(Astro.url.pathname || "/");

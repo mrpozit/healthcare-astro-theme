@@ -1,10 +1,10 @@
 ---
-title: "Назва запису"
-date: 2026-09-16
-type: update
+title: "Робота з ветеранами через мандалу"
+date: 2026-09-22
+type: social
 author: "ICRA"
 excerpt: "на Кирилівській, 103 відбулося нове арт-терапевтичне заняття з ветеранами."
-draft: true
+draft: false
 featured: false
 ---
 

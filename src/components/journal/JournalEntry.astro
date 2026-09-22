@@ -3,9 +3,9 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { formatJournalDate, journalSlug, journalTypeLabels } from "../../lib/journal";
 
-interface Props { entry: CollectionEntry<"journal">; featured?: boolean; reverse?: boolean; }
+interface Props { entry: CollectionEntry<"journal">; featured?: boolean; }
 const { entry, featured = false } = Astro.props;
-const href = `/blog/${journalSlug(entry.id)}/`;
+const href = `/life/${journalSlug(entry.id)}/`;
 const type = journalTypeLabels[entry.data.type ?? "update"];
 ---
 <article class:list={["journal-entry", featured && "featured"]}>

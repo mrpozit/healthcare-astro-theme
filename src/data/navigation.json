@@ -13,10 +13,10 @@
     {"label":"Головна","href":"/","icon":"home"},
     {"label":"Про нас","href":"/about","icon":"info"},
     {"label":"Послуги","href":"/services","icon":"clipboard"},
-    {"label":"Бібліотека","href":"/careers","icon":"users"},
+    {"label":"Бібліотека","href":"/library","icon":"users"},
     {"label":"Жіночий простір","href":"/women-space","icon":"heart"},
-    {"label":"Життя ICRA","href":"/blog","icon":"book"},
-    {"label":"Суспільна діяльність","href":"/info","icon":"document"}
+    {"label":"Життя ICRA","href":"/life","icon":"book"},
+    {"label":"Суспільна діяльність","href":"/social","icon":"document"}
   ],
   "cta": {"label":"Контакти","href":"/contact"}
 }

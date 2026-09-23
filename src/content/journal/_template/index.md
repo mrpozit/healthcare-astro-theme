@@ -5,6 +5,7 @@ type: update
 author: "ICRA"
 excerpt: "Короткий опис, який буде видно у стрічці."
 cover: "./cover.jpg"
+# instagramUrl: "https://www.instagram.com/reel/XXXXXXXXXXX/"
 draft: false
 featured: false
 ---

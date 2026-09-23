@@ -51,3 +51,103 @@ const { Content } = await render(entry);
     </div>
   </article>
 </Layout>
+
+
+<style>
+  .library-reading {
+    color: var(--icra-text);
+    font-size: 1.0625rem;
+    line-height: 1.78;
+  }
+
+  .library-reading :global(p) {
+    margin: 0 0 1.35em;
+  }
+
+  .library-reading :global(h2) {
+    margin: 2.4em 0 0.7em;
+    font-size: var(--icra-text-h2-mobile);
+    line-height: 1.16;
+    font-weight: 700;
+    color: var(--icra-text);
+  }
+
+  .library-reading :global(h3) {
+    margin: 2em 0 0.65em;
+    font-size: var(--icra-text-h3-mobile);
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--icra-text);
+  }
+
+  .library-reading :global(h2 + p),
+  .library-reading :global(h3 + p) {
+    margin-top: 0;
+  }
+
+  .library-reading :global(blockquote) {
+    margin: 2em 0;
+    padding: 0.2em 0 0.2em 1.25rem;
+    border-left: 3px solid var(--icra-library-accent);
+    color: var(--icra-text-soft);
+    font-style: italic;
+  }
+
+  .library-reading :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .library-reading :global(ul),
+  .library-reading :global(ol) {
+    margin: 1.25em 0 1.5em;
+    padding-left: 1.5em;
+  }
+
+  .library-reading :global(li) {
+    margin: 0.45em 0;
+    padding-left: 0.2em;
+  }
+
+  .library-reading :global(hr) {
+    margin: 3rem auto;
+    width: min(10rem, 40%);
+    border: 0;
+    border-top: 1px solid var(--icra-library-border);
+  }
+
+  .library-reading :global(a) {
+    color: var(--icra-brand-dark);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .library-reading :global(strong) {
+    font-weight: 700;
+  }
+
+  .library-reading :global(img) {
+    display: block;
+    width: auto;
+    max-width: min(100%, 720px);
+    max-height: 78vh;
+    height: auto;
+    margin: 2.5rem auto;
+    border-radius: var(--icra-radius-card);
+  }
+
+  @media (min-width: 48rem) {
+    .library-reading {
+      font-size: 1.125rem;
+      line-height: 1.82;
+    }
+
+    .library-reading :global(h2) {
+      font-size: var(--icra-text-h2);
+    }
+
+    .library-reading :global(h3) {
+      font-size: var(--icra-text-h3);
+    }
+  }
+</style>

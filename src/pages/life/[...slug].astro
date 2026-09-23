@@ -22,6 +22,18 @@ const description = entry.data.excerpt ?? entry.data.title;
       {entry.data.author && <p class="mt-4 text-sm font-semibold text-theme-text-muted">{entry.data.author}</p>}
       {entry.data.cover && <Image src={entry.data.cover} alt={entry.data.title} class="journal-cover mt-10 block rounded-2xl" widths={[480, 720, 960]} sizes="(min-width:768px) 720px, calc(100vw - 2rem)" loading="eager" />}
       <div class="journal-prose mt-10 text-lg leading-relaxed text-theme-text-secondary"><Content /></div>
+      {entry.data.instagramUrl && (
+        <div class="journal-instagram mt-10">
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink={entry.data.instagramUrl}
+            data-instgrm-version="14"
+          >
+            <a href={entry.data.instagramUrl} target="_blank" rel="noopener noreferrer">Дивитися в Instagram</a>
+          </blockquote>
+          <script async src="https://www.instagram.com/embed.js"></script>
+        </div>
+      )}
       <footer class="mt-12 border-t border-theme-border pt-8 flex flex-wrap gap-x-8 gap-y-4">
         <a href="/life" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
         {entry.data.relatedLibraryItem && <a href={entry.data.relatedLibraryItem} class="font-semibold text-theme-primary hover:underline underline-offset-4">Матеріал у Бібліотеці →</a>}
@@ -42,4 +54,6 @@ const description = entry.data.excerpt ?? entry.data.title;
   .journal-prose ol { list-style: decimal; }
   .journal-prose a { color: var(--color-theme-primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .journal-prose img { display:block; margin:2.25rem auto; width:auto; max-width:min(100%, 720px); max-height:72vh; height:auto; object-fit:contain; border-radius:1rem; }
+  .journal-instagram { display:flex; justify-content:center; }
+  .journal-instagram .instagram-media { width:100% !important; max-width:540px !important; min-width:0 !important; }
 </style>

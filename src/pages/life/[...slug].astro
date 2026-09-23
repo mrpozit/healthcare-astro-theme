@@ -12,6 +12,31 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const type = journalTypeLabels[entry.data.type ?? "update"];
 const description = entry.data.excerpt ?? entry.data.title;
+const sectionLinks = {
+  about: { href: "/about", label: "Про нас" },
+  library: { href: "/library", label: "Бібліотека" },
+  services: { href: "/services", label: "Консультації" },
+  "women-space": { href: "/women-space", label: "Жіночий простір" },
+  social: { href: "/social", label: "Суспільна діяльність" },
+  life: { href: "/life", label: "Життя ICRA" },
+  contact: { href: "/contact", label: "Контакти" },
+} as const;
+const relatedSection = entry.data.relatedSection ? sectionLinks[entry.data.relatedSection] : undefined;
+
+function youtubeEmbedUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    let id = "";
+    if (parsed.hostname === "youtu.be") id = parsed.pathname.slice(1).split("/")[0];
+    else if (parsed.pathname.startsWith("/shorts/")) id = parsed.pathname.split("/")[2] ?? "";
+    else if (parsed.pathname.startsWith("/embed/")) id = parsed.pathname.split("/")[2] ?? "";
+    else id = parsed.searchParams.get("v") ?? "";
+    return id ? `https://www.youtube-nocookie.com/embed/${id}` : "";
+  } catch {
+    return "";
+  }
+}
+const youtubeEmbed = entry.data.youtubeUrl ? youtubeEmbedUrl(entry.data.youtubeUrl) : "";
 ---
 <Layout title={`${entry.data.title} | Життя ICRA`} description={description}>
   <article class="section bg-theme-surface-muted">
@@ -34,8 +59,29 @@ const description = entry.data.excerpt ?? entry.data.title;
           <script async src="https://www.instagram.com/embed.js"></script>
         </div>
       )}
+      {youtubeEmbed && (
+        <div class="journal-youtube mt-10">
+          <iframe
+            src={youtubeEmbed}
+            title="YouTube video"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
+      {entry.data.gallery && entry.data.gallery.length > 0 && (
+        <div class="journal-gallery mt-10">
+          {entry.data.gallery.map((photo, index) => (
+            <a href={photo.src} target="_blank" rel="noopener noreferrer" aria-label={`Відкрити фото ${index + 1}`}>
+              <Image src={photo} alt={`${entry.data.title}, фото ${index + 1}`} widths={[360, 720]} sizes="(min-width:768px) 50vw, 100vw" loading="lazy" />
+            </a>
+          ))}
+        </div>
+      )}
       <footer class="mt-12 border-t border-theme-border pt-8 flex flex-wrap gap-x-8 gap-y-4">
         <a href="/life" class="font-semibold text-theme-primary hover:underline underline-offset-4">← Життя ICRA</a>
+        {relatedSection && <a href={relatedSection.href} class="font-semibold text-theme-primary hover:underline underline-offset-4">{relatedSection.label} →</a>}
         {entry.data.relatedLibraryItem && <a href={entry.data.relatedLibraryItem} class="font-semibold text-theme-primary hover:underline underline-offset-4">Матеріал у Бібліотеці →</a>}
         {entry.data.externalUrl && <a href={entry.data.externalUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-theme-primary hover:underline underline-offset-4">Перейти →</a>}
       </footer>
@@ -56,4 +102,10 @@ const description = entry.data.excerpt ?? entry.data.title;
   .journal-prose img { display:block; margin:2.25rem auto; width:auto; max-width:min(100%, 720px); max-height:72vh; height:auto; object-fit:contain; border-radius:1rem; }
   .journal-instagram { display:flex; justify-content:center; }
   .journal-instagram .instagram-media { width:100% !important; max-width:540px !important; min-width:0 !important; }
+  .journal-youtube { position:relative; width:100%; max-width:720px; margin-left:auto; margin-right:auto; aspect-ratio:16/9; overflow:hidden; border-radius:1rem; }
+  .journal-youtube iframe { width:100%; height:100%; border:0; }
+  .journal-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+  .journal-gallery a { display:block; overflow:hidden; border-radius:1rem; }
+  .journal-gallery img { display:block; width:100%; height:100%; aspect-ratio:4/3; object-fit:cover; }
+  @media (max-width:640px) { .journal-gallery { grid-template-columns:1fr; } }
 </style>

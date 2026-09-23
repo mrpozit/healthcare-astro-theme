@@ -15,6 +15,7 @@ const library = defineCollection({
     cover: image().optional(),
     pdf: z.string().optional(),
     externalUrl: z.string().url().optional(),
+    instagramUrl: z.string().url().optional(),
     externalLabel: z.string().optional(),
     featured: z.boolean().optional().default(false),
     editorialOrder: z.number().optional().default(99),

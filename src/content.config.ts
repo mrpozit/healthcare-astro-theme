@@ -36,6 +36,10 @@ const journal = defineCollection({
     featured: z.boolean().optional().default(false),
     relatedLibraryItem: z.string().optional(),
     externalUrl: z.string().url().optional(),
+    instagramUrl: z.string().url().optional(),
+    youtubeUrl: z.string().url().optional(),
+    relatedSection: z.enum(["about", "library", "services", "women-space", "social", "life", "contact"]).optional(),
+    gallery: z.array(image()).optional(),
   }),
 });
 

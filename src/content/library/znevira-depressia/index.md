@@ -7,7 +7,7 @@ topics:
 language: "uk"
 status: "published"      # Опубліковано
 access: "free"
-description: "Короткий опис матеріалу для каталогу."
+description: "Роздуми на тему ментальної прірви між пасивним невдоволенням життям і системною поломкою."
 cover: "./cover.jpg"
 editorialOrder: 99
 featured: false

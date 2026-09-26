@@ -68,6 +68,6 @@ draft: false
 
 **Завантажити пам'ятку:**
 
-[Українською](./SOS-panic-uk.pdf)
+[Українською](/downloads/SOS-panic-uk.pdf)
 
-[Російською](./SOS-panic-ru.pdf)
+[Російською](/downloads/SOS-panic-ru.pdf)

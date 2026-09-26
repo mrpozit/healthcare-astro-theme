@@ -44,7 +44,7 @@ editorialOrder: 99
 # featured: true можна використовувати для особливо важливого матеріалу.
 featured: false
 
-# draft: true приховує матеріал. draft: false публікує.
+# draft: false приховує матеріал. draft: false публікує.
 draft: true
 ---
 

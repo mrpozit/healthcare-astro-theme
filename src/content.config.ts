@@ -6,7 +6,7 @@ const library = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     author: z.string(),
-    type: z.enum(["book", "article", "practical", "story", "research", "video"]),
+    type: z.enum(["book", "article", "practical", "story", "video"]),
     topics: z.array(z.string()).optional().default([]),
     language: z.string().optional().default("uk"),
     status: z.enum(["published", "in-progress", "evolving"]).optional().default("published"),

@@ -3,7 +3,7 @@ title: "Урочиста зустріч з ГО Українська вальк�
 date: 2026-09-28
 type: event
 author: "ICRA"
-excerpt: "Майстер-клас для фахівців естетичної медицини українсько-ізраїльської компанії Pelart Laboratory у межах триденного навчального семінару."
+excerpt: ""
 cover: "./cover.jpg"
 draft: false
 featured: true
